@@ -1,7 +1,7 @@
 from pygame import Vector2, Rect
 from .entity import Entity
 from data import Skin, const
-from util import Animator, PlayerDirection
+from util import SpriteAnimator, PlayerDirection
 
 
 class Player(Entity):
@@ -17,7 +17,7 @@ class Player(Entity):
         self.prev_rect = self.hitbox.copy()
 
         self.skin = skin
-        self.animator = Animator(skin.animation_length, 0.1)
+        self.animator = SpriteAnimator(skin.animation_length, 0.1)
 
         self.velocity = Vector2(0, 0)
 

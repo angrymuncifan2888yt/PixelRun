@@ -33,6 +33,6 @@
         {"type": "jump_orb", "position": [1450, 260], "rotation": 0},
         {"type": "jump_orb", "position": [2250, 230], "rotation": 0},
 
-        {"type": "end", "position": [2500, 200]}
+        {"type": "end", "position": [2500, 200], "rotation":  0}
     ]
 }

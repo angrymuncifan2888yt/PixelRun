@@ -3,6 +3,8 @@ from ..scene_manager import SceneManager
 from ..scene import Scene
 from ui import NormalButton, Text, UiManager
 from data import Fonts, Levels, const
+from util import open_file_dialog
+from level import Validator
 import pygame
 
 
@@ -67,6 +69,15 @@ class SceneLevels(Scene):
         )
         btn_play.center_by_x(const.WINDOW_SIZE[0])
 
+        btn_load_custom = NormalButton(
+            position=pygame.Vector2(0, 400),
+            size=(320, 60),
+            text="Load Custom Level",
+            font=Fonts.NORMAL_30,
+            callback=self._load_custom_level
+        )
+        btn_load_custom.center_by_x(const.WINDOW_SIZE[0])
+
         btn_back = NormalButton(
             position=pygame.Vector2(20, 20),
             size=(120, 40),
@@ -84,6 +95,7 @@ class SceneLevels(Scene):
         self.ui.add_ui_object(btn_prev)
         self.ui.add_ui_object(btn_next)
         self.ui.add_ui_object(btn_play)
+        self.ui.add_ui_object(btn_load_custom)
         self.ui.add_ui_object(btn_back)
 
         self._update_level_text()
@@ -116,6 +128,21 @@ class SceneLevels(Scene):
         game_scene = self.scene_manager.get_scene(SceneType.GAME)
         game_scene.load_level(self.current_level)
         self.scene_manager.set_scene(SceneType.GAME)
+
+    def _load_custom_level(self):
+        path = open_file_dialog(
+            title="Select level file",
+            filetypes=[("Level files", "*.json")]
+        )
+
+        if path:
+            try:
+                level = Levels.load_level_from_file(path)
+                if Validator.is_level_valid(level):
+                    Levels.ALL_LEVELS.append(level)
+            except Exception:
+                pass
+            # дальше ты сам делаешь загрузку
 
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)

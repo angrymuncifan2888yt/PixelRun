@@ -1,6 +1,6 @@
 from .timer import Timer
 
-class Animator:
+class SpriteAnimator:
     def __init__(self, sprite_count: int, frame_time: float):
         self.sprite_count = sprite_count
         self.current_frame = 0
