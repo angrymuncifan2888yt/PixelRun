@@ -119,4 +119,5 @@ def render_entity(screen, entity: Entity, camera: Camera = None):
     # Вызываем соответствующую функцию из словаря
     renderer = entity_renderers.get(type(entity))
     if renderer:
-        renderer(screen, entity, camera)
+        if not entity.invisible:
+            renderer(screen, entity, camera)

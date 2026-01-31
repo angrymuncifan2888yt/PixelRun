@@ -7,7 +7,7 @@ from util import PlayerDirection, Camera
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
-from data import Skins, const, levels
+from data import Skins, const, Levels
 from event import EventType
 
 
@@ -30,7 +30,8 @@ class SceneGame(Scene):
             pygame.Vector2(0, 0),
             const.WINDOW_SIZE,
             on_menu=lambda: self.scene_manager.set_scene(SceneType.MAIN_MENU),
-            on_play_again=self.play_again
+            on_play_again=self.play_again,
+            on_levels=lambda: self.scene_manager.set_scene(SceneType.LEVELS)
         )
 
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
@@ -38,7 +39,7 @@ class SceneGame(Scene):
         self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
 
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
-        self.load_level(levels.Level1)
+        self.load_level(Levels.Level1)
 
     def _on_player_reach_end_door(self, event):
         self.level_ended = True
@@ -51,6 +52,9 @@ class SceneGame(Scene):
     def load_level(self, level: Level):
         self.current_level = level  # сохраняем текущий уровень для play_again
         self.background_color = level.background_color
+        self.pause = False
+        self.level_ended = False
+        self.camera.position = self.player.position.copy()
         level.load_to_world(self.world, self.player)
 
     def play_again(self):

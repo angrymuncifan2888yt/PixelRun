@@ -29,5 +29,8 @@ class Deserializator:
         if entity_json.get("color"):
             kvargs["color"] = entity_json["color"]
 
-        return entity_class(**kvargs)
-    
+        entity = entity_class(**kvargs)
+        if entity_json.get("invisible"):
+            entity.invisible = entity_json["invisible"]
+
+        return entity

@@ -1,5 +1,5 @@
 from ui import UiObject, UiManager, Text, NormalButton
-from data import FontStorage
+from data import Fonts
 import pygame
 
 
@@ -25,7 +25,7 @@ class PauseMenu(UiObject):
         # заголовок
         title = Text(
             position=(0, 60),
-            font=FontStorage.LOGO_100,
+            font=Fonts.LOGO_100,
             text="PAUSE",
             color=(255, 255, 255)
         )
@@ -36,7 +36,7 @@ class PauseMenu(UiObject):
             position=(0, 0),
             size=(260, 60),
             text="Continue",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._resume,
             color=(70, 70, 70),
             hover_color=(120, 120, 120)
@@ -46,7 +46,7 @@ class PauseMenu(UiObject):
             position=(0, 0),
             size=(260, 60),
             text="Main Menu",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._menu,
             color=(70, 70, 70),
             hover_color=(120, 120, 120)

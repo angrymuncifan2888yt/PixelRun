@@ -1,7 +1,7 @@
 from ..scene import Scene
 from ..scene_type import SceneType
 from ui import UiManager, Text, NormalButton
-from data import FontStorage, const
+from data import Fonts, const
 from .main_menu_background import MainMenuBackground
 import pygame
 
@@ -18,7 +18,7 @@ class SceneMainMenu(Scene):
         # Заголовок
         title = Text(
             pygame.Vector2(0, 80),
-            FontStorage.LOGO_100,
+            Fonts.LOGO_100,
             "PIXELRUN"
         )
         title.center_by_x(const.WINDOW_SIZE[0])
@@ -34,7 +34,7 @@ class SceneMainMenu(Scene):
             position=pygame.Vector2(0, start_y),
             size=(button_width, button_height),
             text="Play",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._button_play_callback
         )
         btn_play.center_by_x(const.WINDOW_SIZE[0])
@@ -44,7 +44,7 @@ class SceneMainMenu(Scene):
             position=pygame.Vector2(0, start_y + spacing),
             size=(button_width, button_height),
             text="Skins",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._button_skins_callback
         )
         btn_skins.center_by_x(const.WINDOW_SIZE[0])
@@ -54,7 +54,7 @@ class SceneMainMenu(Scene):
             position=pygame.Vector2(0, start_y + spacing * 2),
             size=(button_width, button_height),
             text="Levels",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._button_levels_callback
         )
         btn_levels.center_by_x(const.WINDOW_SIZE[0])
@@ -64,7 +64,7 @@ class SceneMainMenu(Scene):
             position=pygame.Vector2(0, start_y + spacing * 3),
             size=(button_width, button_height),
             text="Exit",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._button_exit_callback
         )
         btn_exit.center_by_x(const.WINDOW_SIZE[0])

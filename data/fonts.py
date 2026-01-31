@@ -1,7 +1,7 @@
 import pygame
 
 
-class FontStorage:
+class Fonts:
     @classmethod
     def init(cls):
         LOGO_FONT_PATH = "assets/fonts/logo_font.ttf"

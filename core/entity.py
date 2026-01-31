@@ -8,6 +8,7 @@ class Entity:
         self.height = height
         self.rotation = rotation
         self.hitbox = pygame.rect.Rect((self.position.x, self.position.y), (self.width, self.height))
+        self.invisible = False
 
     def emit_event(self, event):
         self.world.event_bus.emit(event)

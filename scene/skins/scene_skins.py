@@ -1,7 +1,7 @@
 from ..scene import Scene
 from ..scene_type import SceneType
 from ui import UiManager, Text, NormalButton
-from data import FontStorage, const, Skins
+from data import Fonts, const, Skins
 import pygame
 
 
@@ -37,7 +37,7 @@ class SceneSkins(Scene):
         # Заголовок
         self.title = Text(
             pygame.Vector2(0, 40),
-            FontStorage.LOGO_70,
+            Fonts.LOGO_70,
             "SKINS"
         )
         self.title.center_by_x(const.WINDOW_SIZE[0])
@@ -45,7 +45,7 @@ class SceneSkins(Scene):
         # Название скина
         self.skin_name = Text(
             pygame.Vector2(0, 140),
-            FontStorage.NORMAL_30,
+            Fonts.NORMAL_30,
             ""
         )
         self.skin_name.center_by_x(const.WINDOW_SIZE[0])
@@ -53,7 +53,7 @@ class SceneSkins(Scene):
         # Описание скина
         self.skin_description = Text(
             pygame.Vector2(0, 340),
-            FontStorage.NORMAL_25,
+            Fonts.NORMAL_25,
             ""
         )
         self.skin_description.center_by_x(const.WINDOW_SIZE[0])
@@ -66,7 +66,7 @@ class SceneSkins(Scene):
             position=pygame.Vector2(center_x - 160, preview_y - 30),
             size=(60, 60),
             text="<",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._prev_skin
         )
 
@@ -75,7 +75,7 @@ class SceneSkins(Scene):
             position=pygame.Vector2(center_x + 100, preview_y - 30),
             size=(60, 60),
             text=">",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._next_skin
         )
 
@@ -84,7 +84,7 @@ class SceneSkins(Scene):
             position=pygame.Vector2(0, 420),
             size=(220, 60),
             text="Apply",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._apply_skin
         )
         self.btn_apply.center_by_x(const.WINDOW_SIZE[0])
@@ -94,7 +94,7 @@ class SceneSkins(Scene):
             position=pygame.Vector2(20, 20),
             size=(120, 40),
             text="Back",
-            font=FontStorage.NORMAL_30,
+            font=Fonts.NORMAL_30,
             callback=self._back_to_menu
         )
 

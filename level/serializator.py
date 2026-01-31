@@ -29,6 +29,7 @@ class Serializator:
             "position": [entity.position.x, entity.position.y],
             "size": [entity.width, entity.height],
             "rotation": entity.rotation,
+            "invisible": entity.invisible,
         }
 
         if hasattr(entity, "color"):
