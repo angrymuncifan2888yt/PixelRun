@@ -1,0 +1,38 @@
+{
+    "name": "VerticalChaos",
+    "player_spawn": [50, 500],
+    "background_color": [15, 5, 25],
+    "objects": [
+        {"type": "platform", "position": [0, 550], "size": [600, 50], "rotation": 0, "color": [90, 90, 90]},
+        {"type": "platform", "position": [650, 480], "size": [200, 40], "rotation": 0, "color": [100, 100, 100]},
+        {"type": "platform", "position": [950, 380], "size": [180, 40], "rotation": 0, "color": [110, 110, 110]},
+        {"type": "platform", "position": [1200, 280], "size": [200, 40], "rotation": 0, "color": [120, 120, 120]},
+        {"type": "platform", "position": [1500, 360], "size": [220, 40], "rotation": 0, "color": [130, 130, 130]},
+        {"type": "platform", "position": [1800, 450], "size": [240, 40], "rotation": 0, "color": [120, 120, 120]},
+        {"type": "platform", "position": [2100, 300], "size": [200, 40], "rotation": 0, "color": [110, 110, 110]},
+
+        {"type": "gravity_portal", "position": [700, 430], "size": [140, 40], "rotation": 0},
+        {"type": "gravity_portal", "position": [1550, 310], "size": [140, 40], "rotation": 0},
+        {"type": "gravity_portal", "position": [2150, 260], "size": [140, 40], "rotation": 0},
+
+        {"type": "jump_pad", "position": [500, 520], "size": [60, 30], "rotation": 0, "color": [0, 255, 0]},
+        {"type": "jump_pad", "position": [1050, 350], "size": [60, 30], "rotation": 0, "color": [0, 255, 0]},
+        {"type": "jump_pad", "position": [1750, 420], "size": [60, 30], "rotation": 0, "color": [0, 255, 0]},
+
+        {"type": "gravity_orb", "position": [850, 330]},
+        {"type": "gravity_orb", "position": [1350, 230]},
+        {"type": "gravity_orb", "position": [1950, 260]},
+
+        {"type": "spike", "position": [300, 560], "size": [50, 40], "rotation": 0},
+        {"type": "spike", "position": [780, 510], "size": [50, 40], "rotation": 0},
+        {"type": "spike", "position": [1100, 410], "size": [50, 40], "rotation": 180},
+        {"type": "spike", "position": [1650, 400], "size": [60, 40], "rotation": 0},
+        {"type": "spike", "position": [2050, 340], "size": [60, 40], "rotation": 180},
+
+        {"type": "jump_orb", "position": [900, 360], "rotation": 0},
+        {"type": "jump_orb", "position": [1450, 260], "rotation": 0},
+        {"type": "jump_orb", "position": [2250, 230], "rotation": 0},
+
+        {"type": "end", "position": [2500, 200]}
+    ]
+}
