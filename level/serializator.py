@@ -10,7 +10,7 @@ class Serializator:
             "name": level.name,
             "player_spawn": [level.player_spawn.x, level.player_spawn.y],
             "background_color": level.background_color,
-            "objects": level.objects
+            "objects": level.objects,
         }
 
     @staticmethod
@@ -29,10 +29,14 @@ class Serializator:
             "position": [entity.position.x, entity.position.y],
             "size": [entity.width, entity.height],
             "rotation": entity.rotation,
-            "invisible": entity.invisible,
+            "opacity": entity.opacity,
+            "active": entity.active,
         }
 
-        if hasattr(entity, "color"):
-            data["color"] = entity.color
+        if hasattr(entity, "color_fill"):
+            data["color_fill"] = list(entity.color_fill)
+
+        if hasattr(entity, "color_border"):
+            data["color_border"] = list(entity.color_border)
 
         return data

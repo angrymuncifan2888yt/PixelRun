@@ -31,12 +31,19 @@ class World:
         if entity in self.entities:
             self.entities.remove(entity)
 
-    def update(self, delta_time: float):
+    def update_hitboxes(self):
         for entity in self.entities:
-            entity.update(delta_time)
             entity.update_hitbox()
 
-            for other_entity in self.entities:
-                if other_entity != entity:
-                    if entity.hitbox.colliderect(other_entity.hitbox):
-                        entity.on_entity_collision(other_entity)
+    def update(self, delta_time: float):
+        self.update_hitboxes()
+
+        for entity in self.entities:
+            if entity.active:
+                entity.update(delta_time)
+
+                for other_entity in self.entities:
+                    if other_entity != entity:
+                        if entity.hitbox.colliderect(other_entity.hitbox):
+                            if other_entity.active:
+                                entity.on_entity_collision(other_entity)

@@ -148,7 +148,7 @@ class SceneSkins(Scene):
     def _apply_skin(self):
         game_scene = self.scene_manager.get_scene(SceneType.GAME)
         if game_scene:
-            game_scene.player.set_skin(self.current_skin)
+            game_scene.set_skin(self.current_skin)
             self.applied_skin = self.current_skin
             self._update_apply_button()
 

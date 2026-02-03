@@ -3,18 +3,9 @@ from .entity import Entity
 from data import const
 from .player import Player
 
-
-class GravityPortal(Entity):
-    def __init__(self, world, position: Vector2, width=const.GRAVITY_PORTAL_SIZE[0], height=const.GRAVITY_PORTAL_SIZE[1], rotation=0):
-        super().__init__(
-            world,
-            position,
-            const.GRAVITY_PORTAL_SIZE[0],
-            const.GRAVITY_PORTAL_SIZE[1],
-            rotation
-        )
-        self.hitbox.width = 40
-        self.hitbox.height = 120
+class Portal(Entity):
+    def __init__(self, world, position: Vector2, width, height, rotation=0):
+        super().__init__(world, position, width, height, rotation)
 
     def update_hitbox(self):
         self.hitbox.centerx = int(self.position.x + self.width / 2)
@@ -30,6 +21,30 @@ class GravityPortal(Entity):
 
         if was_outside and is_inside:
             self.apply(player)
+
+    def apply(self, player: Player):
+        raise NotImplementedError
+
+
+class GravityPortal(Portal):
+    def __init__(
+        self,
+        world,
+        position: Vector2,
+        width=const.PORTAL_SIZE[0],
+        height=const.PORTAL_SIZE[1],
+        rotation=0
+    ):
+        super().__init__(
+            world,
+            position,
+            const.PORTAL_SIZE[0],
+            const.PORTAL_SIZE[1],
+            rotation
+        )
+
+        self.hitbox.width = 40
+        self.hitbox.height = 120
 
     def apply(self, player: Player):
         player.reverse_gravity()

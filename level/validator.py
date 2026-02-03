@@ -10,39 +10,58 @@ class Validator:
         if not isinstance(entity_json, dict):
             return False
 
-        # Проверяем обязательное поле type
         entity_type = entity_json.get("type")
         if entity_type not in ENTITY_FACTORY:
             return False
 
-        # Проверка позиции
         pos = entity_json.get("position")
-        if not (isinstance(pos, (list, tuple)) and len(pos) == 2 and all(isinstance(v, (int, float)) for v in pos)):
+        if not (
+            isinstance(pos, (list, tuple))
+            and len(pos) == 2
+            and all(isinstance(v, (int, float)) for v in pos)
+        ):
             return False
 
-        # Проверка size если есть
         size = entity_json.get("size")
         if size is not None:
-            if not (isinstance(size, (list, tuple)) and len(size) == 2 and all(isinstance(v, (int, float)) and v > 0 for v in size)):
+            if not (
+                isinstance(size, (list, tuple))
+                and len(size) == 2
+                and all(isinstance(v, (int, float)) and v > 0 for v in size)
+            ):
                 return False
 
-        # Проверка rotation если есть
         rot = entity_json.get("rotation")
         if rot is not None and not isinstance(rot, (int, float)):
             return False
 
-        # Проверка color если есть
-        color = entity_json.get("color")
-        if color is not None:
-            if not (isinstance(color, (list, tuple)) and len(color) == 3 and all(isinstance(c, int) and 0 <= c <= 255 for c in color)):
+        color_fill = entity_json.get("color_fill")
+        if color_fill is not None:
+            if not (
+                isinstance(color_fill, (list, tuple))
+                and len(color_fill) == 3
+                and all(isinstance(c, int) and 0 <= c <= 255 for c in color_fill)
+            ):
                 return False
 
-        # Проверка invisible если есть
-        inv = entity_json.get("invisible")
-        if inv is not None and not isinstance(inv, bool):
+        color_border = entity_json.get("color_border")
+        if color_border is not None:
+            if not (
+                isinstance(color_border, (list, tuple))
+                and len(color_border) == 3
+                and all(isinstance(c, int) and 0 <= c <= 255 for c in color_border)
+            ):
+                return False
+
+        opacity = entity_json.get("opacity")
+        if opacity is not None:
+            if not isinstance(opacity, int) or not (0 <= opacity <= 255):
+                return False
+
+        active = entity_json.get("active")
+        if active is not None and not isinstance(active, bool):
             return False
 
-        # Пробуем создать объект через Deserializator для полной проверки
         try:
             from core import World
             temp_world = World()
@@ -59,16 +78,17 @@ class Validator:
         if not isinstance(level, Level):
             return False
 
-        # Проверка позиции игрока
         if not isinstance(level.player_spawn, Vector2):
             return False
 
-        # Проверка цвета фона
         bg = level.background_color
-        if not (isinstance(bg, (list, tuple)) and len(bg) == 3 and all(isinstance(c, int) and 0 <= c <= 255 for c in bg)):
+        if not (
+            isinstance(bg, (list, tuple))
+            and len(bg) == 3
+            and all(isinstance(c, int) and 0 <= c <= 255 for c in bg)
+        ):
             return False
 
-        # Проверка объектов
         if not isinstance(level.objects, list):
             return False
 

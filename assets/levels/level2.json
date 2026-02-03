@@ -23,16 +23,17 @@
         {"type": "gravity_orb", "position": [1350, 230]},
         {"type": "gravity_orb", "position": [1950, 260]},
 
-        {"type": "spike", "position": [300, 560], "size": [50, 40], "rotation": 0},
-        {"type": "spike", "position": [780, 510], "size": [50, 40], "rotation": 0},
-        {"type": "spike", "position": [1100, 410], "size": [50, 40], "rotation": 180},
-        {"type": "spike", "position": [1650, 400], "size": [60, 40], "rotation": 0},
-        {"type": "spike", "position": [2050, 340], "size": [60, 40], "rotation": 180},
+        {"type": "spike", "position": [300, 560], "rotation": 0, "color_fill":  [255, 255, 255], "color_border":  [255, 0, 0]},
+        {"type": "spike", "position": [780, 510], "rotation": 0},
+        {"type": "spike", "position": [1100, 410], "rotation": 180},
+        {"type": "spike", "position": [1650, 400], "rotation": 0},
+        {"type": "spike", "position": [2050, 340], "rotation": 180},
 
         {"type": "jump_orb", "position": [900, 360], "rotation": 0},
         {"type": "jump_orb", "position": [1450, 260], "rotation": 0},
         {"type": "jump_orb", "position": [2250, 230], "rotation": 0},
 
-        {"type": "end", "position": [2500, 200], "rotation":  0}
+        {"type": "end", "position": [2500, 200], "rotation":  0},
+        {"type": "end", "position": [0, 450], "size":  [100, 100], "rotation":  50, "opacity": 100, "active": false}
     ]
 }

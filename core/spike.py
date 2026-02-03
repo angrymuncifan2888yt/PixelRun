@@ -12,6 +12,8 @@ class Spike(Entity):
 
         self.hitbox.width = int(self.width * 0.25)
         self.hitbox.height = int(self.height * 0.6)
+        self.color_fill = (0, 0, 0)
+        self.color_border = (255, 255, 255)
 
     def update_hitbox(self):
         self.hitbox.width = int(self.width * 0.25)

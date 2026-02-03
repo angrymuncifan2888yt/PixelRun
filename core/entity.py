@@ -1,5 +1,6 @@
 import pygame
 
+
 class Entity:
     def __init__(self, world, position: pygame.Vector2, width, height, rotation=0):
         self.world = world
@@ -7,8 +8,14 @@ class Entity:
         self.width = width
         self.height = height
         self.rotation = rotation
-        self.hitbox = pygame.rect.Rect((self.position.x, self.position.y), (self.width, self.height))
-        self.invisible = False
+
+        self.hitbox = pygame.rect.Rect(
+            (self.position.x, self.position.y),
+            (self.width, self.height)
+        )
+
+        self.opacity = 255  # 0..255
+        self.active = True
 
     def emit_event(self, event):
         self.world.event_bus.emit(event)
@@ -24,6 +31,6 @@ class Entity:
 
     def update(self, delta_time: float):
         pass
-    
+
     def destroy(self):
         self.world.remove_entity(self)

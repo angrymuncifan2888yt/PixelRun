@@ -2,7 +2,7 @@ from .world import World
 from .entity import Entity
 from .player import Player
 from .platform import Platform
-from .gravity_portal import GravityPortal
+from .portals import GravityPortal
 from .jump_pad import JumpPad
 from .spike import Spike
 from .checkpoint import Checkpoint

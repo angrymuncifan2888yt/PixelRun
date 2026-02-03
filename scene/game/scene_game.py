@@ -41,6 +41,9 @@ class SceneGame(Scene):
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
         self.load_level(Levels.Level1)
 
+    def set_skin(self, skin):
+        self.player.set_skin(skin)
+
     def _on_player_reach_end_door(self, event):
         self.level_ended = True
         self.pause = False
@@ -52,25 +55,22 @@ class SceneGame(Scene):
     def load_level(self, level: Level):
         self.current_level = level  # сохраняем текущий уровень для play_again
         self.background_color = level.background_color
-        self.pause = False
         self.level_ended = False
         self.camera.position = self.player.position.copy()
         level.load_to_world(self.world, self.player)
 
     def play_again(self):
-        self.level_ended = False
-        self.pause = False
-        self.debug = False
-
         # Очистка мира
         self.world = World()
         self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
 
         # Пересоздаем игрока
-        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
 
         # Перезагружаем текущий уровень
         self.load_level(self.current_level)
+        self.level_ended = False
+        self.pause = False
 
     def handle_pygame_event(self, event):
         if self.level_ended:
