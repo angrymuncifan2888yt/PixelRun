@@ -28,6 +28,7 @@
         {"type": "spike", "position": [1100, 410], "rotation": 180},
         {"type": "spike", "position": [1650, 400], "rotation": 0},
         {"type": "spike", "position": [2050, 340], "rotation": 180},
+        {"type": "spike", "position": [0, 0], "rotation": 0, "active":  false, "opacity":  50},
 
         {"type": "jump_orb", "position": [900, 360], "rotation": 0},
         {"type": "jump_orb", "position": [1450, 260], "rotation": 0},

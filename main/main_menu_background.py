@@ -1,67 +1,83 @@
-from ui import UiObject
-from core import Player, World, GravityPortal, Platform, JumpOrb, GravityOrb
-from core.render import render_world
 from data import Skins
+from ui import UiObject
+from core import World, GravityPortal, Platform, JumpOrb, GravityOrb, Player, NormalGravityPortal, UpsideDownPortal
+from core.render import render_world
 import pygame
 import math
+
 
 class MainMenuBackground(UiObject):
     def __init__(self):
         super().__init__(pygame.Vector2(0, 0))
+
         self.world = World()
+        self.time = 0
 
-        # Игрок для фона
-        self.bg_player = Player(self.world, pygame.Vector2(100, 500), Skins.CAT_JARD)
-        self.world.add_entity(self.bg_player)
-        self.world.add_entity(GravityPortal(self.world, pygame.Vector2(100, 300), rotation=90))
+        self._build_scene()
 
-        # Платформы
+    def _build_scene(self):
         self.moving_platforms = []
+        self.base_positions = []
+
         positions = [(50, 700), (300, 550), (600, 500)]
         for pos in positions:
-            plat = Platform(self.world, pygame.Vector2(pos), width=150, height=20, color=(120,120,255))
+            plat = Platform(
+                self.world,
+                pygame.Vector2(pos),
+                width=150,
+                height=20,
+                color=(120, 120, 255)
+            )
             self.world.add_entity(plat)
             self.moving_platforms.append(plat)
+            self.base_positions.append(pygame.Vector2(pos))
 
-        # JumpOrb
+        self.portals = [
+            GravityPortal(self.world, pygame.Vector2(200, 350), rotation=90),
+            GravityPortal(self.world, pygame.Vector2(800, 200), rotation=270),
+            NormalGravityPortal(self.world, pygame.Vector2(1100, 150), rotation=90),
+            UpsideDownPortal(self.world, pygame.Vector2(1100, 600), rotation=270)
+        ]
+        for portal in self.portals:
+            self.world.add_entity(portal)
+
         self.jump_orbs = [
-            JumpOrb(self.world, pygame.Vector2(100, 50))
+            JumpOrb(self.world, pygame.Vector2(350, 450)),
+            JumpOrb(self.world, pygame.Vector2(550, 300))
         ]
         for orb in self.jump_orbs:
             self.world.add_entity(orb)
 
-        # GravityOrb
         self.gravity_orbs = [
-            
+            GravityOrb(self.world, pygame.Vector2(700, 250))
         ]
         for orb in self.gravity_orbs:
             self.world.add_entity(orb)
 
-        self.time = 0
-        self.world_time_multiplier = 0.5 # Slow mo
-
+        self.world.add_entity(
+            Player(self.world, pygame.Vector2(1100, 500), Skins.CAT_JARD)
+        )
+        self.world.add_entity(
+            Platform(self.world, pygame.Vector2(1000, 0), width=200, height=25, color=(255, 0, 0)),
+        )
+        self.world.add_entity(
+            Platform(self.world, pygame.Vector2(1000, 775), width=200, height=25, color=(255, 0, 0)),
+        )
     def update(self, delta, **kwargs):
         self.time += delta
 
-        # Двигаем платформы влево/вправо синусоидой
         for i, plat in enumerate(self.moving_platforms):
-            plat.position.x += math.sin(self.time + i) * 0.5
+            base = self.base_positions[i]
+            plat.position.x = base.x + math.sin(self.time + i) * 40
+            plat.position.y = base.y + math.cos(self.time * 0.8 + i) * 10
 
-        # Проверка столкновения игрока с JumpOrb
-        player_rect = self.bg_player.hitbox
-        for orb in self.jump_orbs:
-            if player_rect.colliderect(orb.hitbox):
-                self.bg_player.is_clicking = True
-                self.bg_player.jump()
+        for i, orb in enumerate(self.jump_orbs):
+            orb.position.y += math.sin(self.time * 2 + i) * 0.3
 
-        # Проверка столкновения игрока с GravityOrb
-        for orb in self.gravity_orbs:
-            if player_rect.colliderect(orb.hitbox):
-                self.bg_player.reverse_gravity()
+        for i, orb in enumerate(self.gravity_orbs):
+            orb.position.x += math.cos(self.time * 1.5 + i) * 0.2
 
-        # Обновляем мир
-        self.world.update(delta * self.world_time_multiplier)
-        self.bg_player.jump()
+        self.world.update(delta)
 
     def draw(self, screen):
         render_world(screen, self.world)

@@ -98,12 +98,10 @@ class Player(Entity):
         self.gravity_dir = 1
         self.on_ground = False
         self.animator.reset()
-        self.update_rotation()
 
     def reverse_gravity(self):
         self.gravity_dir *= -1
         self.on_ground = False
-        self.update_rotation()
 
     def handle_platform_collision(self, platform):
         plat_rect = platform.hitbox

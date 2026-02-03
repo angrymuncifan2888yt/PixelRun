@@ -58,9 +58,19 @@ class SceneMainMenu(Scene):
         )
         btn_levels.center_by_x(const.WINDOW_SIZE[0])
 
+        # Editor
+        btn_editor = NormalButton(
+            position=pygame.Vector2(0, start_y + spacing * 3),
+            size=(button_width, button_height),
+            text="Editor",
+            font=Fonts.NORMAL_30,
+            callback=self._button_levels_callback
+        )
+        btn_editor.center_by_x(const.WINDOW_SIZE[0])
+
         # Exit
         btn_exit = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 3),
+            position=pygame.Vector2(0, start_y + spacing * 4),
             size=(button_width, button_height),
             text="Exit",
             font=Fonts.NORMAL_30,
@@ -72,6 +82,7 @@ class SceneMainMenu(Scene):
         self.ui.add_ui_object(btn_play)
         self.ui.add_ui_object(btn_skins)
         self.ui.add_ui_object(btn_levels)
+        self.ui.add_ui_object(btn_editor)
         self.ui.add_ui_object(btn_exit)
 
     def _button_play_callback(self):

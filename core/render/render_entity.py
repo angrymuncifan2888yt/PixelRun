@@ -6,6 +6,8 @@ from core import (
     Player,
     Platform,
     GravityPortal,
+    NormalGravityPortal,
+    UpsideDownPortal,
     JumpPad,
     Spike,
     Checkpoint,
@@ -147,6 +149,12 @@ def render_gravity_orb(screen, gravity_orb: GravityOrb, camera=None):
 def render_end_door(screen, end_door: EndDoor, camera=None):
     render_sprite_entity(screen, end_door, Sprites.END_DOOR, camera)
 
+def render_upside_down_portal(screen, portal: UpsideDownPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.UPSIDE_DOWN_PORTAL, camera)
+
+
+def render_normal_gravity_portal(screen, portal: NormalGravityPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.NORMAL_GRAVITY_PORTAL, camera)
 
 def render_spike(screen, spike: Spike, camera=None):
     if spike.opacity <= 0:
@@ -191,6 +199,8 @@ ENTITY_RENDERERS = {
     Platform: render_platform,
     JumpPad: render_jump_pad,
     GravityPortal: render_gravity_portal,
+    UpsideDownPortal: render_upside_down_portal,
+    NormalGravityPortal: render_normal_gravity_portal,
     Spike: render_spike,
     Checkpoint: render_checkpoint,
     JumpOrb: render_jump_orb,
