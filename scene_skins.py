@@ -1,5 +1,4 @@
-from ..scene import Scene
-from ..scene_type import SceneType
+from scene import Scene, SceneType
 from ui import UiManager, Text, NormalButton
 from data import Fonts, const, Skins
 import pygame

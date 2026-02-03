@@ -1,8 +1,11 @@
 import pygame
 from data import *
 from data import const
-from scene import SceneMainMenu, SceneManager, SceneType, SceneGame, SceneSkins, SceneLevels
-
+from scene import SceneManager, SceneType
+from main import SceneMainMenu
+from game import SceneGame
+from scene_skins import SceneSkins
+from scene_levels import SceneLevels
 
 class PixelRun:
     def __init__(self):

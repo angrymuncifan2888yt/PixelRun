@@ -1,6 +1,5 @@
 import pygame
-from ..scene import Scene
-from ..scene_type import SceneType
+from scene import Scene, SceneType
 from core import *
 from core.render import render_world
 from util import PlayerDirection, Camera

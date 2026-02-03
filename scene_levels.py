@@ -1,6 +1,4 @@
-from ..scene_type import SceneType
-from ..scene_manager import SceneManager
-from ..scene import Scene
+from scene import Scene, SceneType, SceneManager
 from ui import NormalButton, Text, UiManager
 from data import Fonts, Levels, const
 from util import open_file_dialog
