@@ -1,0 +1,11 @@
+{
+  "name": "Triggers test",
+  "player_spawn": [0, 700],
+  "background_color": [15, 5, 25],
+  "objects": [
+        {"type": "platform", "position": [-100, 500], "size": [4000, 50], "rotation": 0, "color": [255, 255, 255]},
+        {"type": "platform", "position": [-100, 1100], "size": [4000, 50], "rotation": 0, "color": [90, 90, 90]},
+
+        {"type": "color", "position": [2000, 1000], "rotation": 0, "color": [255, 255, 0]}
+  ]
+}

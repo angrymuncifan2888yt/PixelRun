@@ -6,3 +6,4 @@ class SceneType(Enum):
     GAME = auto()
     SKINS = auto()
     LEVELS = auto()
+    EDITOR = auto()

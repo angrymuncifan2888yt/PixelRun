@@ -38,5 +38,7 @@ class Serializator:
 
         if hasattr(entity, "color_border"):
             data["color_border"] = list(entity.color_border)
+        if hasattr(entity, "color"):
+            data["color"] = list(entity.color)
 
         return data

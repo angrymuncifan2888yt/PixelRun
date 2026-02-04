@@ -34,6 +34,9 @@ class Deserializator:
         if entity_json.get("color_fill"):
             entity.color_fill = tuple(entity_json["color_fill"])
 
+        if entity_json.get("color"):
+            entity.color = tuple(entity_json["color"])
+
         if entity_json.get("color_border"):
             entity.color_border = tuple(entity_json["color_border"])
 

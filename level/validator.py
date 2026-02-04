@@ -53,6 +53,15 @@ class Validator:
             ):
                 return False
 
+        color = entity_json.get("color")
+        if color is not None:
+            if not (
+                isinstance(color, (list, tuple))
+                and len(color) == 3
+                and all(isinstance(c, int) and 0 <= c <= 255 for c in color)
+            ):
+                return False
+
         opacity = entity_json.get("opacity")
         if opacity is not None:
             if not isinstance(opacity, int) or not (0 <= opacity <= 255):

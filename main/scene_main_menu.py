@@ -64,7 +64,7 @@ class SceneMainMenu(Scene):
             size=(button_width, button_height),
             text="Editor",
             font=Fonts.NORMAL_30,
-            callback=self._button_levels_callback
+            callback=self._button_editor_callback
         )
         btn_editor.center_by_x(const.WINDOW_SIZE[0])
 
@@ -94,6 +94,9 @@ class SceneMainMenu(Scene):
     def _button_levels_callback(self):
         self.scene_manager.set_scene(SceneType.LEVELS)
 
+    def _button_editor_callback(self):
+        self.scene_manager.set_scene(SceneType.EDITOR)
+        
     def _button_exit_callback(self):
         pygame.quit()
         raise SystemExit

@@ -8,3 +8,4 @@ from .spike import Spike
 from .checkpoint import Checkpoint
 from .orbs import JumpOrb, GravityOrb, Orb
 from .end_door import EndDoor
+from .triggers import ColorTrigger

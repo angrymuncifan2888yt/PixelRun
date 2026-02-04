@@ -10,5 +10,6 @@ ENTITY_FACTORY = {
     "normal_gravity_portal": NormalGravityPortal,
     "upside_down_portal": UpsideDownPortal,
     "checkpoint": Checkpoint,
-    "end": EndDoor
+    "end": EndDoor,
+    "color": ColorTrigger
 }

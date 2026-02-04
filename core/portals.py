@@ -10,7 +10,7 @@ class Portal(Entity):
     def update_hitbox(self):
         # Don't ask why I swapped width and height
         self.hitbox.width = int(self.height)
-        self.hitbox.height = int(self.width)
+        self.hitbox.height = int(self.width/2)
 
         self.hitbox.center = (
             int(self.position.x + self.width / 2),

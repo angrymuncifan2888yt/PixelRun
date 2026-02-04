@@ -36,6 +36,7 @@ class SceneGame(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
         self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
+        self.world.event_bus.subscribe(EventType.CHANGE_BACKGROUND_COLOR, self._on_change_background_color)
 
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
         self.load_level(Levels.Level1)
@@ -46,6 +47,9 @@ class SceneGame(Scene):
     def _on_player_reach_end_door(self, event):
         self.level_ended = True
         self.pause = False
+
+    def _on_change_background_color(self, event):
+        self.background_color = event.data["color"]
 
     def _toogle_pause(self):
         if not self.level_ended:  # нельзя ставить на паузу после конца уровня
@@ -76,6 +80,9 @@ class SceneGame(Scene):
             self.level_complete_menu.handle_pygame_event(event)
         elif self.pause:
             self.pause_menu.handle_pygame_event(event)
+            if event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
+                    self._toogle_pause()
         else:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_TAB:
