@@ -6,6 +6,8 @@
         {"type": "platform", "position": [0, -100], "size": [600, 50], "rotation": 0, "color": [90, 90, 90]},
         {"type": "platform", "position": [0, 1100], "size": [600, 50], "rotation": 0, "color": [90, 90, 90]},
         {"type": "normal_gravity_portal", "position": [0, 100], "size": [140, 40], "rotation": 0},
-        {"type": "upside_down_portal", "position": [0, 900], "size": [140, 40], "rotation": 0}
+        {"type": "upside_down_portal", "position": [0, 900], "size": [140, 40], "rotation": 0},
+        {"type": "normal_gravity_portal", "position": [-300, 100], "size": [140, 40], "rotation": 0},
+        {"type": "upside_down_portal", "position": [-300, 900], "size": [140, 40], "rotation": 0}
     ]
 }

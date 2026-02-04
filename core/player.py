@@ -9,6 +9,7 @@ class Player(Entity):
         super().__init__(world, position, *const.PLAYER_SIZE, rotation)
         self.kill_y = 5000
         self.direction = PlayerDirection.RIGHT
+        self.current_checkpoint = None
 
         self.is_clicking = False
         self.base_spawn_position = position.copy()
@@ -87,10 +88,8 @@ class Player(Entity):
             self.respawn()
 
     def respawn(self):
-        checkpoint = self.world.get_nearest_checkpoint(self.position)
-
-        if checkpoint:
-            self.position = checkpoint.position.copy()
+        if self.current_checkpoint:
+            self.position = self.current_checkpoint.position.copy()
         else:
             self.position = self.base_spawn_position.copy()
 
