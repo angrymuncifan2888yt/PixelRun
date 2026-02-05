@@ -31,7 +31,7 @@ class Player(Entity):
         self.on_ground = False
         self.rotation = 0
 
-        self.move_speed = 800
+        self.move_speed = 600
         self.acceleration = 10000
         self.friction = 4000
 
@@ -52,6 +52,7 @@ class Player(Entity):
         if self.on_ground:
             self.velocity.y = -self.jump_force * self.gravity_dir
             self.on_ground = False
+            self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     def move_right(self, delta_time: float):
         self.velocity.x += self.acceleration * delta_time
@@ -121,6 +122,9 @@ class Player(Entity):
             self.gravity_dir = self.current_checkpoint.gravity_dir
         else:
             self.gravity_dir = 1
+
+        if self.current_checkpoint:
+            self.world.level_background_color = self.current_checkpoint.level_background_color
         self.on_ground = False
         self.animator.reset()
         self.step_timer.reset()

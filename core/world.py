@@ -10,6 +10,7 @@ class World:
     def __init__(self):
         self.entities: List[Entity] = []
         self.event_bus = EventBus()
+        self.level_background_color = [0, 0, 0]
     
     def get_nearest_checkpoint(self, position: pygame.Vector2) -> Checkpoint | None:
         nearest = None

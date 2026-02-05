@@ -27,5 +27,4 @@ class ColorTrigger(Trigger):
         self.color = (0, 0, 0)
 
     def activate(self, player):
-        event = Event(EventType.CHANGE_BACKGROUND_COLOR, {"color": self.color})
-        self.world.event_bus.emit(event)
+        self.world.level_background_color = self.color

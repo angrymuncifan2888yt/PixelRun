@@ -10,6 +10,7 @@ class Checkpoint(Entity):
         super().__init__(world, position, width, height, rotation)
         self.activated = False
         self.gravity_dir = 1
+        self.level_background_color = []
 
     def on_entity_collision(self, entity):
         if self.activated:
@@ -27,4 +28,7 @@ class Checkpoint(Entity):
         self.active = False
         player.current_checkpoint = self
         self.opacity /= 2
+
+        # Save params
         self.gravity_dir = player.gravity_dir
+        self.level_background_color = self.world.level_background_color

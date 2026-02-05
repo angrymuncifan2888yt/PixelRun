@@ -1,6 +1,6 @@
 import pygame
 from .ui_object import UiObject
-from data import Sounds
+from data import Sounds, SoundChannels
 
 class NormalButton(UiObject):
     def __init__(
@@ -53,7 +53,7 @@ class NormalButton(UiObject):
             if self.is_mouse_on_button():
                 if callable(self.callback):
                     self.callback()
-                    Sounds.button_press()
+                    Sounds.play_sound(Sounds.BUTTON_PRESS, SoundChannels.SYSTEM)
 
     def draw(self, screen):
         rect = self.get_rect()

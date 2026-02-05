@@ -2,6 +2,7 @@ from pygame import Vector2
 from .entity import Entity
 from data.const import ORB_SIZE
 from .player import Player
+from event import EventType, Event
 
 
 class Orb(Entity):
@@ -18,6 +19,7 @@ class Orb(Entity):
         if isinstance(entity, Player):
             if entity.is_clicking:
                 self.activate(entity)
+                # self.world.event_bus.emit(Event(EventType.ORB_ACTIVATE, data={"orb": self}))
 
     # To be made in child classes
     def activate(self, player: Player):

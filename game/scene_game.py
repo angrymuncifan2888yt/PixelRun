@@ -6,14 +6,16 @@ from util import PlayerDirection, Camera, Timer
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
-from data import Skins, const, Levels, Sounds
+from data import Skins, const, Levels, Sounds, SoundChannels
 from event import EventType
+from .debug_menu import DebugMenu
 
 
 class SceneGame(Scene):
     def __init__(self, scene_manager) -> None:
         super().__init__(scene_manager, SceneType.GAME)
 
+        self.show_hitboxes = False
         self.debug = False
         self.pause = False
         self.level_ended = False
@@ -32,6 +34,7 @@ class SceneGame(Scene):
             on_play_again=self.play_again,
             on_levels=lambda: self.scene_manager.set_scene(SceneType.LEVELS)
         )
+        self.debug_menu = DebugMenu()
 
         self.player_dying_timer = Timer(1)
         self.dying_animation = False
@@ -56,19 +59,31 @@ class SceneGame(Scene):
         self.pause = False
 
     def _on_player_walk(self, event):
-        Sounds.player_walk()
+        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME)
 
-    def _on_change_background_color(self, event):
-        self.background_color = event.data["color"]
+    def _on_player_jump(self, event):
+        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME)
 
     def _on_player_death(self, event):
         self.dying_animation = True
         self.player.opacity = 50
-        Sounds.player_death()
+        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME)
 
     def _toogle_pause(self):
         if not self.level_ended:  # нельзя ставить на паузу после конца уровня
             self.pause = not self.pause
+
+            if self.pause:
+                SoundChannels.GAME.pause()
+            else:
+                SoundChannels.GAME.unpause()
+
+    def subscribe_world_event(self):
+        # Subscribe event
+        self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
+        self.world.event_bus.subscribe(EventType.PLAYER_WALK, self._on_player_walk)
+        self.world.event_bus.subscribe(EventType.PLAYER_DEATH, self._on_player_death)
+        self.world.event_bus.subscribe(EventType.PLAYER_JUMP, self._on_player_jump)
 
     def load_level(self, level: Level):
         self.current_level = level  # сохраняем текущий уровень для play_again
@@ -76,12 +91,7 @@ class SceneGame(Scene):
         self.level_ended = False
         self.camera.position = self.player.position.copy()
         level.load_to_world(self.world, self.player)
-
-        # Subscribe event
-        self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
-        self.world.event_bus.subscribe(EventType.CHANGE_BACKGROUND_COLOR, self._on_change_background_color)
-        self.world.event_bus.subscribe(EventType.PLAYER_WALK, self._on_player_walk)
-        self.world.event_bus.subscribe(EventType.PLAYER_DEATH, self._on_player_death)
+        self.subscribe_world_event()
 
     def play_again(self):
         # Очистка мира
@@ -96,6 +106,9 @@ class SceneGame(Scene):
         self.level_ended = False
         self.pause = False
 
+    def click(self):
+        self.player.is_clicking = True
+
     def handle_pygame_event(self, event):
         if self.level_ended:
             self.level_complete_menu.handle_pygame_event(event)
@@ -106,18 +119,21 @@ class SceneGame(Scene):
                     self._toogle_pause()
         else:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_TAB:
+                if event.key == pygame.K_F3:
+                    self.show_hitboxes = not self.show_hitboxes
+                if event.key == pygame.K_F2:
                     self.debug = not self.debug
                 if event.key == pygame.K_SPACE:
-                    self.player.is_clicking = True
+                    self.click()
                 if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
                     self._toogle_pause()
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                self.player.is_clicking = True
+                self.click()
 
     def update(self, delta, **kwargs):
         if not self.level_ended:
             if not self.pause:
+                self.debug_menu.update(delta, kwargs["clock"], self.player)
                 if not self.dying_animation:
                     self.world.update(delta)
                     self.camera.update(pygame.Vector2(self.player.hitbox.center))
@@ -148,8 +164,11 @@ class SceneGame(Scene):
             self.level_complete_menu.update(delta)  # обновляем меню конца уровня
 
     def draw(self, screen):
-        screen.fill(self.background_color)
-        render_world(screen, self.world, self.camera, self.debug)
+        screen.fill(self.world.level_background_color)
+        render_world(screen, self.world, self.camera, self.show_hitboxes)
+        if self.debug:
+            self.debug_menu.draw(screen)
+
         if self.pause:
             self.pause_menu.draw(screen)
         if self.level_ended:

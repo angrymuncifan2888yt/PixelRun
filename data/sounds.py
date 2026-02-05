@@ -1,5 +1,12 @@
 import pygame
 
+
+class SoundChannels:
+    @classmethod
+    def init(cls):
+        cls.SYSTEM = pygame.mixer.Channel(0)
+        cls.GAME = pygame.mixer.Channel(1)
+
 class Sounds:
     @classmethod
     def init(cls):
@@ -13,20 +20,12 @@ class Sounds:
         cls.PLAYER_DEATH = pygame.mixer.Sound("assets/sounds/death.mp3")
         cls.PLAYER_DEATH.set_volume(cls.VOLUME)
 
-    @classmethod
-    def button_press(cls):
-        cls.BUTTON_PRESS.set_volume(cls.VOLUME)
-        cls.BUTTON_PRESS.play()
+        cls.PLAYER_JUMP = pygame.mixer.Sound("assets/sounds/click.mp3")
+        cls.PLAYER_JUMP.set_volume(cls.VOLUME * 3) # To make jump a bit louder
 
-    @classmethod
-    def player_walk(cls):
-        cls.PLAYER_WALK.set_volume(cls.VOLUME)
-        cls.PLAYER_WALK.play()
-
-    @classmethod
-    def player_death(cls):
-        cls.PLAYER_DEATH.set_volume(cls.VOLUME)
-        cls.PLAYER_DEATH.play()
+    @staticmethod
+    def play_sound(sound: pygame.mixer.Sound, channel: pygame.mixer.Channel):
+        channel.play(sound)
 
     @classmethod
     def set_volume(cls, volume: float):

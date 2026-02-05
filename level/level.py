@@ -13,6 +13,7 @@ class Level:
     def load_to_world(self, world, player):
         world.entities.clear()
 
+        world.level_background_color = self.background_color
         player.position = self.player_spawn.copy()
         player.base_spawn_position = self.player_spawn.copy()
         player.world = world

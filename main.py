@@ -8,8 +8,18 @@ from scene_skins import SceneSkins
 from scene_levels import SceneLevels
 from editor import SceneEditor
 
+
+def init_assets():
+    Sprites.init()
+    Skins.init()
+    Fonts.init()
+    Levels.init()
+    SoundChannels.init()
+    Sounds.init()
+
 class PixelRun:
     def __init__(self):
+        # Core
         pygame.init()
         pygame.font.init()
         pygame.mixer.init()
@@ -19,12 +29,9 @@ class PixelRun:
         self.clock = pygame.time.Clock()
         self.running = True
 
-        Sprites.init()
-        Skins.init()
-        Fonts.init()
-        Levels.init()
-        Sounds.init()
+        init_assets()
 
+        # Scenes
         self.scene_manager = SceneManager()
         self.scene_main_menu = SceneMainMenu(self.scene_manager)
         self.scene_game = SceneGame(self.scene_manager)
@@ -48,7 +55,7 @@ class PixelRun:
         while self.running:
             delta_time = self.clock.tick(const.TARGET_FPS) / 1000
 
-            self.scene_manager.update_current_scene(delta_time)
+            self.scene_manager.update_current_scene(delta_time, clock=self.clock)
             self.scene_manager.render_current_scene(self.screen)
 
             for event in pygame.event.get():

@@ -2,6 +2,7 @@ from data import Skins
 from ui import UiObject
 from core import World, GravityPortal, Platform, JumpOrb, GravityOrb, Player, NormalGravityPortal, UpsideDownPortal
 from core.render import render_world
+from event import EventType
 import pygame
 import math
 
@@ -54,8 +55,9 @@ class MainMenuBackground(UiObject):
         for orb in self.gravity_orbs:
             self.world.add_entity(orb)
 
+        self.player = Player(self.world, pygame.Vector2(1100, 500), Skins.CAT_JARD)
         self.world.add_entity(
-            Player(self.world, pygame.Vector2(1100, 500), Skins.CAT_JARD)
+            self.player
         )
         self.world.add_entity(
             Platform(self.world, pygame.Vector2(1000, 0), width=200, height=25, color=(255, 0, 0)),
@@ -63,6 +65,11 @@ class MainMenuBackground(UiObject):
         self.world.add_entity(
             Platform(self.world, pygame.Vector2(1000, 775), width=200, height=25, color=(255, 0, 0)),
         )
+        self.world.event_bus.subscribe(EventType.PLAYER_DEATH, self._on_player_death)
+    
+    def _on_player_death(self, event):
+        self.player.respawn()
+
     def update(self, delta, **kwargs):
         self.time += delta
 
