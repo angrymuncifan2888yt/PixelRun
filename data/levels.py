@@ -9,8 +9,5 @@ class Levels:
 
     @classmethod
     def init(cls):
-        cls.Level1 = cls.load_level_from_file("assets/levels/level1.json")
-        # cls.Level2 = cls.load_level_from_file("assets/levels/level2.json")
-
-        # List of all levels
-        cls.ALL_LEVELS = [cls.Level1]
+        cls.FIRST_LEVEL = cls.load_level_from_file("assets/levels/first_level.json")
+        cls.ALL_LEVELS = [cls.FIRST_LEVEL]

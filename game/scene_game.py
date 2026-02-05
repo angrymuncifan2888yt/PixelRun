@@ -40,7 +40,7 @@ class SceneGame(Scene):
         self.world = World()
 
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
-        self.load_level(Levels.Level1)
+        self.load_level(Levels.FIRST_LEVEL)
 
     def on_enter(self):
         pygame.mixer.music.pause()

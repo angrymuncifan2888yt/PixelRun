@@ -24,7 +24,7 @@ from .render_utils import (
 )
 
 # ===============================
-# 🎮 РЕНДЕРЫ СУЩНОСТЕЙ
+# 🎮 ENTITY RENDERERS
 # ===============================
 
 def render_player(screen, player: Player, camera=None):
@@ -41,6 +41,8 @@ def render_player(screen, player: Player, camera=None):
 
     sprite = get_transformed(
         sprite,
+        width=player.width,
+        height=player.height,
         flip_x=(player.direction == PlayerDirection.LEFT),
         angle=player.rotation,
         opacity=player.opacity,
@@ -69,6 +71,8 @@ def render_colored_rect(screen, entity, color, camera=None):
 
     surface = get_transformed(
         surface,
+        width=entity.width,
+        height=entity.height,
         angle=entity.rotation,
         opacity=entity.opacity,
     )
@@ -84,6 +88,8 @@ def render_sprite_entity(screen, entity, sprite, camera=None):
 
     sprite = get_transformed(
         sprite,
+        width=entity.width,
+        height=entity.height,
         angle=entity.rotation,
         opacity=entity.opacity,
     )
@@ -157,6 +163,8 @@ def render_spike(screen, spike: Spike, camera=None):
 
     surface = get_transformed(
         surface,
+        width=spike.width,
+        height=spike.height,
         angle=spike.rotation,
         opacity=spike.opacity,
     )
@@ -164,7 +172,7 @@ def render_spike(screen, spike: Spike, camera=None):
     blit_centered(screen, surface, pos, spike.width, spike.height)
 
 # ===============================
-# 🗂 ТАБЛИЦА РЕНДЕРОВ
+# 🗂 ENTITY → RENDERER MAP
 # ===============================
 
 ENTITY_RENDERERS = {
@@ -182,6 +190,9 @@ ENTITY_RENDERERS = {
     ColorTrigger: render_color_trigger,
 }
 
+# ===============================
+# 🚀 MAIN ENTRY
+# ===============================
 
 def render_entity(screen, entity: Entity, camera: Camera | None = None):
     if entity.opacity <= 0:

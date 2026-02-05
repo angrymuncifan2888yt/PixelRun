@@ -5,9 +5,11 @@ from data import const
 
 
 class Checkpoint(Entity):
-    def __init__(self, world, position: pygame.Vector2, rotation=0):
-        super().__init__(world, position, *const.CHECKPOINT_SIZE, rotation)
+    def __init__(self, world, position: pygame.Vector2, width=const.CHECKPOINT_SIZE[0]
+                 ,height=const.CHECKPOINT_SIZE[1], rotation=0):
+        super().__init__(world, position, width, height, rotation)
         self.activated = False
+        self.gravity_dir = 1
 
     def on_entity_collision(self, entity):
         if self.activated:
@@ -25,3 +27,4 @@ class Checkpoint(Entity):
         self.active = False
         player.current_checkpoint = self
         self.opacity /= 2
+        self.gravity_dir = player.gravity_dir

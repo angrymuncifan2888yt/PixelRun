@@ -2,33 +2,38 @@ import pygame
 from core import Entity
 from util import Camera
 
-import pygame
-from core import Entity
-from util import Camera
-
-_transform_cache: dict[tuple[int, bool, int, int], pygame.Surface] = {}
+_transform_cache: dict[tuple[int, int, int, bool, int, int], pygame.Surface] = {}
 
 
 def get_transformed(
     surface: pygame.Surface,
     *,
+    width: int,
+    height: int,
     flip_x: bool = False,
     angle: int = 0,
-    opacity: int = 255
+    opacity: int = 255,
 ) -> pygame.Surface:
-    key = (id(surface), flip_x, angle, opacity)
+    key = (id(surface), width, height, flip_x, angle, opacity)
     cached = _transform_cache.get(key)
     if cached:
         return cached
 
     result = surface
 
+    # 🔹 SCALE
+    if surface.get_width() != width or surface.get_height() != height:
+        result = pygame.transform.smoothscale(result, (width, height))
+
+    # 🔹 FLIP
     if flip_x:
         result = pygame.transform.flip(result, True, False)
 
+    # 🔹 ROTATE
     if angle != 0:
         result = pygame.transform.rotate(result, angle)
 
+    # 🔹 OPACITY
     if opacity < 255:
         result = result.copy()
         result.set_alpha(opacity)
