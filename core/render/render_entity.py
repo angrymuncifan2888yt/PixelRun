@@ -14,55 +14,14 @@ from core import (
     JumpOrb,
     GravityOrb,
     EndDoor,
+    ColorTrigger,
 )
 
-# ===============================
-# 🔥 КЕШ ВРАЩЕНИЙ
-# ===============================
-
-_rotation_cache: dict[tuple[int, int], pygame.Surface] = {}
-
-
-def get_rotated(surface: pygame.Surface, angle: int) -> pygame.Surface:
-    if angle == 0:
-        return surface
-
-    key = (id(surface), angle)
-    cached = _rotation_cache.get(key)
-
-    if cached is None:
-        cached = pygame.transform.rotate(surface, angle)
-        _rotation_cache[key] = cached
-
-    return cached
-
-
-# ===============================
-# 🧩 ОБЩИЕ ФУНКЦИИ
-# ===============================
-
-def get_entity_screen_pos(entity: Entity, camera: Camera | None):
-    return camera.get_screen_position(entity.position) if camera else entity.position
-
-
-def blit_centered(screen, surface, pos, width, height):
-    rect = surface.get_rect(
-        center=(
-            int(pos.x + width / 2),
-            int(pos.y + height / 2),
-        )
-    )
-    screen.blit(surface, rect)
-
-
-def apply_opacity(surface: pygame.Surface, opacity: int) -> pygame.Surface:
-    if opacity >= 255:
-        return surface
-
-    temp = surface.copy()
-    temp.set_alpha(opacity)
-    return temp
-
+from .render_utils import (
+    get_entity_screen_pos,
+    blit_centered,
+    get_transformed,
+)
 
 # ===============================
 # 🎮 РЕНДЕРЫ СУЩНОСТЕЙ
@@ -74,15 +33,20 @@ def render_player(screen, player: Player, camera=None):
 
     pos = get_entity_screen_pos(player, camera)
 
-    if player.direction in (PlayerDirection.LEFT, PlayerDirection.RIGHT):
-        sprite = player.animator.get_current_sprite(player.skin.animations)
-    else:
-        sprite = player.skin.standing_sprite
+    sprite = (
+        player.animator.get_current_sprite(player.skin.animations)
+        if player.is_moving
+        else player.skin.standing_sprite
+    )
 
-    rotated = get_rotated(sprite, player.rotation)
-    rotated = apply_opacity(rotated, player.opacity)
+    sprite = get_transformed(
+        sprite,
+        flip_x=(player.direction == PlayerDirection.LEFT),
+        angle=player.rotation,
+        opacity=player.opacity,
+    )
 
-    blit_centered(screen, rotated, pos, player.width, player.height)
+    blit_centered(screen, sprite, pos, player.width, player.height)
 
 
 def render_colored_rect(screen, entity, color, camera=None):
@@ -98,16 +62,33 @@ def render_colored_rect(screen, entity, color, camera=None):
     surface = render_colored_rect._cache.get(key)
     if surface is None:
         surface = pygame.Surface(
-            (entity.width, entity.height),
-            pygame.SRCALPHA
+            (entity.width, entity.height), pygame.SRCALPHA
         ).convert_alpha()
         surface.fill(color)
         render_colored_rect._cache[key] = surface
 
-    rotated = get_rotated(surface, entity.rotation)
-    rotated = apply_opacity(rotated, entity.opacity)
+    surface = get_transformed(
+        surface,
+        angle=entity.rotation,
+        opacity=entity.opacity,
+    )
 
-    blit_centered(screen, rotated, pos, entity.width, entity.height)
+    blit_centered(screen, surface, pos, entity.width, entity.height)
+
+
+def render_sprite_entity(screen, entity, sprite, camera=None):
+    if entity.opacity <= 0:
+        return
+
+    pos = get_entity_screen_pos(entity, camera)
+
+    sprite = get_transformed(
+        sprite,
+        angle=entity.rotation,
+        opacity=entity.opacity,
+    )
+
+    blit_centered(screen, sprite, pos, entity.width, entity.height)
 
 
 def render_platform(screen, platform: Platform, camera=None):
@@ -118,20 +99,16 @@ def render_jump_pad(screen, jump_pad: JumpPad, camera=None):
     render_colored_rect(screen, jump_pad, jump_pad.color, camera)
 
 
-def render_sprite_entity(screen, entity, sprite, camera=None):
-    if entity.opacity <= 0:
-        return
-
-    pos = get_entity_screen_pos(entity, camera)
-
-    rotated = get_rotated(sprite, entity.rotation)
-    rotated = apply_opacity(rotated, entity.opacity)
-
-    blit_centered(screen, rotated, pos, entity.width, entity.height)
-
-
 def render_gravity_portal(screen, portal: GravityPortal, camera=None):
     render_sprite_entity(screen, portal, Sprites.GRAVITY_PORTAL, camera)
+
+
+def render_upside_down_portal(screen, portal: UpsideDownPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.UPSIDE_DOWN_PORTAL, camera)
+
+
+def render_normal_gravity_portal(screen, portal: NormalGravityPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.NORMAL_GRAVITY_PORTAL, camera)
 
 
 def render_checkpoint(screen, checkpoint: Checkpoint, camera=None):
@@ -149,12 +126,10 @@ def render_gravity_orb(screen, gravity_orb: GravityOrb, camera=None):
 def render_end_door(screen, end_door: EndDoor, camera=None):
     render_sprite_entity(screen, end_door, Sprites.END_DOOR, camera)
 
-def render_upside_down_portal(screen, portal: UpsideDownPortal, camera=None):
-    render_sprite_entity(screen, portal, Sprites.UPSIDE_DOWN_PORTAL, camera)
 
+def render_color_trigger(screen, trigger: ColorTrigger, camera=None):
+    render_sprite_entity(screen, trigger, Sprites.COLOR_TRIGGER, camera)
 
-def render_normal_gravity_portal(screen, portal: NormalGravityPortal, camera=None):
-    render_sprite_entity(screen, portal, Sprites.NORMAL_GRAVITY_PORTAL, camera)
 
 def render_spike(screen, spike: Spike, camera=None):
     if spike.opacity <= 0:
@@ -169,26 +144,24 @@ def render_spike(screen, spike: Spike, camera=None):
     surface = render_spike._cache.get(key)
     if surface is None:
         surface = pygame.Surface(
-            (spike.width, spike.height),
-            pygame.SRCALPHA
+            (spike.width, spike.height), pygame.SRCALPHA
         ).convert_alpha()
-
         points = [
             (spike.width // 2, 0),
             (0, spike.height),
             (spike.width, spike.height),
         ]
-
         pygame.draw.polygon(surface, spike.color_fill, points)
         pygame.draw.polygon(surface, spike.color_border, points, width=2)
-
         render_spike._cache[key] = surface
 
-    rotated = get_rotated(surface, spike.rotation)
-    rotated = apply_opacity(rotated, spike.opacity)
+    surface = get_transformed(
+        surface,
+        angle=spike.rotation,
+        opacity=spike.opacity,
+    )
 
-    blit_centered(screen, rotated, pos, spike.width, spike.height)
-
+    blit_centered(screen, surface, pos, spike.width, spike.height)
 
 # ===============================
 # 🗂 ТАБЛИЦА РЕНДЕРОВ
@@ -206,6 +179,7 @@ ENTITY_RENDERERS = {
     JumpOrb: render_jump_orb,
     GravityOrb: render_gravity_orb,
     EndDoor: render_end_door,
+    ColorTrigger: render_color_trigger,
 }
 
 

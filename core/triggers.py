@@ -9,6 +9,7 @@ class Trigger(Entity):
                  width=const.TRIGGER_SIZE[0],
                  height=const.TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
+        self.opacity = 0
 
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
@@ -24,7 +25,6 @@ class ColorTrigger(Trigger):
                  height=const.TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
         self.color = (0, 0, 0)
-        self.opacity = 0
 
     def activate(self, player):
         event = Event(EventType.CHANGE_BACKGROUND_COLOR, {"color": self.color})

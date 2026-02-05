@@ -1,5 +1,6 @@
 from pygame import Vector2
 from .entity_factory import ENTITY_FACTORY
+from core import Trigger
 
 
 class Deserializator:
@@ -43,7 +44,10 @@ class Deserializator:
         if entity_json.get("opacity") is not None:
             entity.opacity = int(entity_json["opacity"])
         else:
-            entity.opacity = 255
+            if isinstance(entity, Trigger):
+                entity.opacity = 0
+            else:
+                entity.opacity = 255
 
         if entity_json.get("active") is not None:
             entity.active = entity_json["active"]

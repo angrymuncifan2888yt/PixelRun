@@ -1,7 +1,8 @@
 from pygame import Vector2, Rect
 from .entity import Entity
 from data import Skin, const
-from util import SpriteAnimator, PlayerDirection
+from util import SpriteAnimator, PlayerDirection, Timer
+from event import Event, EventType
 
 
 class Player(Entity):
@@ -10,6 +11,7 @@ class Player(Entity):
         self.kill_y = 5000
         self.direction = PlayerDirection.RIGHT
         self.current_checkpoint = None
+        self.is_moving = False  # <-- добавили флаг движения
 
         self.is_clicking = False
         self.base_spawn_position = position.copy()
@@ -29,9 +31,11 @@ class Player(Entity):
         self.on_ground = False
         self.rotation = 0
 
-        self.move_speed = 800  # максимальная скорость движения
-        self.acceleration = 10000  # ускорение пикселей/с^2
-        self.friction = 4000  # замедление, когда клавиша отпущена
+        self.move_speed = 800
+        self.acceleration = 10000
+        self.friction = 4000
+
+        self.step_timer = Timer(0.25, repeat=False)  # шаг каждые 0.25 сек
 
     @property
     def is_upside_down(self):
@@ -54,12 +58,14 @@ class Player(Entity):
         if self.velocity.x > self.move_speed:
             self.velocity.x = self.move_speed
         self.direction = PlayerDirection.RIGHT
+        self.is_moving = True  # <-- игрок двигается
 
     def move_left(self, delta_time: float):
         self.velocity.x -= self.acceleration * delta_time
         if self.velocity.x < -self.move_speed:
             self.velocity.x = -self.move_speed
         self.direction = PlayerDirection.LEFT
+        self.is_moving = True  # <-- игрок двигается
 
     def stop_horizontal(self, delta_time: float):
         if self.velocity.x > 0:
@@ -72,10 +78,10 @@ class Player(Entity):
                 self.velocity.x = 0
 
     def update(self, delta_time: float):
-        self.direction = PlayerDirection.STANDING
         self.prev_position = self.position.copy()
         self.prev_rect = self.hitbox.copy()
 
+        # Обновляем анимацию (SpriteAnimator сам выбирает кадр в зависимости от direction)
         self.animator.update(delta_time)
 
         self.velocity.y += self.gravity * delta_time * self.gravity_dir
@@ -84,8 +90,25 @@ class Player(Entity):
         self.stop_horizontal(delta_time)
         self.update_rotation()
 
-        if abs(self.position.y - 0) >= self.kill_y:
-            self.respawn()
+        if abs(self.position.y) >= self.kill_y:
+            self.kill()
+
+        # Обновление таймера шагов
+        self.step_timer.update(delta_time)
+        if self.step_timer.is_finished() and self.is_moving:
+            self.step_timer.reset()
+            if self.on_ground:
+                self.world.event_bus.emit(Event(EventType.PLAYER_WALK, {}))
+
+        # Обновляем направление в зависимости от скорости
+        if abs(self.velocity.x) < 1:  # почти стоим
+            self.direction = PlayerDirection.STANDING
+
+        # Сбрасываем флаг движения для следующего кадра
+        self.is_moving = False
+
+    def kill(self):
+        self.world.event_bus.emit(Event(EventType.PLAYER_DEATH, {}))
 
     def respawn(self):
         if self.current_checkpoint:
@@ -97,6 +120,8 @@ class Player(Entity):
         self.gravity_dir = 1
         self.on_ground = False
         self.animator.reset()
+        self.step_timer.reset()
+        self.is_moving = False
 
     def reverse_gravity(self):
         self.gravity_dir *= -1

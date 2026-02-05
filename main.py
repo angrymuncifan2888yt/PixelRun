@@ -18,10 +18,12 @@ class PixelRun:
         pygame.display.set_caption(const.WINDOW_CAPTION)
         self.clock = pygame.time.Clock()
         self.running = True
+
         Sprites.init()
         Skins.init()
         Fonts.init()
         Levels.init()
+        Sounds.init()
 
         self.scene_manager = SceneManager()
         self.scene_main_menu = SceneMainMenu(self.scene_manager)
@@ -36,8 +38,13 @@ class PixelRun:
         self.scene_manager.add_scene(self.scene_levels)
         self.scene_manager.add_scene(self.scene_editor)
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
-    
+
+        # Background music
+        pygame.mixer.music.load("assets/sounds/background.mp3")
+
     def mainloop(self):
+        pygame.mixer.music.play(-1)
+
         while self.running:
             delta_time = self.clock.tick(const.TARGET_FPS) / 1000
 

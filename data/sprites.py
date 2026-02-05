@@ -21,15 +21,12 @@ class Sprites:
             pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running5.png"), PLAYER_SIZE),
         ]
         # Sliding garou skin
-        cls.SLIDING_GAROU_STANDING = pygame.transform.scale(pygame.image.load("assets/images/sliding_garou.png"), PLAYER_SIZE)
+        cls.SLIDING_GAROU_STANDING = pygame.transform.flip(
+            pygame.transform.scale(pygame.image.load("assets/images/sliding_garou.png"), PLAYER_SIZE),
+            True, False)
         cls.SLIDING_GAROU = [
-            pygame.transform.scale(cls.SLIDING_GAROU_STANDING, PLAYER_SIZE),
+            cls.SLIDING_GAROU_STANDING,
         ]
-        cls.CAT_JARD_REVERSED = []
-        for sprite in cls.CAT_JARD:
-            cls.CAT_JARD_REVERSED.append(
-                pygame.transform.flip(sprite, True, False)
-            )
 
         # World objects
         cls.GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/gravity_portal.png"), PORTAL_SIZE)
@@ -40,5 +37,6 @@ class Sprites:
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)
         cls.GRAVITY_ORB = pygame.transform.scale(pygame.image.load("assets/images/gravity_orb.png"), ORB_SIZE)
         cls.END_DOOR = pygame.transform.scale(pygame.image.load("assets/images/end_door.png"), END_DOOR_SIZE)
+        cls.COLOR_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/color_trigger.png"), TRIGGER_SIZE).convert_alpha()
 
         # Other

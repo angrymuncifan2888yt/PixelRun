@@ -2,11 +2,11 @@ import pygame
 from scene import Scene, SceneType
 from core import *
 from core.render import render_world
-from util import PlayerDirection, Camera
+from util import PlayerDirection, Camera, Timer
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
-from data import Skins, const, Levels
+from data import Skins, const, Levels, Sounds
 from event import EventType
 
 
@@ -33,13 +33,20 @@ class SceneGame(Scene):
             on_levels=lambda: self.scene_manager.set_scene(SceneType.LEVELS)
         )
 
+        self.player_dying_timer = Timer(1)
+        self.dying_animation = False
+
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
-        self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
-        self.world.event_bus.subscribe(EventType.CHANGE_BACKGROUND_COLOR, self._on_change_background_color)
 
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
         self.load_level(Levels.Level1)
+
+    def on_enter(self):
+        pygame.mixer.music.pause()
+
+    def on_exit(self):
+        pygame.mixer.music.unpause()
 
     def set_skin(self, skin):
         self.player.set_skin(skin)
@@ -48,8 +55,16 @@ class SceneGame(Scene):
         self.level_ended = True
         self.pause = False
 
+    def _on_player_walk(self, event):
+        Sounds.player_walk()
+
     def _on_change_background_color(self, event):
         self.background_color = event.data["color"]
+
+    def _on_player_death(self, event):
+        self.dying_animation = True
+        self.player.opacity = 50
+        Sounds.player_death()
 
     def _toogle_pause(self):
         if not self.level_ended:  # нельзя ставить на паузу после конца уровня
@@ -62,16 +77,22 @@ class SceneGame(Scene):
         self.camera.position = self.player.position.copy()
         level.load_to_world(self.world, self.player)
 
+        # Subscribe event
+        self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
+        self.world.event_bus.subscribe(EventType.CHANGE_BACKGROUND_COLOR, self._on_change_background_color)
+        self.world.event_bus.subscribe(EventType.PLAYER_WALK, self._on_player_walk)
+        self.world.event_bus.subscribe(EventType.PLAYER_DEATH, self._on_player_death)
+
     def play_again(self):
         # Очистка мира
         self.world = World()
-        self.world.event_bus.subscribe(EventType.PLAYER_TOUCH_END_DOOR, self._on_player_reach_end_door)
 
         # Пересоздаем игрока
         self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
 
         # Перезагружаем текущий уровень
         self.load_level(self.current_level)
+        self.background_color = self.current_level.background_color
         self.level_ended = False
         self.pause = False
 
@@ -97,21 +118,30 @@ class SceneGame(Scene):
     def update(self, delta, **kwargs):
         if not self.level_ended:
             if not self.pause:
-                self.world.update(delta)
-                self.camera.update(pygame.Vector2(self.player.hitbox.center))
-                self.player.is_clicking = False
+                if not self.dying_animation:
+                    self.world.update(delta)
+                    self.camera.update(pygame.Vector2(self.player.hitbox.center))
+                    self.player.is_clicking = False
 
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_SPACE]:
-                    self.player.jump()
-                if keys[pygame.K_a]:
-                    self.player.move_left(delta)
-                elif keys[pygame.K_d]:
-                    self.player.move_right(delta)
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_SPACE]:
+                        self.player.jump()
+                    if keys[pygame.K_a]:
+                        self.player.move_left(delta)
+                    elif keys[pygame.K_d]:
+                        self.player.move_right(delta)
 
-                mouse = pygame.mouse.get_pressed()
-                if mouse[0]:
-                    self.player.jump()
+                    mouse = pygame.mouse.get_pressed()
+                    if mouse[0]:
+                        self.player.jump()
+                else:
+                    self.player_dying_timer.update(delta)
+                    if self.player_dying_timer.finished:
+                        self.player_dying_timer.reset()
+                        self.dying_animation = False
+                        self.player.respawn()
+                        self.player.opacity = 255
+
             else:
                 self.pause_menu.update(delta)
         else:

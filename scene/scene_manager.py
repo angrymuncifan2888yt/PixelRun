@@ -16,7 +16,11 @@ class SceneManager:
         return ValueError("Scene not found")
 
     def set_scene(self, id):
+        if self.current_scene:
+            self.current_scene.on_exit()
         self.current_scene = self.get_scene(id)
+        if self.current_scene:
+            self.current_scene.on_enter()
 
     def handle_event_current_scene(self, event):
         if isinstance(self.current_scene, Scene):

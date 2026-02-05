@@ -26,4 +26,4 @@ class Spike(Entity):
 
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
-            entity.respawn()
+            entity.kill()
