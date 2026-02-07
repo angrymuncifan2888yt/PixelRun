@@ -25,26 +25,69 @@ class World:
 
         return nearest
 
+    def get_entities_by_id(self, id: str):
+        list_ = []
+        for entity in self.entities:
+            if entity.id == id:
+                list_.append(entity)
+        return list_
+
     def add_entity(self, entity):
         self.entities.append(entity)
     
     def remove_entity(self, entity):
         if entity in self.entities:
             self.entities.remove(entity)
+            
+    def get_nearest_entities(
+        self,
+        position: pygame.Vector2,
+        radius: float
+    ) -> List[Entity]:
+        result = []
+        radius_sq = radius * radius
 
-    def update_hitboxes(self):
+        for entity in self.entities:
+            if not entity.active:
+                continue
+
+            rect = entity.hitbox
+
+            closest_x = max(rect.left, min(position.x, rect.right))
+            closest_y = max(rect.top, min(position.y, rect.bottom))
+
+            dx = position.x - closest_x
+            dy = position.y - closest_y
+
+            dist_sq = dx * dx + dy * dy
+
+            if dist_sq <= radius_sq:
+                result.append(entity)
+
+        return result
+
+    def update_all_hitboxes(self):
+        updated = 0
         for entity in self.entities:
             entity.update_hitbox()
+            updated += 1
+        return updated
 
-    def update(self, delta_time: float):
-        self.update_hitboxes()
+    def update_entities(self, entities: List[Entity], delta_time: float):
+        # Actual update
+        updated = 0
+        for entity in entities:
+            if not entity.active:
+                continue
 
-        for entity in self.entities:
-            if entity.active:
-                entity.update(delta_time)
+            entity.update(delta_time)
+            updated += 1
 
-                for other_entity in self.entities:
-                    if other_entity != entity:
-                        if entity.hitbox.colliderect(other_entity.hitbox):
-                            if other_entity.active:
-                                entity.on_entity_collision(other_entity)
+            for other in entities:
+                if other is entity or not other.active:
+                    continue
+
+                if entity.hitbox.colliderect(other.hitbox):
+                    entity.on_entity_collision(other)
+
+        return updated

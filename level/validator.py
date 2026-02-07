@@ -2,6 +2,7 @@ from pygame import Vector2
 from .level import Level
 from .entity_factory import ENTITY_FACTORY
 from .deserializator import Deserializator
+from core import TriggerActivationMode
 
 
 class Validator:
@@ -70,6 +71,15 @@ class Validator:
         active = entity_json.get("active")
         if active is not None and not isinstance(active, bool):
             return False
+
+        activation_mode = entity_json.get("activation_mode")
+        if activation_mode is not None:
+            if not isinstance(activation_mode, str):
+                return False
+            try:
+                TriggerActivationMode[activation_mode]
+            except KeyError:
+                return False
 
         try:
             from core import World

@@ -28,16 +28,6 @@ class SceneMainMenu(Scene):
         start_y = 230
         spacing = 70
 
-        # Play
-        btn_play = NormalButton(
-            position=pygame.Vector2(0, start_y),
-            size=(button_width, button_height),
-            text="Play",
-            font=Fonts.NORMAL_30,
-            callback=self._button_play_callback
-        )
-        btn_play.center_by_x(const.WINDOW_SIZE[0])
-
         # Skins
         btn_skins = NormalButton(
             position=pygame.Vector2(0, start_y + spacing),
@@ -50,9 +40,9 @@ class SceneMainMenu(Scene):
 
         # Levels
         btn_levels = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 2),
+            position=pygame.Vector2(0, start_y),
             size=(button_width, button_height),
-            text="Levels",
+            text="Play",
             font=Fonts.NORMAL_30,
             callback=self._button_levels_callback
         )
@@ -60,7 +50,7 @@ class SceneMainMenu(Scene):
 
         # Editor
         btn_editor = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 3),
+            position=pygame.Vector2(0, start_y + spacing * 2),
             size=(button_width, button_height),
             text="Editor",
             font=Fonts.NORMAL_30,
@@ -70,7 +60,7 @@ class SceneMainMenu(Scene):
 
         # Exit
         btn_exit = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 4),
+            position=pygame.Vector2(0, start_y + spacing * 3),
             size=(button_width, button_height),
             text="Exit",
             font=Fonts.NORMAL_30,
@@ -79,14 +69,10 @@ class SceneMainMenu(Scene):
         btn_exit.center_by_x(const.WINDOW_SIZE[0])
 
         self.ui.add_ui_object(title)
-        self.ui.add_ui_object(btn_play)
         self.ui.add_ui_object(btn_skins)
         self.ui.add_ui_object(btn_levels)
         self.ui.add_ui_object(btn_editor)
         self.ui.add_ui_object(btn_exit)
-
-    def _button_play_callback(self):
-        self.scene_manager.set_scene(SceneType.GAME)
 
     def _button_skins_callback(self):
         self.scene_manager.set_scene(SceneType.SKINS)
@@ -103,10 +89,6 @@ class SceneMainMenu(Scene):
 
     def handle_pygame_event(self, event):
         self.ui.handle_pygame_event(event)
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                self._button_play_callback()
 
     def update(self, delta, **kwargs):
         self.ui.update(delta)

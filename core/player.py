@@ -117,18 +117,19 @@ class Player(Entity):
         else:
             self.position = self.base_spawn_position.copy()
 
-        self.velocity = Vector2(0, 0)
+        if self.current_checkpoint:
+            self.world.level_background_color = self.current_checkpoint.level_background_color
+
         if self.current_checkpoint:
             self.gravity_dir = self.current_checkpoint.gravity_dir
         else:
             self.gravity_dir = 1
 
-        if self.current_checkpoint:
-            self.world.level_background_color = self.current_checkpoint.level_background_color
         self.on_ground = False
         self.animator.reset()
         self.step_timer.reset()
         self.is_moving = False
+        self.velocity = Vector2(0, 0)
 
     def reverse_gravity(self):
         self.gravity_dir *= -1

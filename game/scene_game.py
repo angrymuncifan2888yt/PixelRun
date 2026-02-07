@@ -43,7 +43,6 @@ class SceneGame(Scene):
         self.world = World()
 
         self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
-        self.load_level(Levels.FIRST_LEVEL)
 
     def on_enter(self):
         pygame.mixer.music.pause()
@@ -90,6 +89,7 @@ class SceneGame(Scene):
         self.background_color = level.background_color
         self.level_ended = False
         self.camera.position = self.player.position.copy()
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
         level.load_to_world(self.world, self.player)
         self.subscribe_world_event()
 
@@ -133,9 +133,12 @@ class SceneGame(Scene):
     def update(self, delta, **kwargs):
         if not self.level_ended:
             if not self.pause:
-                self.debug_menu.update(delta, kwargs["clock"], self.player)
                 if not self.dying_animation:
-                    self.world.update(delta)
+                    # Upd world
+                    hitboxes_updated = self.world.update_all_hitboxes()
+                    entities_to_upd = self.world.get_nearest_entities(self.player.position, const.WORLD_LOAD_DISTANCE)
+                    objects_updated = self.world.update_entities(entities_to_upd, delta)
+
                     self.camera.update(pygame.Vector2(self.player.hitbox.center))
                     self.player.is_clicking = False
 
@@ -150,6 +153,9 @@ class SceneGame(Scene):
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
                         self.player.jump()
+
+                    self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)
+
                 else:
                     self.player_dying_timer.update(delta)
                     if self.player_dying_timer.finished:

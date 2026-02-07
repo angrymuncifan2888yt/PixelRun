@@ -1,6 +1,6 @@
 from pygame import Vector2
 from .entity_factory import ENTITY_FACTORY
-from core import Trigger
+from core import Trigger, TriggerActivationMode
 
 
 class Deserializator:
@@ -51,5 +51,10 @@ class Deserializator:
 
         if entity_json.get("active") is not None:
             entity.active = entity_json["active"]
+
+        if entity_json.get("activation_mode") is not None:
+            mode = entity_json.get("activation_mode")
+            if mode is not None:
+                entity.activation_mode = TriggerActivationMode[mode]
 
         return entity

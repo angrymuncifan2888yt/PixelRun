@@ -40,5 +40,7 @@ class Serializator:
             data["color_border"] = list(entity.color_border)
         if hasattr(entity, "color"):
             data["color"] = list(entity.color)
+        if hasattr(entity, "activation_mode"):
+            data["activation_mode"] = entity.activation_mode.name
 
         return data
