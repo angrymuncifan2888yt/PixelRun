@@ -38,23 +38,35 @@ class Deserializator:
         if entity_json.get("color"):
             entity.color = tuple(entity_json["color"])
 
+        if entity_json.get("target_color"):
+            entity.target_color = tuple(entity_json["target_color"])
+
         if entity_json.get("color_border"):
             entity.color_border = tuple(entity_json["color_border"])
 
+        if entity_json.get("id"):
+            entity.id = list(entity_json["id"])
+
+        if entity_json.get("target_ids"):
+            entity.target_ids = list(entity_json["target_ids"])
+
         if entity_json.get("opacity") is not None:
             entity.opacity = int(entity_json["opacity"])
+
         else:
             if isinstance(entity, Trigger):
                 entity.opacity = 0
             else:
                 entity.opacity = 255
 
+        if entity_json.get("target_opacity") is not None:
+            entity.target_opacity = int(entity_json["target_opacity"])
+
         if entity_json.get("active") is not None:
             entity.active = entity_json["active"]
 
-        if entity_json.get("activation_mode") is not None:
-            mode = entity_json.get("activation_mode")
-            if mode is not None:
-                entity.activation_mode = TriggerActivationMode[mode]
+        mode = entity_json.get("activation_mode")
+        if mode:
+            entity.activation_mode = TriggerActivationMode[mode]
 
         return entity

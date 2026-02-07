@@ -1,0 +1,11 @@
+{
+    "background_color": [50, 50, 50],
+    "name": "Super trigger",
+    "player_spawn": [0, 0],
+    "objects": [
+        {"type": "platform", "position": [-50, 2000], "size": [100, 100], "color": [50, 50, 255], "id": ["platform1"]},
+        {"type": "platform", "position": [150, 2000], "size": [100, 100], "color": [50, 50, 255], "id": ["platform1"]},
+        {"type": "color_trigger", "position": [-50, 1900],"target_color": [0, 0, 0], "opacity": 150},
+        {"type": "opacity_trigger", "position": [150, 1900], "opacity": 150, "target_opacity": 100, "target_ids": ["platform1"]}
+    ]
+}

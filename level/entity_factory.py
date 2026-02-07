@@ -11,5 +11,6 @@ ENTITY_FACTORY = {
     "upside_down_portal": UpsideDownPortal,
     "checkpoint": Checkpoint,
     "end": EndDoor,
-    "color": ColorTrigger
+    "color_trigger": ColorTrigger,
+    "opacity_trigger": OpacityTrigger
 }

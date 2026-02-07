@@ -28,7 +28,7 @@ class World:
     def get_entities_by_id(self, id: str):
         list_ = []
         for entity in self.entities:
-            if entity.id == id:
+            if id in entity.id:
                 list_.append(entity)
         return list_
 

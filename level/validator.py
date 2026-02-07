@@ -32,6 +32,14 @@ class Validator:
             ):
                 return False
 
+        id_ = entity_json.get("id")
+        if not isinstance(id_, list):
+                return False
+
+        target_ids_ = entity_json.get("target_ids")
+        if not isinstance(target_ids_, list):
+            return False
+
         rot = entity_json.get("rotation")
         if rot is not None and not isinstance(rot, (int, float)):
             return False
@@ -63,9 +71,23 @@ class Validator:
             ):
                 return False
 
+        target_color = entity_json.get("target_color")
+        if target_color is not None:
+            if not (
+                isinstance(target_color, (list, tuple))
+                and len(target_color) == 3
+                and all(isinstance(c, int) and 0 <= c <= 255 for c in target_color)
+            ):
+                return False
+            
         opacity = entity_json.get("opacity")
         if opacity is not None:
             if not isinstance(opacity, int) or not (0 <= opacity <= 255):
+                return False
+
+        target_opacity = entity_json.get("target_opacity")
+        if target_opacity is not None:
+            if not isinstance(target_opacity, int) or not (0 <= target_opacity <= 255):
                 return False
 
         active = entity_json.get("active")

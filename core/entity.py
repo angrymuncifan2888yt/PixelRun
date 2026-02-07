@@ -16,7 +16,7 @@ class Entity:
 
         self.opacity = 255  # 0..255
         self.active = True
-        self.id = "1"
+        self.id = []
 
     # @property
     # def bounds(self) -> pygame.Rect:

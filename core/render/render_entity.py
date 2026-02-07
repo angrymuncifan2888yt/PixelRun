@@ -15,6 +15,7 @@ from core import (
     GravityOrb,
     EndDoor,
     ColorTrigger,
+    OpacityTrigger
 )
 
 from .render_utils import (
@@ -136,6 +137,8 @@ def render_end_door(screen, end_door: EndDoor, camera=None):
 def render_color_trigger(screen, trigger: ColorTrigger, camera=None):
     render_sprite_entity(screen, trigger, Sprites.COLOR_TRIGGER, camera)
 
+def render_opacity_trigger(screen, trigger: OpacityTrigger, camera=None):
+    render_sprite_entity(screen, trigger, Sprites.OPACITY_TRIGGER, camera)
 
 def render_spike(screen, spike: Spike, camera=None):
     if spike.opacity <= 0:
@@ -188,11 +191,8 @@ ENTITY_RENDERERS = {
     GravityOrb: render_gravity_orb,
     EndDoor: render_end_door,
     ColorTrigger: render_color_trigger,
+    OpacityTrigger: render_opacity_trigger
 }
-
-# ===============================
-# 🚀 MAIN ENTRY
-# ===============================
 
 def render_entity(screen, entity: Entity, camera: Camera | None = None):
     if entity.opacity <= 0:

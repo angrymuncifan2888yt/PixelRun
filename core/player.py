@@ -8,6 +8,7 @@ from event import Event, EventType
 class Player(Entity):
     def __init__(self, world, position: Vector2, skin: Skin, rotation=0):
         super().__init__(world, position, *const.PLAYER_SIZE, rotation)
+        self.id = ["player"]
         self.kill_y = 5000
         self.direction = PlayerDirection.RIGHT
         self.current_checkpoint = None

@@ -31,16 +31,21 @@ class Serializator:
             "rotation": entity.rotation,
             "opacity": entity.opacity,
             "active": entity.active,
+            "id": entity.id,
         }
 
         if hasattr(entity, "color_fill"):
             data["color_fill"] = list(entity.color_fill)
-
+        if hasattr(entity, "target_ids"):
+            data["target_ids"] = entity.target_ids
+        if hasattr(entity, "target_opacity"):
+            data["target_opacity"] = entity.target_opacity
         if hasattr(entity, "color_border"):
             data["color_border"] = list(entity.color_border)
         if hasattr(entity, "color"):
             data["color"] = list(entity.color)
+        if hasattr(entity, "target_color"):
+            data["target_color"] = list(entity.target_color)
         if hasattr(entity, "activation_mode"):
             data["activation_mode"] = entity.activation_mode.name
-
         return data

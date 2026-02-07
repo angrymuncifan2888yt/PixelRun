@@ -37,6 +37,12 @@ class Sprites:
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)
         cls.GRAVITY_ORB = pygame.transform.scale(pygame.image.load("assets/images/gravity_orb.png"), ORB_SIZE)
         cls.END_DOOR = pygame.transform.scale(pygame.image.load("assets/images/end_door.png"), END_DOOR_SIZE)
-        cls.COLOR_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/color_trigger.png"), TRIGGER_SIZE).convert_alpha()
+
+        # Triggers
+        cls.COLOR_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/color_trigger.png"), TRIGGER_SIZE).convert_alpha()
+        cls.OPACITY_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/opacity_trigger.png"), TRIGGER_SIZE).convert_alpha()
+        cls.MOVE_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/move_trigger.png"), TRIGGER_SIZE).convert_alpha()
+        cls.TOGGLE_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/toggle_trigger.png"), TRIGGER_SIZE).convert_alpha()
+        cls.ROTATION_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/rotation_trigger.png"), TRIGGER_SIZE).convert_alpha()
 
         # Other

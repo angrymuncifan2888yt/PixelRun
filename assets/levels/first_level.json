@@ -50,7 +50,7 @@
         {"type": "gravity_orb", "position": [2260, 402]},
         {"type": "checkpoint", "position": [501, 1138], "size": [174, 259]},
         {"type": "checkpoint", "position": [1728, 102], "size": [99, 144]},
-        {"type": "color", "position": [6, 85], "size": [1014, 151], "color": [75, 75, 75]},
+        {"type": "color_trigger", "position": [6, 85], "size": [1014, 151], "target_color": [75, 75, 75], "opacity": 0},
         {"type": "jump_pad", "position": [3913, 820]},
         {"type": "end", "position": [4547, 219]}
     ]
