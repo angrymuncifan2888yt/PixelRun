@@ -1,7 +1,7 @@
 import pygame
 from scene import Scene, SceneType
 from core import *
-from core.render import render_world
+from core.render import render_entity, render_hitbox
 from util import PlayerDirection, Camera, Timer
 from level import Level
 from .pause_menu import PauseMenu
@@ -171,7 +171,16 @@ class SceneGame(Scene):
 
     def draw(self, screen):
         screen.fill(self.world.level_background_color)
-        render_world(screen, self.world, self.camera, self.show_hitboxes)
+        rendered = 0
+        for entity in self.world.entities:
+            if self.camera.is_object_visible(entity.position, entity.width, entity.height):
+                render_entity(screen, entity, self.camera)
+                rendered += 1
+                if self.show_hitboxes:
+                    render_hitbox(screen, entity.hitbox, self.camera)
+
+        self.debug_menu.text_entities_rendered.text = f"Entities rendered: {rendered}"
+        
         if self.debug:
             self.debug_menu.draw(screen)
 

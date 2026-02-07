@@ -1,7 +1,7 @@
 from data import Skins
 from ui import UiObject
 from core import World, GravityPortal, Platform, JumpOrb, GravityOrb, Player, NormalGravityPortal, UpsideDownPortal
-from core.render import render_world
+from core.render import render_entity
 from event import EventType
 import pygame
 import math
@@ -88,4 +88,6 @@ class MainMenuBackground(UiObject):
         self.world.update_entities(self.world.entities, delta)
 
     def draw(self, screen):
-        render_world(screen, self.world)
+        for entity in self.world.entities:
+            render_entity(screen, entity)
+            
