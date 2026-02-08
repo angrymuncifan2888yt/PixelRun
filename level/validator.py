@@ -23,6 +23,15 @@ class Validator:
         ):
             return False
 
+        target_offset = entity_json.get("target_offset")
+        if target_offset is not None:
+            if not (
+                isinstance(target_offset, (list, tuple))
+                and len(target_offset) == 2
+                and all(isinstance(v, (int, float)) for v in target_offset)
+            ):
+                return False
+            
         size = entity_json.get("size")
         if size is not None:
             if not (
@@ -36,6 +45,11 @@ class Validator:
         if not isinstance(id_, list):
                 return False
 
+        transition_time = entity_json.get("transition_time")
+        if transition_time is not None:
+            if not isinstance(transition_time, (int, float)) or transition_time < 0:
+                return False
+    
         target_ids_ = entity_json.get("target_ids")
         if not isinstance(target_ids_, list):
             return False

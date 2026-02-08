@@ -1,9 +1,9 @@
 from .color_trigger import ColorTrigger
 from .trigger import Trigger, TriggerActivationMode
 from .opacity_trigger import OpacityTrigger
+from .move_trigger import MoveTrigger
 # TODO: trigger
 # Move
-# Opacity
 # Rotation
 # Toggle
 # Scale

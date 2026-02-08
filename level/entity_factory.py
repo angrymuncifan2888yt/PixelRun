@@ -12,5 +12,6 @@ ENTITY_FACTORY = {
     "checkpoint": Checkpoint,
     "end": EndDoor,
     "color_trigger": ColorTrigger,
-    "opacity_trigger": OpacityTrigger
+    "opacity_trigger": OpacityTrigger,
+    "move_trigger": MoveTrigger,
 }

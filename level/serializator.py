@@ -40,6 +40,10 @@ class Serializator:
             data["target_ids"] = entity.target_ids
         if hasattr(entity, "target_opacity"):
             data["target_opacity"] = entity.target_opacity
+        if hasattr(entity, "target_offset"):
+            data["target_offset"] = [entity.target_offset.x, entity.target_offset.y]
+        if hasattr(entity, "transition_time"):
+            data["transition_time"] = entity.transition_time
         if hasattr(entity, "color_border"):
             data["color_border"] = list(entity.color_border)
         if hasattr(entity, "color"):

@@ -32,6 +32,9 @@ class Deserializator:
 
         entity = entity_class(**kvargs)
 
+        if entity_json.get("target_offset"):
+            entity.target_offset = Vector2(entity_json["target_offset"])
+            
         if entity_json.get("color_fill"):
             entity.color_fill = tuple(entity_json["color_fill"])
 
@@ -61,7 +64,8 @@ class Deserializator:
 
         if entity_json.get("target_opacity") is not None:
             entity.target_opacity = int(entity_json["target_opacity"])
-
+        if entity_json.get("transition_time") is not None:
+            entity.transition_time = float(entity_json["transition_time"])
         if entity_json.get("active") is not None:
             entity.active = entity_json["active"]
 

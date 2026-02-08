@@ -5,7 +5,28 @@
     "objects": [
         {"type": "platform", "position": [-50, 2000], "size": [100, 100], "color": [50, 50, 255], "id": ["platform1"]},
         {"type": "platform", "position": [150, 2000], "size": [100, 100], "color": [50, 50, 255], "id": ["platform1"]},
+        {"type": "platform", "position": [650, 5400], "size": [100, 100], "color": [50, 50, 255], "id": ["platform2"]},
+        {"type": "platform", "position": [1500, 2000], "size": [100, 100], "color": [50, 50, 255], "id": ["platform3"]},
+        {"type": "platform", "position": [1200, 2000], "size": [100, 100], "color": [50, 50, 255]},
+        {"type": "platform", "position": [1600, 2000], "size": [100, 100], "color": [50, 50, 255]},
+        {"type": "platform", "position": [1700, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move1"]},
+        {"type": "platform", "position": [1800, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move2"]},
+        {"type": "platform", "position": [1900, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move3"]},
+        {"type": "platform", "position": [2000, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move4"]},
+        {"type": "platform", "position": [2100, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move5"]},
+        {"type": "platform", "position": [2200, 2500], "size": [100, 100], "color": [50, 50, 255], "id": ["to_move6"]},
+        {"type": "platform", "position": [2700, 10000], "size": [50, 500], "color": [50, 50, 255], "id": ["troll"]},
         {"type": "color_trigger", "position": [-50, 1900],"target_color": [0, 0, 0], "opacity": 150},
-        {"type": "opacity_trigger", "position": [150, 1900], "opacity": 150, "target_opacity": 100, "target_ids": ["platform1"]}
+        {"type": "opacity_trigger", "position": [150, 1900], "opacity": 150, "target_opacity": 100, "target_ids": ["platform1"], "transition_time": 0.5},
+        {"type": "move_trigger", "position": [650, 1900], "target_offset": [0, -3400], "target_ids": ["platform2"], "transition_time": 0, "opacity": 150},
+        {"type": "move_trigger", "position": [1200, 1900], "target_offset": [-400, -700], "target_ids": ["platform3"], "transition_time": 0.5, "opacity": 150},
+        {"type": "move_trigger", "position": [1700, 1900], "target_offset": [0, -500], "target_ids": ["to_move1"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [1800, 1900], "target_offset": [0, -500], "target_ids": ["to_move2"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [1900, 1900], "target_offset": [0, -500], "target_ids": ["to_move3"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [2000, 1900], "target_offset": [0, -500], "target_ids": ["to_move4"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [2100, 1900], "target_offset": [0, -500], "target_ids": ["to_move5"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [2200, 1900], "target_offset": [0, -500], "target_ids": ["to_move6"], "transition_time": 0.2, "opacity": 150},
+        {"type": "move_trigger", "position": [2600, 1700], "size": [50, 700], "target_offset": [0, -8600], "target_ids": ["troll"], "transition_time": 0.1},
+        {"type": "end", "position": [2800, 1800], "rotation": 0}
     ]
 }
