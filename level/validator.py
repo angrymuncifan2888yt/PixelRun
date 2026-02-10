@@ -31,7 +31,12 @@ class Validator:
                 and all(isinstance(v, (int, float)) for v in target_offset)
             ):
                 return False
-            
+    
+        delay = entity_json.get("delay")
+        if delay is not None:
+            if not isinstance(delay, (int, float)) or delay < 0:
+                return False
+
         size = entity_json.get("size")
         if size is not None:
             if not (

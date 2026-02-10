@@ -26,7 +26,7 @@ class Player(Entity):
         self.velocity = Vector2(0, 0)
 
         self.gravity_dir = 1
-        self.gravity = 2000
+        self.gravity = 2400
         self.jump_force = 1000
 
         self.on_ground = False

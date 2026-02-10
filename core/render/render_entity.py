@@ -17,6 +17,7 @@ from core import (
     ColorTrigger,
     OpacityTrigger,
     MoveTrigger,
+    SpawnTrigger
 )
 
 from .render_utils import (
@@ -144,6 +145,9 @@ def render_opacity_trigger(screen, trigger: OpacityTrigger, camera=None):
 def render_move_trigger(screen, trigger: MoveTrigger, camera=None):
     render_sprite_entity(screen, trigger, Sprites.MOVE_TRIGGER, camera)
 
+def render_spawn_trigger(screen, trigger: SpawnTrigger, camera=None):
+    render_sprite_entity(screen, trigger, Sprites.SPAWN_TRIGGER, camera)
+
 def render_spike(screen, spike: Spike, camera=None):
     if spike.opacity <= 0:
         return
@@ -197,6 +201,7 @@ ENTITY_RENDERERS = {
     ColorTrigger: render_color_trigger,
     OpacityTrigger: render_opacity_trigger,
     MoveTrigger: render_move_trigger,
+    SpawnTrigger: render_spawn_trigger,
 }
 
 def render_entity(screen, entity: Entity, camera: Camera | None = None):

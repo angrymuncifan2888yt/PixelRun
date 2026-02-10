@@ -1,6 +1,7 @@
 from pygame import Vector2
 from .entity_factory import ENTITY_FACTORY
 from core import Trigger, TriggerActivationMode
+from util import Timer
 
 
 class Deserializator:
@@ -35,6 +36,10 @@ class Deserializator:
         if entity_json.get("target_offset"):
             entity.target_offset = Vector2(entity_json["target_offset"])
             
+        if entity_json.get("delay"):
+            if isinstance(entity_json.get("delay"), int) or isinstance(entity_json.get("delay"), float):
+                entity.delay = Timer(entity_json["delay"], repeat=True)
+        
         if entity_json.get("color_fill"):
             entity.color_fill = tuple(entity_json["color_fill"])
 
