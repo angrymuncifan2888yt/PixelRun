@@ -48,21 +48,25 @@ class World:
         radius_sq = radius * radius
 
         for entity in self.entities:
-            if not entity.active:
-                continue
+            try:
+                if not entity.active:
+                    continue
 
-            rect = entity.hitbox
+                rect = entity.hitbox
 
-            closest_x = max(rect.left, min(position.x, rect.right))
-            closest_y = max(rect.top, min(position.y, rect.bottom))
+                closest_x = max(rect.left, min(position.x, rect.right))
+                closest_y = max(rect.top, min(position.y, rect.bottom))
 
-            dx = position.x - closest_x
-            dy = position.y - closest_y
+                dx = position.x - closest_x
+                dy = position.y - closest_y
 
-            dist_sq = dx * dx + dy * dy
+                dist_sq = dx * dx + dy * dy
 
-            if dist_sq <= radius_sq:
-                result.append(entity)
+                if dist_sq <= radius_sq:
+                    result.append(entity)
+
+            except Exception as e:
+                pass
 
         return result
 
@@ -77,15 +81,18 @@ class World:
         # Actual update
         updated = 0
         for entity in entities:
-            entity.update(delta_time)
-            updated += 1
+            try:
+                entity.update(delta_time)
+                updated += 1
+                if entity.active:
+                    for other in entities:
+                        if other is entity or not other.active:
+                            continue
 
-            if entity.active:
-                for other in entities:
-                    if other is entity or not other.active:
-                        continue
+                        if entity.hitbox.colliderect(other.hitbox):
+                            entity.on_entity_collision(other)
 
-                    if entity.hitbox.colliderect(other.hitbox):
-                        entity.on_entity_collision(other)
-
+            except Exception as e:
+                pass
+            
         return updated

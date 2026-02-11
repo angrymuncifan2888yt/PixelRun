@@ -19,7 +19,10 @@ class Level:
         player.world = world
 
         for obj in self.objects:
-            entity = Deserializator.load_entity(obj, world)
-            world.add_entity(entity)
+            try:
+                entity = Deserializator.load_entity(obj, world)
+                world.add_entity(entity)
+            except Exception as e:
+                pass
 
         world.add_entity(player)

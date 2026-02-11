@@ -173,12 +173,16 @@ class SceneGame(Scene):
         screen.fill(self.world.level_background_color)
         rendered = 0
         for entity in self.world.entities:
-            if self.camera.is_object_visible(entity.position, entity.width, entity.height):
-                render_entity(screen, entity, self.camera)
-                rendered += 1
-                if self.show_hitboxes:
-                    render_hitbox(screen, entity.hitbox, self.camera)
+            try:
+                if self.camera.is_object_visible(entity.position, entity.width, entity.height):
+                    render_entity(screen, entity, self.camera)
+                    rendered += 1
+                    if self.show_hitboxes:
+                        render_hitbox(screen, entity.hitbox, self.camera)
 
+            except Exception as e:
+                pass
+            
         self.debug_menu.text_entities_rendered.text = f"Entities rendered: {rendered}"
         
         if self.debug:

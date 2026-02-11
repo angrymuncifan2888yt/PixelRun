@@ -1,0 +1,126 @@
+{
+  "background_color": [30, 30, 30],
+  "name": "Elevator Room",
+  "player_spawn": [0, 0],
+  "objects": [
+
+
+    {
+      "type": "platform",
+      "position": [-300, 200],
+      "size": [300, 40],
+      "color": [100, 100, 100]
+    },
+
+    {
+      "type": "platform",
+      "position": [300, -200],
+      "size": [300, 40],
+      "color": [100, 100, 100]
+    },
+
+    {
+      "type": "platform",
+      "position": [0, -450],
+      "size": [400, 40],
+      "color": [100, 100, 100]
+    },
+
+
+    {
+      "type": "platform",
+      "position": [0, 300],
+      "size": [200, 40],
+      "color": [80, 80, 255],
+      "id": ["elevator1"]
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": [0, 250],
+      "delay": 0,
+      "target_ids": ["elevator1_up"],
+      "activation_mode": "ONCE"
+    },
+
+    {
+      "type": "move_trigger",
+      "position": [0, 250],
+      "id": ["elevator1_up"],
+      "target_ids": ["elevator1"],
+      "target_offset": [0, -350],
+      "transition_time": 2
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": [0, 250],
+      "delay": 2,
+      "target_ids": ["elevator1_down"]
+    },
+
+    {
+      "type": "move_trigger",
+      "position": [0, 250],
+      "id": ["elevator1_down"],
+      "target_ids": ["elevator1"],
+      "target_offset": [0, 350],
+      "transition_time": 2
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": ["asfd", 20],
+      "delay": 2,
+      "target_ids": ["elevator1_up"]
+    },
+
+    {
+      "type": "platform",
+      "position": [500, 150],
+      "size": [150, 40],
+      "color": [255, 120, 80],
+      "id": ["elevator2"]
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": [500, 100],
+      "delay": 0,
+      "target_ids": ["elevator2_up"],
+      "activation_mode": "ONCE"
+    },
+
+    {
+      "type": "move_trigger",
+      "position": [500, 100],
+      "id": ["elevator2_up"],
+      "target_ids": ["elevator2"],
+      "target_offset": [0, -250],
+      "transition_time": 1
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": [500, 100],
+      "delay": 1,
+      "target_ids": ["elevator2_down"]
+    },
+
+    {
+      "type": "move_trigger",
+      "position": [500, 100],
+      "id": ["elevator2_down"],
+      "target_ids": ["elevator2"],
+      "target_offset": [0, 250],
+      "transition_time": 1
+    },
+
+    {
+      "type": "spawn_trigger",
+      "position": [500, 100],
+      "delay": 1,
+      "target_ids": ["elevator2_up"]
+    }
+  ]
+}
