@@ -34,6 +34,7 @@
         {"type": "move_trigger", "position": [-350, 1400], "opacity": 150, "target_offset": [-100, -700], "id": ["spawn_test2_t"], "target_ids": ["spawn_test2"], "transition_time": 0.5},
         {"type": "toggle_trigger", "position": [2000, 1600], "opacity": 150, "toggle": false, "target_ids": ["troll"], "id": ["toggle_troll"]},
         {"type": "opacity_trigger", "position": [2000, 1600], "target_ids": ["troll"], "id": ["troll_opacity"], "target_opacity": 0, "transition_time": 0.5},
+        {"type": "rotation_trigger", "position": [1500, 1600], "target_ids": ["to_move1", "to_move2", "to_move3", "to_move4", "to_move5", "to_move6"], "transition_time": 2.0, "target_rotation": 360, "opacity": 150, "activation_mode": "ON_ENTER"},
         {"type": "end", "position": [2800, 1800], "rotation": 0}
     ]
 }

@@ -37,6 +37,11 @@ class Validator:
             if not isinstance(delay, (int, float)) or delay < 0:
                 return False
 
+        target_rotation = entity_json.get("target_rotation")
+        if target_rotation is not None:
+            if not isinstance(target_rotation, (int, float)):
+                return False
+            
         size = entity_json.get("size")
         if size is not None:
             if not (

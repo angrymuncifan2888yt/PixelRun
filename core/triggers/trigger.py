@@ -28,16 +28,14 @@ class Trigger(Entity):
                     self._activated = True
             elif self.activation_mode == TriggerActivationMode.ALWAYS:
                 self.activate(entity)
-                self._activated = True
 
             elif self.activation_mode == TriggerActivationMode.ON_ENTER:
-                # проверяем вход игрока в портал с помощью prev_rect
                 was_outside = not entity.prev_rect.colliderect(self.hitbox)
                 is_inside = entity.hitbox.colliderect(self.hitbox)
 
                 if was_outside and is_inside:
                     self.activate(entity)
-                    self._activated = True
+
 
     def activate(self, player):
         pass

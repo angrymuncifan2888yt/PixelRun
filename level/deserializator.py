@@ -61,7 +61,10 @@ class Deserializator:
         if entity_json.get("toggle"):
             entity.toggle = entity_json["toggle"]
     
-        if entity_json.get("opacity") is not None:
+        if entity_json.get("target_rotation"):
+            entity.target_rotation = float(entity_json["target_rotation"])
+            
+        if entity_json.get("opacity"):
             entity.opacity = int(entity_json["opacity"])
 
         else:
