@@ -38,7 +38,7 @@ class Deserializator:
             
         if entity_json.get("delay"):
             if isinstance(entity_json.get("delay"), int) or isinstance(entity_json.get("delay"), float):
-                entity.delay = Timer(entity_json["delay"], repeat=True)
+                entity.delay = Timer(entity_json["delay"])
         
         if entity_json.get("color_fill"):
             entity.color_fill = tuple(entity_json["color_fill"])

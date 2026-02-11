@@ -77,17 +77,15 @@ class World:
         # Actual update
         updated = 0
         for entity in entities:
-            if not entity.active:
-                continue
-
             entity.update(delta_time)
             updated += 1
 
-            for other in entities:
-                if other is entity or not other.active:
-                    continue
+            if entity.active:
+                for other in entities:
+                    if other is entity or not other.active:
+                        continue
 
-                if entity.hitbox.colliderect(other.hitbox):
-                    entity.on_entity_collision(other)
+                    if entity.hitbox.colliderect(other.hitbox):
+                        entity.on_entity_collision(other)
 
         return updated

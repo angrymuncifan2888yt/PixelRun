@@ -36,7 +36,7 @@ class Player(Entity):
         self.acceleration = 10000
         self.friction = 4000
 
-        self.step_timer = Timer(0.25, repeat=False)  # шаг каждые 0.25 сек
+        self.step_timer = Timer(0.25)  # шаг каждые 0.25 сек
 
     @property
     def is_upside_down(self):
@@ -97,7 +97,7 @@ class Player(Entity):
 
         # Обновление таймера шагов
         self.step_timer.update(delta_time)
-        if self.step_timer.is_finished() and self.is_moving:
+        if self.step_timer.finished and self.is_moving:
             self.step_timer.reset()
             if self.on_ground:
                 self.world.event_bus.emit(Event(EventType.PLAYER_WALK, {}))

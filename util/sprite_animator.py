@@ -12,7 +12,7 @@ class SpriteAnimator:
     def update(self, delta_time: float):
         self.timer.update(delta_time)
 
-        if self.timer.is_finished():
+        if self.timer.finished:
             self.current_frame += 1
 
             if self.current_frame >= self.sprite_count:
