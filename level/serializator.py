@@ -50,6 +50,8 @@ class Serializator:
             data["color"] = list(entity.color)
         if hasattr(entity, "delay"):
             data["delay"] = entity.delay.duration
+        if hasattr(entity, "toggle"):
+            data["toggle"] = entity.toggle
         if hasattr(entity, "target_color"):
             data["target_color"] = list(entity.target_color)
         if hasattr(entity, "activation_mode"):

@@ -58,6 +58,9 @@ class Deserializator:
         if entity_json.get("target_ids"):
             entity.target_ids = list(entity_json["target_ids"])
 
+        if entity_json.get("toggle"):
+            entity.toggle = entity_json["toggle"]
+    
         if entity_json.get("opacity") is not None:
             entity.opacity = int(entity_json["opacity"])
 

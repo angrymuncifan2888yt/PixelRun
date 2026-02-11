@@ -3,7 +3,6 @@ from .trigger import Trigger, TriggerActivationMode
 from .opacity_trigger import OpacityTrigger
 from .move_trigger import MoveTrigger
 from .spawn_trigger import SpawnTrigger
+from .toggle_trigger import ToggleTrigger
 # TODO: trigger
-# Rotation
 # Toggle
-# Scale

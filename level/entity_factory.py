@@ -15,4 +15,5 @@ ENTITY_FACTORY = {
     "opacity_trigger": OpacityTrigger,
     "move_trigger": MoveTrigger,
     "spawn_trigger": SpawnTrigger,
+    "toggle_trigger": ToggleTrigger
 }
