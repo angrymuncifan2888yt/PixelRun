@@ -1,5 +1,4 @@
 import pygame
-
 from .ui_object import UiObject
 
 
@@ -13,6 +12,14 @@ class UiManager:
     def remove_ui_object(self, obj: UiObject):
         if obj in self.ui_objects:
             self.ui_objects.remove(obj)
+
+    def is_mouse_over_ui(self, mouse_pos: pygame.Vector2):
+        for obj in self.ui_objects:
+            if hasattr(obj, "get_rect"):
+                rect = obj.get_rect()
+                if rect and rect.collidepoint(mouse_pos):
+                    return True
+        return False
 
     def handle_pygame_event(self, event: pygame.event.Event):
         for obj in self.ui_objects:

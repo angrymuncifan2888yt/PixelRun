@@ -99,7 +99,14 @@
       "target_offset": [0, -250],
       "transition_time": 1
     },
-
+    {
+      "type": "move_trigger",
+      "position": [0, 0],
+      "id": ["player"],
+      "target_ids": ["elevator2"],
+      "target_offset": ["asf, adf"],
+      "transition_time": 1
+    },
     {
       "type": "spawn_trigger",
       "position": [500, 100],

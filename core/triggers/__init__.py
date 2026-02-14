@@ -5,5 +5,3 @@ from .move_trigger import MoveTrigger
 from .spawn_trigger import SpawnTrigger
 from .toggle_trigger import ToggleTrigger
 from .rotation_trigger import RotationTrigger
-# TODO: trigger
-# Rotation

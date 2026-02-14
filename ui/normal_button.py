@@ -55,6 +55,14 @@ class NormalButton(UiObject):
                     self.callback()
                     Sounds.play_sound(Sounds.BUTTON_PRESS, SoundChannels.SYSTEM)
 
+    def draw_at(self, screen, position: pygame.Vector2):
+        rect = pygame.Rect(position.x, position.y, self.size.x, self.size.y)
+        current_color = self.hover_color if rect.collidepoint(pygame.mouse.get_pos()) else self.color
+        pygame.draw.rect(screen, current_color, rect)
+
+        self.text_rect.center = rect.center
+        screen.blit(self.text_render, self.text_rect)
+
     def draw(self, screen):
         rect = self.get_rect()
         current_color = self.hover_color if self.is_mouse_on_button() else self.color

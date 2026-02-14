@@ -8,11 +8,15 @@ class Deserializator:
     @staticmethod
     def load_level(data: dict) -> "Level":
         from .level import Level
+        name = data.get("name", "Unnamed Level")
+        player_spawn = data.get("player_spawn", Vector2(0, 0))
+        if player_spawn:
+            player_spawn = Vector2(player_spawn)
+            
+        background_color = data.get("background_color", [0, 0, 0])
+        objects = data.get("objects", [])
         return Level(
-            name=data["name"],
-            player_spawn=Vector2(*data["player_spawn"]),
-            background_color=data["background_color"],
-            objects=data["objects"],
+            name, player_spawn, background_color, objects
         )
 
     @staticmethod
