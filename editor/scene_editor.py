@@ -7,7 +7,9 @@ from util import Camera
 from core import World, Platform, Spike, Trigger
 from core.render import render_entity, render_hitbox
 from data import const, Fonts
-from level import Level, Deserializator, Serializator
+from level import Level, Deserializator, Serializator, ENTITY_FACTORY
+from .edit_level_window import LevelEditWindow
+from window import WindowManager, WindowType
 
 
 class SceneEditor(Scene):
@@ -32,7 +34,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Copy",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_copy_callback
         )
         # Кнопка Paste
         btn_paste = NormalButton(
@@ -40,7 +42,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Paste",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_paste_callback
         )
         # Кнопка Edit
         btn_edit = NormalButton(
@@ -56,7 +58,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Delete",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_delete_callback
         )
         # Кнопка Edit Special
         btn_edit_special = NormalButton(
@@ -72,7 +74,7 @@ class SceneEditor(Scene):
             size=(260, 60),
             text="Edit Level",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_edit_level_callback
         )        
         btn_edit_level.center_by_x(const.WINDOW_SIZE[0])
 
@@ -108,11 +110,21 @@ class SceneEditor(Scene):
             font=Fonts.NORMAL_30,
             callback=self._button_hitbox_callback
         )
+        # Кнопка Grid
+        self.btn_grid = NormalButton(
+            position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 220),
+            size=(100, 100),
+            text="Grid",
+            font=Fonts.NORMAL_30,
+            color=(0, 200, 0),
+            callback=self._button_grid_callback,
+        )
+        self.btn_grid.hover_color = (0, 150, 0)
 
         self.entity_panel = EntityPanel(
             position=pygame.Vector2(10, 70),
             width=240,
-            height=500
+            height=390
         )
     
         self.ui.add_ui_object(btn_hitbox)
@@ -126,7 +138,9 @@ class SceneEditor(Scene):
         self.ui.add_ui_object(btn_load)
         self.ui.add_ui_object(btn_edit_special)
         self.ui.add_ui_object(btn_play)
+        self.ui.add_ui_object(self.btn_grid)
         self.ui.add_ui_object(self.entity_panel)
+
         # <-- /UI -->
 
         # <-- LEVEL -->
@@ -134,10 +148,20 @@ class SceneEditor(Scene):
         self.world = World()
         self.show_hitboxes = False
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
+        self.selected_entity = None
+        self.entity_buffer = None  # Для Copy/Paste
+        self.use_grid = True
+
         # Test
         self.world.add_entity(Platform(self.world, pygame.Vector2(0, 0)))
         self.world.add_entity(Spike(self.world, pygame.Vector2(300, 300)))
         # <-- /LEVEL -->
+
+        # <-- WINDOWS -->
+        self.window_manager = WindowManager()
+        self.level_edit_window = LevelEditWindow(self.window_manager, self.level, const.WINDOW_SIZE)
+        self.window_manager.add_window(self.level_edit_window)
+        # <-- /WINDOWS -->
 
     def _draw_world(self, screen):
         # Grid
@@ -182,9 +206,77 @@ class SceneEditor(Scene):
                 if self.show_hitboxes:
                     render_hitbox(screen, entity.hitbox, self.camera)
 
+                # Подсветка выбранной сущности
+                if entity == self.selected_entity:
+                    screen_rect = pygame.Rect(
+                        entity.position.x - self.camera.position.x,
+                        entity.position.y - self.camera.position.y,
+                        entity.width,
+                        entity.height
+                    )
+
+                    pygame.draw.rect(
+                        screen,
+                        (0, 255, 0),
+                        screen_rect,
+                        3
+                    )
+
+
     # buttons
+    def _button_edit_level_callback(self):
+        self.window_manager.set_window(WindowType.LEVEL_EDIT)
+
     def _button_hitbox_callback(self):
         self.show_hitboxes = not self.show_hitboxes
+    def _button_grid_callback(self):
+        self.use_grid = not self.use_grid
+
+        if self.use_grid:
+            self.btn_grid.color = (0, 200, 0)
+            self.btn_grid.hover_color = (0, 150, 0)
+        else:
+            self.btn_grid.color = (200, 0, 0)
+            self.btn_grid.hover_color = (150, 0, 0)
+
+    def _button_delete_callback(self):
+        if self.selected_entity:
+            self.world.remove_entity(self.selected_entity)
+            self.selected_entity = None
+    def _button_copy_callback(self):
+        if self.selected_entity:
+            self.entity_buffer = Serializator.get_entity_json(self.selected_entity)
+
+    def _button_paste_callback(self):
+        if not self.entity_buffer:
+            return
+
+        # Центр камеры в world координатах
+        center_world = pygame.Vector2(
+            self.camera.position.x + self.camera.width / 2,
+            self.camera.position.y + self.camera.height / 2
+        )
+
+        entity_cls = ENTITY_FACTORY[self.entity_buffer["type"]]
+
+        # Snap только для платформ
+        if issubclass(entity_cls, Platform):
+            grid_size = 50
+            center_world.x = int(center_world.x // grid_size) * grid_size
+            center_world.y = int(center_world.y // grid_size) * grid_size
+
+        new_entity = Deserializator.load_entity(self.entity_buffer, self.world)
+
+        # Чтобы объект реально оказался по центру
+        center_world.x -= new_entity.width / 2
+        center_world.y -= new_entity.height / 2
+
+        new_entity.position = center_world
+
+        self.world.add_entity(new_entity)
+        self.selected_entity = new_entity
+
+
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
@@ -203,17 +295,38 @@ class SceneEditor(Scene):
         # Переводим в world координаты
         mouse_world = mouse_screen + self.camera.position
 
-        # Привязка к сетке (очень важно для редактора)
-        grid_size = 50
-        mouse_world.x = int(mouse_world.x // grid_size) * grid_size
-        mouse_world.y = int(mouse_world.y // grid_size) * grid_size
+        # Привязка к сетке
+        if self.use_grid:
+            grid_size = 50
+            mouse_world.x = int(mouse_world.x // grid_size) * grid_size
+            mouse_world.y = int(mouse_world.y // grid_size) * grid_size
 
         # Создаем объект
         entity = selected_cls(self.world, mouse_world)
         self.world.add_entity(entity)
 
     def _right_click(self, event):
-        print("del")
+        mouse_screen = pygame.Vector2(event.pos)
+
+        # Если клик по UI — ничего не делаем
+        if self.ui.is_mouse_over_ui(mouse_screen):
+            return
+
+        # Переводим в world координаты
+        mouse_world = mouse_screen + self.camera.position
+
+        # Ищем сущность под курсором
+        entities = self.world.get_nearest_entities(mouse_world, 200)
+
+        # Проверяем сверху вниз (чтобы выбирать верхнюю)
+        for entity in reversed(entities):
+            if entity.bounds.collidepoint(mouse_world):
+                self.selected_entity = entity
+                return
+
+        # Если клик в пустоту — снимаем выделение
+        self.selected_entity = None
+
     # Scene methods
     def handle_pygame_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Левая кнопка мыши
@@ -222,6 +335,7 @@ class SceneEditor(Scene):
             self._right_click(event)
 
         self.ui.handle_pygame_event(event)
+        self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
         # World
@@ -229,6 +343,7 @@ class SceneEditor(Scene):
 
         # ui
         self.ui.update(delta, **kwargs)
+        self.window_manager.update_current_window(delta)
 
         # camera movement
         camera_speed = 1000
@@ -246,3 +361,4 @@ class SceneEditor(Scene):
         screen.fill(self.level.background_color)
         self._draw_world(screen)
         self.ui.draw(screen)
+        self.window_manager.draw_current_window(screen)

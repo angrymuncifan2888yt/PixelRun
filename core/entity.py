@@ -18,14 +18,14 @@ class Entity:
         self.active = True
         self.id = []
 
-    # @property
-    # def bounds(self) -> pygame.Rect:
-    #     return pygame.Rect(
-    #         self.position.x - self.width / 2,
-    #         self.position.y - self.height / 2,
-    #         self.width,
-    #         self.height
-    #     )
+    @property
+    def bounds(self) -> pygame.Rect:
+        return pygame.Rect(
+            self.position.x,
+            self.position.y,
+            self.width,
+            self.height
+        )
 
     def emit_event(self, event):
         self.world.event_bus.emit(event)
