@@ -6,6 +6,7 @@ from main import SceneMainMenu
 from game import SceneGame
 from scene_skins import SceneSkins
 from scene_levels import SceneLevels
+from scene_editor_playtest import SceneEditorPlaytest
 from editor import SceneEditor
 
 
@@ -38,12 +39,14 @@ class PixelRun:
         self.scene_skins = SceneSkins(self.scene_manager)
         self.scene_levels = SceneLevels(self.scene_manager)
         self.scene_editor = SceneEditor(self.scene_manager)
+        self.scene_editor_playtest = SceneEditorPlaytest(self.scene_manager)
 
         self.scene_manager.add_scene(self.scene_main_menu)
         self.scene_manager.add_scene(self.scene_game)
         self.scene_manager.add_scene(self.scene_skins)
         self.scene_manager.add_scene(self.scene_levels)
         self.scene_manager.add_scene(self.scene_editor)
+        self.scene_manager.add_scene(self.scene_editor_playtest)
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
         # Background music

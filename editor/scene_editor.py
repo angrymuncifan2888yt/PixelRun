@@ -84,7 +84,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Play",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_play_callback
         )    
         # Кнопка Save
         btn_save = NormalButton(
@@ -222,11 +222,25 @@ class SceneEditor(Scene):
                         3
                     )
 
+    # Updates level (for save/play test)
+    def _form_level(self):
+        # obj
+        objects = []
+        for entity in self.world.entities:
+            objects.append(Serializator.get_entity_json(entity))
+        self.level.objects = objects
+
+        # TODO: Name, background color, etc.
 
     # buttons
+    def _button_play_callback(self):
+        self._form_level()
+        game_scene = self.scene_manager.get_scene(SceneType.EDITOR_PLAYTEST)
+        game_scene.load_level(self.level)
+        self.scene_manager.set_scene(SceneType.EDITOR_PLAYTEST)
+
     def _button_edit_level_callback(self):
         self.window_manager.set_window(WindowType.LEVEL_EDIT)
-
     def _button_hitbox_callback(self):
         self.show_hitboxes = not self.show_hitboxes
     def _button_grid_callback(self):
@@ -329,12 +343,13 @@ class SceneEditor(Scene):
 
     # Scene methods
     def handle_pygame_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Левая кнопка мыши
-            self._left_click(event)
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: # Правая кнопка мыши
-            self._right_click(event)
+        if not self.window_manager.current_window:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Левая кнопка мыши
+                self._left_click(event)
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: # Правая кнопка мыши
+                self._right_click(event)
 
-        self.ui.handle_pygame_event(event)
+            self.ui.handle_pygame_event(event)
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):

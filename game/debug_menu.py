@@ -6,12 +6,20 @@ from core import Player
 
 class DebugMenu(UiObject):
     def __init__(self, position: pygame.Vector2=pygame.Vector2(0,0)):
+        super().__init__(position)
         self.ui = UiManager()
         self.text_fps = Text(pygame.Vector2(10, 10), Fonts.NORMAL_30, "")
         self.text_player_pos = Text(pygame.Vector2(10, 45), Fonts.NORMAL_30, "")
         self.text_objects_updated = Text(pygame.Vector2(10, 80), Fonts.NORMAL_30, "")
         self.text_hitboxes_updated = Text(pygame.Vector2(10, 115), Fonts.NORMAL_30, "")
         self.text_entities_rendered = Text(pygame.Vector2(10, 150), Fonts.NORMAL_30, "")
+
+        self.text_fps.parent = self
+        self.text_player_pos.parent = self
+        self.text_objects_updated.parent = self
+        self.text_hitboxes_updated.parent = self
+        self.text_entities_rendered.parent = self
+
         self.ui.add_ui_object(self.text_fps)
         self.ui.add_ui_object(self.text_player_pos)
         self.ui.add_ui_object(self.text_objects_updated)

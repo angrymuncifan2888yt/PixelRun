@@ -7,3 +7,4 @@ class SceneType(Enum):
     SKINS = auto()
     LEVELS = auto()
     EDITOR = auto()
+    EDITOR_PLAYTEST = auto()

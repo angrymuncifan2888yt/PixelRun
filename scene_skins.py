@@ -151,6 +151,12 @@ class SceneSkins(Scene):
             self.applied_skin = self.current_skin
             self._update_apply_button()
 
+        editor_playtest_scene = self.scene_manager.get_scene(SceneType.EDITOR_PLAYTEST)
+        if editor_playtest_scene:
+            editor_playtest_scene.set_skin(self.current_skin)
+            self.applied_skin = self.current_skin
+            self._update_apply_button()
+
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
@@ -166,9 +172,9 @@ class SceneSkins(Scene):
         # Отложенная инициализация из SceneGame
         # -----------------------
         if not self.initialized_from_game:
-            game_scene = self.scene_manager.get_scene(SceneType.GAME)
-            if game_scene:
-                current_skin = game_scene.player.skin
+            editor_playtest_scene = self.scene_manager.get_scene(SceneType.GAME)
+            if editor_playtest_scene:
+                current_skin = editor_playtest_scene.player.skin
                 try:
                     self.skin_index = Skins.ALL_SKINS.index(current_skin)
                 except ValueError:
