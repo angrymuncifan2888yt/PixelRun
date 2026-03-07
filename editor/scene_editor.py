@@ -3,13 +3,14 @@ from .entity_panel import EntityPanel
 from scene import Scene, SceneType
 from ui import NormalButton, UiManager, Text
 import pygame
-from util import Camera
+from util import Camera, save_file_dialog, open_file_dialog
 from core import World, Platform, Spike, Trigger
 from core.render import render_entity, render_hitbox
 from data import const, Fonts
 from level import Level, Deserializator, Serializator, ENTITY_FACTORY
 from .edit_level_window import LevelEditWindow
 from window import WindowManager, WindowType
+import json
 
 
 class SceneEditor(Scene):
@@ -92,7 +93,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Save",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_save_callback
         )
         # Кнопка Load
         btn_load = NormalButton(
@@ -100,16 +101,18 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Load",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_load_callback
         )
         # Кнопка Hitbox
-        btn_hitbox = NormalButton(
+        self.btn_hitbox = NormalButton(
             position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 110),
             size=(100, 100),
             text="Hitbox",
             font=Fonts.NORMAL_30,
+            color=(200, 0, 0),
             callback=self._button_hitbox_callback
         )
+        self.btn_hitbox.hover_color = (150, 0, 0)
         # Кнопка Grid
         self.btn_grid = NormalButton(
             position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 220),
@@ -127,7 +130,7 @@ class SceneEditor(Scene):
             height=390
         )
     
-        self.ui.add_ui_object(btn_hitbox)
+        self.ui.add_ui_object(self.btn_hitbox)
         self.ui.add_ui_object(btn_back)
         self.ui.add_ui_object(btn_copy)
         self.ui.add_ui_object(btn_paste)
@@ -145,6 +148,7 @@ class SceneEditor(Scene):
 
         # <-- LEVEL -->
         self.level = Level()
+        self.level_path = None
         self.world = World()
         self.show_hitboxes = False
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
@@ -233,6 +237,45 @@ class SceneEditor(Scene):
         # TODO: Name, background color, etc.
 
     # buttons
+    def _button_save_callback(self):
+        if not self.level_path:
+            level_path = save_file_dialog(
+                "Save level",
+                [("JSON Files", "*.json")],
+                ".json"
+            )
+            if level_path:
+                if not level_path.endswith(".json"):
+                    level_path += ".json"
+                with open(level_path, "w") as f:
+                    self._form_level()
+                    json.dump(Serializator.get_level_json(self.level), f, indent=4)
+                self.level_path = level_path
+        else:
+            with open(self.level_path, "w+") as f:
+                self._form_level()
+                json.dump(Serializator.get_level_json(self.level), f, indent=4)
+
+    def _button_load_callback(self):
+        level_path = open_file_dialog(
+            "Load level",
+            [("JSON Files", "*.json")]
+        )
+
+        if not level_path:
+            return
+
+        with open(level_path, "r") as f:
+            level_json = json.load(f)
+
+        self.level = Deserializator.load_level(level_json)
+
+        for obj in self.level.objects:
+            entity = Deserializator.load_entity(obj, self.world)
+            self.world.add_entity(entity)
+
+        self.level_path = level_path
+
     def _button_play_callback(self):
         self._form_level()
         game_scene = self.scene_manager.get_scene(SceneType.EDITOR_PLAYTEST)
@@ -243,6 +286,13 @@ class SceneEditor(Scene):
         self.window_manager.set_window(WindowType.LEVEL_EDIT)
     def _button_hitbox_callback(self):
         self.show_hitboxes = not self.show_hitboxes
+        if self.show_hitboxes:
+            self.btn_hitbox.color = (0, 200, 0)
+            self.btn_hitbox.hover_color = (0, 150, 0)
+        else:
+            self.btn_hitbox.color = (200, 0, 0)
+            self.btn_hitbox.hover_color = (150, 0, 0)
+            
     def _button_grid_callback(self):
         self.use_grid = not self.use_grid
 
