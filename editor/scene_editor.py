@@ -236,8 +236,6 @@ class SceneEditor(Scene):
             objects.append(Serializator.get_entity_json(entity))
         self.level.objects = objects
 
-        # TODO: Name, background color, etc.
-
     # buttons
     def _button_save_callback(self):
         if not self.level_path:
@@ -453,24 +451,26 @@ class SceneEditor(Scene):
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
-        # World
-        self.world.update_all_hitboxes()
+        if not self.window_manager.current_window:
+            # World
+            self.world.update_all_hitboxes()
 
         # ui
         self.ui.update(delta, **kwargs)
         self.window_manager.update_current_window(delta)
 
         # camera movement
-        camera_speed = 1000
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            self.camera.position.y -= camera_speed * delta
-        if keys[pygame.K_s]:
-            self.camera.position.y += camera_speed * delta
-        if keys[pygame.K_a]:
-            self.camera.position.x -= camera_speed * delta
-        if keys[pygame.K_d]:
-            self.camera.position.x += camera_speed * delta
+        if not self.window_manager.current_window:
+            camera_speed = 1000
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_w]:
+                self.camera.position.y -= camera_speed * delta
+            if keys[pygame.K_s]:
+                self.camera.position.y += camera_speed * delta
+            if keys[pygame.K_a]:
+                self.camera.position.x -= camera_speed * delta
+            if keys[pygame.K_d]:
+                self.camera.position.x += camera_speed * delta
 
     def draw(self, screen):
         screen.fill(self.level.background_color)
