@@ -152,9 +152,11 @@ class SceneEditor(Scene):
         self.world = World()
         self.show_hitboxes = False
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
-        self.selected_entity = None
+        self.selected_entities = []
         self.entity_buffer = None  # Для Copy/Paste
         self.use_grid = True
+        self.dragging_entity = None
+        self.drag_offset = pygame.Vector2(0, 0)
 
         # Test
         self.world.add_entity(Platform(self.world, pygame.Vector2(0, 0)))
@@ -211,7 +213,7 @@ class SceneEditor(Scene):
                     render_hitbox(screen, entity.hitbox, self.camera)
 
                 # Подсветка выбранной сущности
-                if entity == self.selected_entity:
+                if entity in self.selected_entities:
                     screen_rect = pygame.Rect(
                         entity.position.x - self.camera.position.x,
                         entity.position.y - self.camera.position.y,
@@ -302,45 +304,56 @@ class SceneEditor(Scene):
         else:
             self.btn_grid.color = (200, 0, 0)
             self.btn_grid.hover_color = (150, 0, 0)
-
     def _button_delete_callback(self):
-        if self.selected_entity:
-            self.world.remove_entity(self.selected_entity)
-            self.selected_entity = None
-    def _button_copy_callback(self):
-        if self.selected_entity:
-            self.entity_buffer = Serializator.get_entity_json(self.selected_entity)
+        for entity in self.selected_entities:
+            self.world.remove_entity(entity)
 
+        self.selected_entities.clear()
+    def _button_copy_callback(self):
+        if not self.selected_entities:
+            return
+
+        self.entity_buffer = []
+
+        base_pos = self.selected_entities[0].position
+
+        for entity in self.selected_entities:
+            data = Serializator.get_entity_json(entity)
+
+            offset = entity.position - base_pos
+
+            data["_offset"] = (offset.x, offset.y)
+
+            self.entity_buffer.append(data)
     def _button_paste_callback(self):
         if not self.entity_buffer:
             return
 
-        # Центр камеры в world координатах
         center_world = pygame.Vector2(
             self.camera.position.x + self.camera.width / 2,
             self.camera.position.y + self.camera.height / 2
         )
 
-        entity_cls = ENTITY_FACTORY[self.entity_buffer["type"]]
+        new_entities = []
 
-        # Snap только для платформ
-        if issubclass(entity_cls, Platform):
-            grid_size = 50
-            center_world.x = int(center_world.x // grid_size) * grid_size
-            center_world.y = int(center_world.y // grid_size) * grid_size
+        for data in self.entity_buffer:
 
-        new_entity = Deserializator.load_entity(self.entity_buffer, self.world)
+            offset = pygame.Vector2(data["_offset"])
 
-        # Чтобы объект реально оказался по центру
-        center_world.x -= new_entity.width / 2
-        center_world.y -= new_entity.height / 2
+            entity = Deserializator.load_entity(data, self.world)
 
-        new_entity.position = center_world
+            entity.position = center_world + offset
 
-        self.world.add_entity(new_entity)
-        self.selected_entity = new_entity
+            if self.use_grid:
+                grid = 50
+                entity.position.x = int(entity.position.x // grid) * grid
+                entity.position.y = int(entity.position.y // grid) * grid
 
+            self.world.add_entity(entity)
 
+            new_entities.append(entity)
+
+        self.selected_entities = new_entities
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
@@ -372,25 +385,36 @@ class SceneEditor(Scene):
     def _right_click(self, event):
         mouse_screen = pygame.Vector2(event.pos)
 
-        # Если клик по UI — ничего не делаем
         if self.ui.is_mouse_over_ui(mouse_screen):
             return
 
-        # Переводим в world координаты
         mouse_world = mouse_screen + self.camera.position
 
-        # Ищем сущность под курсором
         entities = self.world.get_nearest_entities(mouse_world, 200)
 
-        # Проверяем сверху вниз (чтобы выбирать верхнюю)
+        clicked_entity = None
+
         for entity in reversed(entities):
             if entity.bounds.collidepoint(mouse_world):
-                self.selected_entity = entity
-                return
+                clicked_entity = entity
+                break
 
-        # Если клик в пустоту — снимаем выделение
-        self.selected_entity = None
+        mods = pygame.key.get_mods()
+        shift = mods & pygame.KMOD_SHIFT
 
+        if clicked_entity:
+
+            if shift:
+                if clicked_entity not in self.selected_entities:
+                    self.selected_entities.append(clicked_entity)
+            else:
+                self.selected_entities = [clicked_entity]
+
+            self.dragging_entity = clicked_entity
+            self.drag_offset = mouse_world - clicked_entity.position
+        else:
+            if not shift:
+                self.selected_entities.clear()
     # Scene methods
     def handle_pygame_event(self, event):
         if not self.window_manager.current_window:
@@ -398,8 +422,34 @@ class SceneEditor(Scene):
                 self._left_click(event)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: # Правая кнопка мыши
                 self._right_click(event)
+            if event.type == pygame.MOUSEMOTION:
+                if self.dragging_entity:
 
-            self.ui.handle_pygame_event(event)
+                    mouse_world = pygame.Vector2(event.pos) + self.camera.position
+                    new_pos = mouse_world - self.drag_offset
+
+                    move_delta = new_pos - self.dragging_entity.position
+
+                    for entity in self.selected_entities:
+                        entity.position += move_delta
+
+                    if self.use_grid:
+                        grid_size = 50
+
+                        for entity in self.selected_entities:
+                            entity.position.x = int(entity.position.x // grid_size) * grid_size
+                            entity.position.y = int(entity.position.y // grid_size) * grid_size
+            if event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 3:
+                    self.dragging_entity = None
+            # keys
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    for entity in self.selected_entities:
+                        entity.rotation += 90
+                        if entity.rotation == 360:
+                            entity.rotation = 0
+        self.ui.handle_pygame_event(event)
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
