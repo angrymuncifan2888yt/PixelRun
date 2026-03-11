@@ -9,6 +9,7 @@ from core.render import render_entity, render_hitbox
 from data import const, Fonts
 from level import Level, Deserializator, Serializator, ENTITY_FACTORY
 from .edit_level_window import LevelEditWindow
+from .edit_entity_window import EditEntityWindow
 from window import WindowManager, WindowType
 import json
 
@@ -51,7 +52,7 @@ class SceneEditor(Scene):
             size=(100, 100),
             text="Edit",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=self._button_edit_entity_callback
         )        
         # Кнопка Delete
         btn_delete = NormalButton(
@@ -166,7 +167,9 @@ class SceneEditor(Scene):
         # <-- WINDOWS -->
         self.window_manager = WindowManager()
         self.level_edit_window = LevelEditWindow(self.window_manager, self.level, const.WINDOW_SIZE)
+        self.entity_edit_window = EditEntityWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.window_manager.add_window(self.level_edit_window)
+        self.window_manager.add_window(self.entity_edit_window)
         # <-- /WINDOWS -->
 
     def _draw_world(self, screen):
@@ -237,6 +240,11 @@ class SceneEditor(Scene):
         self.level.objects = objects
 
     # buttons
+    def _button_edit_entity_callback(self):
+        self.entity_edit_window.entities = self.selected_entities
+        self.entity_edit_window.load_entity_data()
+        self.window_manager.set_window(WindowType.EDIT_ENTITY)
+
     def _button_save_callback(self):
         if not self.level_path:
             level_path = save_file_dialog(

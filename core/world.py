@@ -49,9 +49,6 @@ class World:
 
         for entity in self.entities:
             try:
-                if not entity.active:
-                    continue
-
                 rect = entity.hitbox
 
                 closest_x = max(rect.left, min(position.x, rect.right))
