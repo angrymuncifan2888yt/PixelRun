@@ -11,7 +11,9 @@ from level import Level, Deserializator, Serializator, ENTITY_FACTORY
 from .edit_level_window import LevelEditWindow
 from .edit_entity_window import EditEntityWindow
 from window import WindowManager, WindowType
+from .scene_editor_buttons import *
 import json
+from .scene_editor_ui import create_ui
 
 
 class SceneEditor(Scene):
@@ -19,132 +21,7 @@ class SceneEditor(Scene):
         super().__init__(scene_manager, SceneType.EDITOR)
 
         # <-- UI -->
-        self.ui = UiManager()
-
-        # Кнопка Back
-        btn_back = NormalButton(
-            position=pygame.Vector2(10, 20),
-            size=(120, 40),
-            text="Back",
-            font=Fonts.NORMAL_30,
-            callback=self._back_to_menu
-        )
-
-        # Кнопка Copy
-        btn_copy = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, 10),
-            size=(100, 100),
-            text="Copy",
-            font=Fonts.NORMAL_30,
-            callback=self._button_copy_callback
-        )
-        # Кнопка Paste
-        btn_paste = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 220, 10),
-            size=(100, 100),
-            text="Paste",
-            font=Fonts.NORMAL_30,
-            callback=self._button_paste_callback
-        )
-        # Кнопка Edit
-        btn_edit = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 220, 120),
-            size=(100, 100),
-            text="Edit",
-            font=Fonts.NORMAL_30,
-            callback=self._button_edit_entity_callback
-        )        
-        # Кнопка Delete
-        btn_delete = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, 120),
-            size=(100, 100),
-            text="Delete",
-            font=Fonts.NORMAL_30,
-            callback=self._button_delete_callback
-        )
-        # Кнопка Edit Special
-        btn_edit_special = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 220, 230),
-            size=(210, 100),
-            text="Edit Special",
-            font=Fonts.NORMAL_30,
-            callback=None
-        )        
-        # Кнопка Edit level
-        btn_edit_level = NormalButton(
-            position=pygame.Vector2(0, 10),
-            size=(260, 60),
-            text="Edit Level",
-            font=Fonts.NORMAL_30,
-            callback=self._button_edit_level_callback
-        )        
-        btn_edit_level.center_by_x(const.WINDOW_SIZE[0])
-
-        # Кнопка Play
-        btn_play = NormalButton(
-            position=pygame.Vector2(10, const.WINDOW_SIZE[1] - 330),
-            size=(100, 100),
-            text="Play",
-            font=Fonts.NORMAL_30,
-            callback=self._button_play_callback
-        )    
-        # Кнопка Save
-        btn_save = NormalButton(
-            position=pygame.Vector2(10, const.WINDOW_SIZE[1] - 220),
-            size=(100, 100),
-            text="Save",
-            font=Fonts.NORMAL_30,
-            callback=self._button_save_callback
-        )
-        # Кнопка Load
-        btn_load = NormalButton(
-            position=pygame.Vector2(10, const.WINDOW_SIZE[1] - 110),
-            size=(100, 100),
-            text="Load",
-            font=Fonts.NORMAL_30,
-            callback=self._button_load_callback
-        )
-        # Кнопка Hitbox
-        self.btn_hitbox = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 110),
-            size=(100, 100),
-            text="Hitbox",
-            font=Fonts.NORMAL_30,
-            color=(200, 0, 0),
-            callback=self._button_hitbox_callback
-        )
-        self.btn_hitbox.hover_color = (150, 0, 0)
-        # Кнопка Grid
-        self.btn_grid = NormalButton(
-            position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 220),
-            size=(100, 100),
-            text="Grid",
-            font=Fonts.NORMAL_30,
-            color=(0, 200, 0),
-            callback=self._button_grid_callback,
-        )
-        self.btn_grid.hover_color = (0, 150, 0)
-
-        self.entity_panel = EntityPanel(
-            position=pygame.Vector2(10, 70),
-            width=240,
-            height=390
-        )
-    
-        self.ui.add_ui_object(self.btn_hitbox)
-        self.ui.add_ui_object(btn_back)
-        self.ui.add_ui_object(btn_copy)
-        self.ui.add_ui_object(btn_paste)
-        self.ui.add_ui_object(btn_delete)
-        self.ui.add_ui_object(btn_edit)
-        self.ui.add_ui_object(btn_edit_level)
-        self.ui.add_ui_object(btn_save)
-        self.ui.add_ui_object(btn_load)
-        self.ui.add_ui_object(btn_edit_special)
-        self.ui.add_ui_object(btn_play)
-        self.ui.add_ui_object(self.btn_grid)
-        self.ui.add_ui_object(self.entity_panel)
-
+        create_ui(self)
         # <-- /UI -->
 
         # <-- LEVEL -->
@@ -171,6 +48,9 @@ class SceneEditor(Scene):
         self.window_manager.add_window(self.level_edit_window)
         self.window_manager.add_window(self.entity_edit_window)
         # <-- /WINDOWS -->
+
+    def _back_to_menu(self):
+        self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
     def _draw_world(self, screen):
         # Grid
@@ -238,130 +118,6 @@ class SceneEditor(Scene):
         for entity in self.world.entities:
             objects.append(Serializator.get_entity_json(entity))
         self.level.objects = objects
-
-    # buttons
-    def _button_edit_entity_callback(self):
-        self.entity_edit_window.entities = self.selected_entities
-        self.entity_edit_window.load_entity_data()
-        self.window_manager.set_window(WindowType.EDIT_ENTITY)
-
-    def _button_save_callback(self):
-        if not self.level_path:
-            level_path = save_file_dialog(
-                "Save level",
-                [("JSON Files", "*.json")],
-                ".json"
-            )
-            if level_path:
-                if not level_path.endswith(".json"):
-                    level_path += ".json"
-                with open(level_path, "w") as f:
-                    self._form_level()
-                    json.dump(Serializator.get_level_json(self.level), f, indent=4)
-                self.level_path = level_path
-        else:
-            with open(self.level_path, "w+") as f:
-                self._form_level()
-                json.dump(Serializator.get_level_json(self.level), f, indent=4)
-
-    def _button_load_callback(self):
-        level_path = open_file_dialog(
-            "Load level",
-            [("JSON Files", "*.json")]
-        )
-
-        if not level_path:
-            return
-
-        with open(level_path, "r") as f:
-            level_json = json.load(f)
-
-        self.level = Deserializator.load_level(level_json)
-
-        for obj in self.level.objects:
-            entity = Deserializator.load_entity(obj, self.world)
-            self.world.add_entity(entity)
-
-        self.level_path = level_path
-
-    def _button_play_callback(self):
-        self._form_level()
-        game_scene = self.scene_manager.get_scene(SceneType.EDITOR_PLAYTEST)
-        game_scene.load_level(self.level)
-        self.scene_manager.set_scene(SceneType.EDITOR_PLAYTEST)
-
-    def _button_edit_level_callback(self):
-        self.window_manager.set_window(WindowType.LEVEL_EDIT)
-    def _button_hitbox_callback(self):
-        self.show_hitboxes = not self.show_hitboxes
-        if self.show_hitboxes:
-            self.btn_hitbox.color = (0, 200, 0)
-            self.btn_hitbox.hover_color = (0, 150, 0)
-        else:
-            self.btn_hitbox.color = (200, 0, 0)
-            self.btn_hitbox.hover_color = (150, 0, 0)
-            
-    def _button_grid_callback(self):
-        self.use_grid = not self.use_grid
-
-        if self.use_grid:
-            self.btn_grid.color = (0, 200, 0)
-            self.btn_grid.hover_color = (0, 150, 0)
-        else:
-            self.btn_grid.color = (200, 0, 0)
-            self.btn_grid.hover_color = (150, 0, 0)
-    def _button_delete_callback(self):
-        for entity in self.selected_entities:
-            self.world.remove_entity(entity)
-
-        self.selected_entities.clear()
-    def _button_copy_callback(self):
-        if not self.selected_entities:
-            return
-
-        self.entity_buffer = []
-
-        base_pos = self.selected_entities[0].position
-
-        for entity in self.selected_entities:
-            data = Serializator.get_entity_json(entity)
-
-            offset = entity.position - base_pos
-
-            data["_offset"] = (offset.x, offset.y)
-
-            self.entity_buffer.append(data)
-    def _button_paste_callback(self):
-        if not self.entity_buffer:
-            return
-
-        center_world = pygame.Vector2(
-            self.camera.position.x + self.camera.width / 2,
-            self.camera.position.y + self.camera.height / 2
-        )
-
-        new_entities = []
-
-        for data in self.entity_buffer:
-
-            offset = pygame.Vector2(data["_offset"])
-
-            entity = Deserializator.load_entity(data, self.world)
-
-            entity.position = center_world + offset
-
-            if self.use_grid:
-                grid = 50
-                entity.position.x = int(entity.position.x // grid) * grid
-                entity.position.y = int(entity.position.y // grid) * grid
-
-            self.world.add_entity(entity)
-
-            new_entities.append(entity)
-
-        self.selected_entities = new_entities
-    def _back_to_menu(self):
-        self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
     # interact
     def _left_click(self, event):

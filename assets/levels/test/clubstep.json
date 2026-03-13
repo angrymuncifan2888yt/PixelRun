@@ -11,6 +11,56 @@
     ],
     "objects": [
         {
+            "type": "spike",
+            "position": [
+                300.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                300.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
             "type": "platform",
             "position": [
                 0.0,
@@ -501,8 +551,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -526,8 +576,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -551,8 +601,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -576,8 +626,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -601,8 +651,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -626,8 +676,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -651,8 +701,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -676,8 +726,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -701,8 +751,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -726,8 +776,8 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -751,8 +801,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -776,8 +826,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -801,8 +851,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -826,8 +876,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -851,8 +901,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -876,8 +926,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -901,8 +951,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -926,8 +976,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -951,8 +1001,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -976,8 +1026,8 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 255,
-            "active": true,
+            "opacity": 100,
+            "active": false,
             "id": [],
             "color_fill": [
                 0,
@@ -3919,6 +3969,146 @@
             "size": [
                 100,
                 100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                400.0,
+                150.0
+            ],
+            "size": [
+                150,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -100.0,
+                150.0
+            ],
+            "size": [
+                500,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "end",
+            "position": [
+                1650.0,
+                400.0
+            ],
+            "size": [
+                195,
+                259
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                400.0,
+                650.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1050.0,
+                600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1250.0,
+                450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1400.0,
+                -100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                1350.0,
+                250.0
+            ],
+            "size": [
+                100,
+                500
             ],
             "rotation": 0,
             "opacity": 255,
