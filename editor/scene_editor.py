@@ -10,46 +10,45 @@ from window import WindowManager
 from .scene_editor_buttons import *
 import json
 from .scene_editor_ui import create_ui
+import pygame
 
 
 class SceneEditor(Scene):
     def __init__(self, scene_manager) -> None:
         super().__init__(scene_manager, SceneType.EDITOR)
 
-        # <-- UI -->
         create_ui(self)
-        # <-- /UI -->
 
-        # <-- LEVEL -->
         self.level = Level()
         self.level_path = None
         self.world = World()
         self.show_hitboxes = False
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.selected_entities = []
-        self.entity_buffer = None  # Для Copy/Paste
+        self.entity_buffer = None
         self.use_grid = True
         self.dragging_entity = None
         self.drag_offset = pygame.Vector2(0, 0)
 
-        # Test
+        self.selection_start = None
+        self.selection_rect = None
+        self.is_selecting = False
+
         self.world.add_entity(Platform(self.world, pygame.Vector2(0, 0)))
         self.world.add_entity(Spike(self.world, pygame.Vector2(300, 300)))
-        # <-- /LEVEL -->
 
-        # <-- WINDOWS -->
         self.window_manager = WindowManager()
         self.level_edit_window = LevelEditWindow(
-                self.window_manager,
-                const.WINDOW_SIZE,
-                set_bg_func=self._set_level_background,
-                set_spawn_func=self._set_player_spawn,
-                set_name_func=self._set_level_name
+            self.window_manager,
+            const.WINDOW_SIZE,
+            set_bg_func=self._set_level_background,
+            set_spawn_func=self._set_player_spawn,
+            set_name_func=self._set_level_name,
+            delete_level_objects_func=self._delete_all_objects
         )
         self.entity_edit_window = EditEntityWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.window_manager.add_window(self.level_edit_window)
         self.window_manager.add_window(self.entity_edit_window)
-        # <-- /WINDOWS -->
 
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
@@ -62,110 +61,109 @@ class SceneEditor(Scene):
 
     def _set_level_name(self, name):
         self.level.name = name
+
+    def _delete_all_objects(self):
+        self.world.entities.clear()
+        self.level.objects.clear()
+
     def _draw_world(self, screen):
-        # Grid
         grid_size = 50
         grid_color = (60, 60, 60)
-
         start_x = int(self.camera.position.x // grid_size * grid_size)
         end_x = int(self.camera.position.x + self.camera.width)
-
         start_y = int(self.camera.position.y // grid_size * grid_size)
         end_y = int(self.camera.position.y + self.camera.height)
 
         for x in range(start_x, end_x, grid_size):
-            screen_x = x - self.camera.position.x
-            pygame.draw.line(
-                screen,
-                grid_color,
-                (screen_x, 0),
-                (screen_x, self.camera.height)
-            )
-
+            pygame.draw.line(screen, grid_color, (x - self.camera.position.x, 0),
+                             (x - self.camera.position.x, self.camera.height))
         for y in range(start_y, end_y, grid_size):
-            screen_y = y - self.camera.position.y
-            pygame.draw.line(
-                screen,
-                grid_color,
-                (0, screen_y),
-                (self.camera.width, screen_y)
-            )
+            pygame.draw.line(screen, grid_color, (0, y - self.camera.position.y),
+                             (self.camera.width, y - self.camera.position.y))
 
-        # world
         entities = self.world.get_nearest_entities(self.camera.position, 2000)
         for entity in entities:
             if self.camera.is_object_visible(entity.position, entity.width, entity.height):
                 if isinstance(entity, Trigger):
                     old_opacity = entity.opacity
-                    entity.opacity = 255  # Сделаем триггеры полностью видимыми для удобства редактирования
+                    entity.opacity = 255
                     render_entity(screen, entity, self.camera)
-                    entity.opacity = old_opacity  # Вернем обратно
+                    entity.opacity = old_opacity
                 else:
                     render_entity(screen, entity, self.camera)
                 if self.show_hitboxes:
                     render_hitbox(screen, entity.hitbox, self.camera)
-
-                # Подсветка выбранной сущности
                 if entity in self.selected_entities:
-                    screen_rect = pygame.Rect(
+                    rect = pygame.Rect(
                         entity.position.x - self.camera.position.x,
                         entity.position.y - self.camera.position.y,
-                        entity.width,
-                        entity.height
+                        entity.width, entity.height
                     )
+                    pygame.draw.rect(screen, (0, 255, 0), rect, 3)
 
-                    pygame.draw.rect(
-                        screen,
-                        (0, 255, 0),
-                        screen_rect,
-                        3
-                    )
+        if self.selection_rect:
+            pygame.draw.rect(screen, (0, 255, 0), self.selection_rect, 2)
 
-    # Updates level (for save/play test)
     def _form_level(self):
-        # obj
-        objects = []
-        for entity in self.world.entities:
-            objects.append(Serializator.get_entity_json(entity))
-        self.level.objects = objects
+        self.level.objects = [Serializator.get_entity_json(e) for e in self.world.entities]
 
-    # interact
     def _left_click(self, event):
-        selected_cls = self.entity_panel.get_selected()
-        if not selected_cls:
-            return
-
         mouse_screen = pygame.Vector2(event.pos)
-
-        # Проверяем что клик не по UI
         if self.ui.is_mouse_over_ui(mouse_screen):
             return
 
-        # Переводим в world координаты
         mouse_world = mouse_screen + self.camera.position
+        selected_cls = self.entity_panel.get_selected()
+        mods = pygame.key.get_mods()
+        shift = mods & pygame.KMOD_SHIFT
 
-        # Привязка к сетке
-        if self.use_grid:
-            grid_size = 50
-            mouse_world.x = int(mouse_world.x // grid_size) * grid_size
-            mouse_world.y = int(mouse_world.y // grid_size) * grid_size
+        # Перемещение выбранных объектов Shift + ЛКМ
+        if shift and self.selected_entities:
+            clicked_entity = None
+            entities = self.world.get_nearest_entities(mouse_world, 200)
+            for entity in reversed(entities):
+                if entity.bounds.collidepoint(mouse_world):
+                    clicked_entity = entity
+                    break
+            if clicked_entity and clicked_entity in self.selected_entities:
+                self.dragging_entity = clicked_entity
+                self.drag_offset = mouse_world - clicked_entity.position
 
-        # Создаем объект
-        entity = selected_cls(self.world, mouse_world)
-        self.world.add_entity(entity)
+        # Создание нового объекта
+        elif selected_cls:
+            if self.use_grid:
+                grid_size = 50
+                mouse_world.x = int(mouse_world.x // grid_size) * grid_size
+                mouse_world.y = int(mouse_world.y // grid_size) * grid_size
+            entity = selected_cls(self.world, mouse_world)
+            self.world.add_entity(entity)
+
+        # Выделение объекта обычной ЛКМ
+        else:
+            clicked_entity = None
+            entities = self.world.get_nearest_entities(mouse_world, 200)
+            for entity in reversed(entities):
+                if entity.bounds.collidepoint(mouse_world):
+                    clicked_entity = entity
+                    break
+            shift = mods & pygame.KMOD_SHIFT
+            if clicked_entity:
+                if shift and clicked_entity not in self.selected_entities:
+                    self.selected_entities.append(clicked_entity)
+                else:
+                    self.selected_entities = [clicked_entity]
+            else:
+                if not shift:
+                    self.selected_entities.clear()
 
     def _right_click(self, event):
         mouse_screen = pygame.Vector2(event.pos)
-
         if self.ui.is_mouse_over_ui(mouse_screen):
             return
 
         mouse_world = mouse_screen + self.camera.position
-
-        entities = self.world.get_nearest_entities(mouse_world, 200)
-
         clicked_entity = None
-
+        entities = self.world.get_nearest_entities(mouse_world, 200)
         for entity in reversed(entities):
             if entity.bounds.collidepoint(mouse_world):
                 clicked_entity = entity
@@ -174,77 +172,87 @@ class SceneEditor(Scene):
         mods = pygame.key.get_mods()
         shift = mods & pygame.KMOD_SHIFT
 
+        # ПКМ по объекту → выделяем
         if clicked_entity:
-
-            if shift:
-                if clicked_entity not in self.selected_entities:
-                    self.selected_entities.append(clicked_entity)
+            if shift and clicked_entity not in self.selected_entities:
+                self.selected_entities.append(clicked_entity)
             else:
                 self.selected_entities = [clicked_entity]
-
-            self.dragging_entity = clicked_entity
-            self.drag_offset = mouse_world - clicked_entity.position
+        # ПКМ по пустому месту → начинаем рамку
         else:
-            if not shift:
-                self.selected_entities.clear()
-    # Scene methods
+            self.is_selecting = True
+            self.selection_start = mouse_screen
+            self.selection_rect = pygame.Rect(mouse_screen.x, mouse_screen.y, 0, 0)
+
     def handle_pygame_event(self, event):
         if not self.window_manager.current_window:
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Левая кнопка мыши
+            mouse_screen = pygame.Vector2(pygame.mouse.get_pos())
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self._left_click(event)
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: # Правая кнопка мыши
+            if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                self.dragging_entity = None
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
                 self._right_click(event)
+            if event.type == pygame.MOUSEBUTTONUP and event.button == 3:
+                if self.is_selecting:
+                    self.selected_entities.clear()
+                    if self.selection_rect:
+                        rect_world = self.selection_rect.move(self.camera.position)
+                        for entity in self.world.entities:
+                            ent_rect = pygame.Rect(entity.position.x, entity.position.y, entity.width, entity.height)
+                            if rect_world.colliderect(ent_rect):
+                                self.selected_entities.append(entity)
+                    self.is_selecting = False
+                    self.selection_rect = None
+
             if event.type == pygame.MOUSEMOTION:
+                if self.is_selecting:
+                    x = min(self.selection_start.x, mouse_screen.x)
+                    y = min(self.selection_start.y, mouse_screen.y)
+                    w = abs(mouse_screen.x - self.selection_start.x)
+                    h = abs(mouse_screen.y - self.selection_start.y)
+                    self.selection_rect = pygame.Rect(x, y, w, h)
+
                 if self.dragging_entity:
-
-                    mouse_world = pygame.Vector2(event.pos) + self.camera.position
+                    mouse_world = mouse_screen + self.camera.position
                     new_pos = mouse_world - self.drag_offset
-
                     move_delta = new_pos - self.dragging_entity.position
-
                     for entity in self.selected_entities:
                         entity.position += move_delta
-
                     if self.use_grid:
                         grid_size = 50
-
                         for entity in self.selected_entities:
                             entity.position.x = int(entity.position.x // grid_size) * grid_size
                             entity.position.y = int(entity.position.y // grid_size) * grid_size
-            if event.type == pygame.MOUSEBUTTONUP:
-                if event.button == 3:
-                    self.dragging_entity = None
-            # keys
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_r:
-                    for entity in self.selected_entities:
-                        entity.rotation += 90
-                        if entity.rotation == 360:
-                            entity.rotation = 0
+
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                for entity in self.selected_entities:
+                    entity.rotation += 90
+                    if entity.rotation == 360:
+                        entity.rotation = 0
+
         self.ui.handle_pygame_event(event)
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
         if not self.window_manager.current_window:
-            # World
             self.world.update_all_hitboxes()
-
-        # ui
         self.ui.update(delta, **kwargs)
         self.window_manager.update_current_window(delta)
 
-        # camera movement
         if not self.window_manager.current_window:
-            camera_speed = 1000
             keys = pygame.key.get_pressed()
+            speed = 1000
             if keys[pygame.K_w]:
-                self.camera.position.y -= camera_speed * delta
+                self.camera.position.y -= speed * delta
             if keys[pygame.K_s]:
-                self.camera.position.y += camera_speed * delta
+                self.camera.position.y += speed * delta
             if keys[pygame.K_a]:
-                self.camera.position.x -= camera_speed * delta
+                self.camera.position.x -= speed * delta
             if keys[pygame.K_d]:
-                self.camera.position.x += camera_speed * delta
+                self.camera.position.x += speed * delta
 
     def draw(self, screen):
         screen.fill(self.level.background_color)

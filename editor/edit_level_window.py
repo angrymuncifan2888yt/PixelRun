@@ -1,5 +1,5 @@
 import pygame
-from ui import NormalButton, LineEdit
+from ui import NormalButton, LineEdit, UiManager
 from data import Fonts
 from window import Window, WindowType
 
@@ -10,7 +10,7 @@ WINDOW_HEIGHT = 600
 
 class LevelEditWindow(Window):
 
-    def __init__(self, manager, screen_size, set_bg_func, set_spawn_func, set_name_func):
+    def __init__(self, manager, screen_size, set_bg_func, set_spawn_func, set_name_func, delete_level_objects_func):
         super().__init__(manager, WindowType.LEVEL_EDIT)
 
         self.screen_size = screen_size
@@ -18,6 +18,10 @@ class LevelEditWindow(Window):
         self.set_background = set_bg_func
         self.set_spawn = set_spawn_func
         self.set_name = set_name_func
+        self.delete_level_objects = delete_level_objects_func
+
+        self.ui = UiManager()
+
         self.rect = pygame.Rect(
             screen_size[0] // 2 - WINDOW_WIDTH // 2,
             screen_size[1] // 2 - WINDOW_HEIGHT // 2,
@@ -25,7 +29,10 @@ class LevelEditWindow(Window):
             WINDOW_HEIGHT
         )
 
-        # NAME
+        r, g, b = (0, 0, 0)
+        spawn_x = 0
+        spawn_y = 0
+
         self.input_name = LineEdit(
             (self.rect.x + 300, self.rect.y + 100),
             (400, 40),
@@ -33,11 +40,6 @@ class LevelEditWindow(Window):
             max_length=32
         )
 
-        # default params
-        r, g, b = (0, 0, 0)
-        spawn_x = 0
-        spawn_y = 0
-        # RGB
         self.input_r = LineEdit(
             (self.rect.x + 450, self.rect.y + 160),
             (80, 40),
@@ -62,7 +64,6 @@ class LevelEditWindow(Window):
         )
         self.input_b.text = str(b)
 
-        # PLAYER SPAWN
         self.input_spawn_x = LineEdit(
             (self.rect.x + 450, self.rect.y + 340),
             (120, 40),
@@ -87,6 +88,16 @@ class LevelEditWindow(Window):
             callback=self.apply
         )
 
+        self.btn_clear = NormalButton(
+            position=pygame.Vector2(self.rect.centerx - 75, self.rect.bottom - 70),
+            size=(150, 45),
+            text="Clear All",
+            font=Fonts.NORMAL_30,
+            callback=self.delete_level_objects,
+            color=(200, 0, 0)
+        )
+        self.btn_clear.hover_color = (150, 0, 0)
+
         self.btn_close = NormalButton(
             position=pygame.Vector2(self.rect.right - 160, self.rect.bottom - 70),
             size=(130, 45),
@@ -94,14 +105,28 @@ class LevelEditWindow(Window):
             font=Fonts.NORMAL_30,
             callback=self.close
         )
+
+        self.ui.add_ui_object(self.input_name)
+
+        self.ui.add_ui_object(self.input_r)
+        self.ui.add_ui_object(self.input_g)
+        self.ui.add_ui_object(self.input_b)
+
+        self.ui.add_ui_object(self.input_spawn_x)
+        self.ui.add_ui_object(self.input_spawn_y)
+
+        self.ui.add_ui_object(self.btn_apply)
+        self.ui.add_ui_object(self.btn_clear)
+        self.ui.add_ui_object(self.btn_close)
+
     def update_data(self, r, g, b, name, player_spawn):
         self.input_r.text = str(r)
-        self.input_b.text = str(b)
         self.input_g.text = str(g)
+        self.input_b.text = str(b)
         self.input_name.text = name
         self.input_spawn_x.text = str(player_spawn[0])
         self.input_spawn_y.text = str(player_spawn[1])
-        
+
     def apply(self):
 
         if self.input_r.text.isdigit():
@@ -128,37 +153,16 @@ class LevelEditWindow(Window):
             spawn_y = int(self.input_spawn_y.text)
         except:
             spawn_y = 0
+
         self.set_background(r, g, b)
         self.set_spawn(spawn_x, spawn_y)
         self.set_name(self.input_name.text)
 
     def handle_pygame_event(self, event):
-
-        self.btn_close.handle_pygame_event(event)
-        self.btn_apply.handle_pygame_event(event)
-
-        self.input_name.handle_pygame_event(event)
-
-        self.input_r.handle_pygame_event(event)
-        self.input_g.handle_pygame_event(event)
-        self.input_b.handle_pygame_event(event)
-
-        self.input_spawn_x.handle_pygame_event(event)
-        self.input_spawn_y.handle_pygame_event(event)
+        self.ui.handle_pygame_event(event)
 
     def update(self, delta_time):
-
-        self.btn_close.update(delta_time)
-        self.btn_apply.update(delta_time)
-
-        self.input_name.update(delta_time)
-
-        self.input_r.update(delta_time)
-        self.input_g.update(delta_time)
-        self.input_b.update(delta_time)
-
-        self.input_spawn_x.update(delta_time)
-        self.input_spawn_y.update(delta_time)
+        self.ui.update(delta_time)
 
     def draw(self, screen):
 
@@ -174,11 +178,9 @@ class LevelEditWindow(Window):
         title = font.render("LEVEL EDIT MENU", True, (255, 255, 255))
         screen.blit(title, (self.rect.x + 30, self.rect.y + 30))
 
-        # NAME
         name_label = font.render("Level Name:", True, (255, 255, 255))
         screen.blit(name_label, (self.rect.x + 30, self.rect.y + 100))
 
-        # BACKGROUND
         label = font.render("Background RGB:", True, (255, 255, 255))
         screen.blit(label, (self.rect.x + 30, self.rect.y + 165))
 
@@ -194,22 +196,14 @@ class LevelEditWindow(Window):
             int(self.input_g.text) if self.input_g.text.isdigit() else 0,
             int(self.input_b.text) if self.input_b.text.isdigit() else 0
         )
-
-        pygame.draw.rect(screen,  color, preview_rect)
+        for color2 in color:
+            if color2 > 255:
+                break
+        else:
+            pygame.draw.rect(screen, color, preview_rect)
         pygame.draw.rect(screen, (255, 255, 255), preview_rect, 3)
 
-        # PLAYER SPAWN
         spawn_label = font.render("Player Spawn:", True, (255, 255, 255))
         screen.blit(spawn_label, (self.rect.x + 30, self.rect.y + 340))
 
-        self.input_name.draw(screen)
-
-        self.input_r.draw(screen)
-        self.input_g.draw(screen)
-        self.input_b.draw(screen)
-
-        self.input_spawn_x.draw(screen)
-        self.input_spawn_y.draw(screen)
-
-        self.btn_apply.draw(screen)
-        self.btn_close.draw(screen)
+        self.ui.draw(screen)
