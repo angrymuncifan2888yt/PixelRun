@@ -10,21 +10,20 @@ WINDOW_HEIGHT = 600
 
 class LevelEditWindow(Window):
 
-    def __init__(self, manager, level, screen_size):
+    def __init__(self, manager, screen_size, set_bg_func, set_spawn_func, set_name_func):
         super().__init__(manager, WindowType.LEVEL_EDIT)
 
-        self.level = level
         self.screen_size = screen_size
 
+        self.set_background = set_bg_func
+        self.set_spawn = set_spawn_func
+        self.set_name = set_name_func
         self.rect = pygame.Rect(
             screen_size[0] // 2 - WINDOW_WIDTH // 2,
             screen_size[1] // 2 - WINDOW_HEIGHT // 2,
             WINDOW_WIDTH,
             WINDOW_HEIGHT
         )
-
-        r, g, b = level.background_color
-        spawn_x, spawn_y = level.player_spawn
 
         # NAME
         self.input_name = LineEdit(
@@ -33,8 +32,11 @@ class LevelEditWindow(Window):
             Fonts.NORMAL_30,
             max_length=32
         )
-        self.input_name.text = level.name
 
+        # default params
+        r, g, b = (0, 0, 0)
+        spawn_x = 0
+        spawn_y = 0
         # RGB
         self.input_r = LineEdit(
             (self.rect.x + 450, self.rect.y + 160),
@@ -92,37 +94,44 @@ class LevelEditWindow(Window):
             font=Fonts.NORMAL_30,
             callback=self.close
         )
-
+    def update_data(self, r, g, b, name, player_spawn):
+        self.input_r.text = str(r)
+        self.input_b.text = str(b)
+        self.input_g.text = str(g)
+        self.input_name.text = name
+        self.input_spawn_x.text = str(player_spawn[0])
+        self.input_spawn_y.text = str(player_spawn[1])
+        
     def apply(self):
 
         if self.input_r.text.isdigit():
             r = max(0, min(255, int(self.input_r.text)))
         else:
-            r = self.level.background_color[0]
+            r = 0
 
         if self.input_g.text.isdigit():
             g = max(0, min(255, int(self.input_g.text)))
         else:
-            g = self.level.background_color[1]
+            g = 0
 
         if self.input_b.text.isdigit():
             b = max(0, min(255, int(self.input_b.text)))
         else:
-            b = self.level.background_color[2]
+            b = 0
 
-        if self.input_spawn_x.text.isdigit():
+        try:
             spawn_x = int(self.input_spawn_x.text)
-        else:
-            spawn_x = self.level.player_spawn[0]
+        except:
+            spawn_x = 0
 
-        if self.input_spawn_y.text.isdigit():
+        try:
             spawn_y = int(self.input_spawn_y.text)
-        else:
-            spawn_y = self.level.player_spawn[1]
+        except:
+            spawn_y = 0
+        self.set_background(r, g, b)
+        self.set_spawn(spawn_x, spawn_y)
+        self.set_name(self.input_name.text)
 
-        self.level.background_color = (r, g, b)
-        self.level.name = self.input_name.text
-        self.level.player_spawn = pygame.Vector2(spawn_x, spawn_y)
     def handle_pygame_event(self, event):
 
         self.btn_close.handle_pygame_event(event)
@@ -180,7 +189,13 @@ class LevelEditWindow(Window):
             100
         )
 
-        pygame.draw.rect(screen, self.level.background_color, preview_rect)
+        color = (
+            int(self.input_r.text) if self.input_r.text.isdigit() else 0,
+            int(self.input_g.text) if self.input_g.text.isdigit() else 0,
+            int(self.input_b.text) if self.input_b.text.isdigit() else 0
+        )
+
+        pygame.draw.rect(screen,  color, preview_rect)
         pygame.draw.rect(screen, (255, 255, 255), preview_rect, 3)
 
         # PLAYER SPAWN

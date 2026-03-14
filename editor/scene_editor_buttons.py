@@ -42,7 +42,7 @@ def button_load_callback(self):
         level_json = json.load(f)
 
     self.level = Deserializator.load_level(level_json)
-
+    self.world.entities.clear()
     for obj in self.level.objects:
         entity = Deserializator.load_entity(obj, self.world)
         self.world.add_entity(entity)
@@ -57,6 +57,7 @@ def button_play_callback(self):
 
 def button_edit_level_callback(self):
     self.window_manager.set_window(WindowType.LEVEL_EDIT)
+    self.level_edit_window.update_data(*self.level.background_color, self.level.name, self.level.player_spawn)
 def button_hitbox_callback(self):
     self.show_hitboxes = not self.show_hitboxes
     if self.show_hitboxes:

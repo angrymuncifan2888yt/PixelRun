@@ -14,7 +14,7 @@ class Level:
         world.entities.clear()
 
         world.level_background_color = self.background_color
-        player.position = self.player_spawn.copy()
+        player.position = Vector2(self.player_spawn.copy())
         player.base_spawn_position = self.player_spawn.copy()
         player.world = world
 

@@ -154,4 +154,3 @@ class SceneEditorPlaytest(Scene):
         if self.debug:
             self.debug_menu.draw(screen)
         self.editor_btn.draw(screen)
-        

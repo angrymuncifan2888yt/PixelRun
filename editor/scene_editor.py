@@ -1,16 +1,12 @@
-from typing import Any
-from .entity_panel import EntityPanel
-from scene import Scene, SceneType
-from ui import NormalButton, UiManager, Text
-import pygame
-from util import Camera, save_file_dialog, open_file_dialog
+from scene import Scene
+from util import Camera
 from core import World, Platform, Spike, Trigger
 from core.render import render_entity, render_hitbox
-from data import const, Fonts
-from level import Level, Deserializator, Serializator, ENTITY_FACTORY
+from data import const
+from level import Level
 from .edit_level_window import LevelEditWindow
 from .edit_entity_window import EditEntityWindow
-from window import WindowManager, WindowType
+from window import WindowManager
 from .scene_editor_buttons import *
 import json
 from .scene_editor_ui import create_ui
@@ -43,7 +39,13 @@ class SceneEditor(Scene):
 
         # <-- WINDOWS -->
         self.window_manager = WindowManager()
-        self.level_edit_window = LevelEditWindow(self.window_manager, self.level, const.WINDOW_SIZE)
+        self.level_edit_window = LevelEditWindow(
+                self.window_manager,
+                const.WINDOW_SIZE,
+                set_bg_func=self._set_level_background,
+                set_spawn_func=self._set_player_spawn,
+                set_name_func=self._set_level_name
+        )
         self.entity_edit_window = EditEntityWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.window_manager.add_window(self.level_edit_window)
         self.window_manager.add_window(self.entity_edit_window)
@@ -52,6 +54,14 @@ class SceneEditor(Scene):
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
+    def _set_level_background(self, r, g, b):
+        self.level.background_color = (r, g, b)
+
+    def _set_player_spawn(self, x, y):
+        self.level.player_spawn = pygame.Vector2(x, y)
+
+    def _set_level_name(self, name):
+        self.level.name = name
     def _draw_world(self, screen):
         # Grid
         grid_size = 50
