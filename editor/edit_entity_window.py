@@ -57,15 +57,6 @@ class EditEntityWindow(Window):
 
         base_x = self.rect.x + 350
 
-        self.input_id = LineEdit(
-            (base_x, self.rect.y + 120),
-            (350, 45),
-            Fonts.NORMAL_30,
-            max_length=128
-        )
-        self.input_id.text = entity_ids
-        self.ui.add_ui_object(self.input_id)
-
         self.input_pos_x = LineEdit(
             (base_x, self.rect.y + 210),
             (140, 45),
@@ -145,15 +136,6 @@ class EditEntityWindow(Window):
             font=Fonts.NORMAL_30,
             callback=self.apply_all
         )
-        self.btn_apply_id = NormalButton(
-            position=pygame.Vector2(base_x + 360, self.rect.y + 120),  # рядом с ID
-            size=(140, 45),
-            text="Apply ID",
-            font=Fonts.NORMAL_30,
-            callback=self.apply_id
-        )
-        self.ui.add_ui_object(self.btn_apply_id)
-
         self.btn_apply_pos = NormalButton(
             position=pygame.Vector2(base_x + 360, self.rect.y + 210),  # рядом с Pos
             size=(140, 45),
@@ -222,7 +204,6 @@ class EditEntityWindow(Window):
             self.btn_active.hover_color = (150, 0, 0)
     def load_entity_data(self):
         if not self.entities:
-            self.input_id.text = ""
             self.input_pos_x.text = "0"
             self.input_pos_y.text = "0"
             self.input_opacity.text = "255"
@@ -234,8 +215,6 @@ class EditEntityWindow(Window):
             return
 
         first = self.entities[0]
-
-        self.input_id.text = ", ".join(str(e.id) for e in self.entities)
         self.input_pos_x.text = str(int(first.position.x))
         self.input_pos_y.text = str(int(first.position.y))
         self.input_opacity.text = str(int(first.opacity))
@@ -260,19 +239,16 @@ class EditEntityWindow(Window):
 
     def apply_position(self):
 
-        if not self.input_pos_x.text.isdigit():
-            return
-        if not self.input_pos_y.text.isdigit():
+        try:
+            x = int(self.input_pos_x.text)
+            y = int(self.input_pos_y.text)
+        except ValueError:
             return
 
-        pos = pygame.Vector2(
-            int(self.input_pos_x.text),
-            int(self.input_pos_y.text)
-        )
+        pos = pygame.Vector2(x, y)
 
         for entity in self.entities:
             entity.position = pos
-
     def apply_opacity(self):
 
         if not self.input_opacity.text.isdigit():
@@ -285,15 +261,16 @@ class EditEntityWindow(Window):
 
     def apply_rotation(self):
 
-        if not self.input_rotation.text.isdigit():
+        try:
+            rotation = int(self.input_rotation.text)
+        except ValueError:
             return
 
-        rotation = int(self.input_rotation.text) % 360
+        rotation %= 360
 
         for entity in self.entities:
             if hasattr(entity, "rotation"):
                 entity.rotation = rotation
-
     def apply_size(self):
 
         if not self.input_width.text.isdigit():
@@ -310,20 +287,6 @@ class EditEntityWindow(Window):
             if hasattr(entity, "height"):
                 entity.height = height
 
-    def apply_id(self):
-
-        ids = [i.strip() for i in self.input_id.text.split(",") if i.strip()]
-
-        if not ids:
-            return
-
-        for i, entity in enumerate(self.entities):
-
-            if i < len(ids):
-                entity.id = ids[i]
-            else:
-                entity.id = ids[-1]
-
     def apply_active(self):
 
         for entity in self.entities:
@@ -331,7 +294,6 @@ class EditEntityWindow(Window):
 
     def apply_all(self):
 
-        self.apply_id()
         self.apply_position()
         self.apply_opacity()
         self.apply_rotation()
@@ -356,8 +318,6 @@ class EditEntityWindow(Window):
         font = Fonts.NORMAL_30
 
         screen.blit(font.render("EDIT ENTITIES", True, (255, 255, 255)), (self.rect.x + 40, self.rect.y + 40))
-
-        screen.blit(font.render("Object ID(s):", True, (255, 255, 255)), (self.rect.x + 40, self.rect.y + 125))
         screen.blit(font.render("Position (X Y):", True, (255, 255, 255)), (self.rect.x + 40, self.rect.y + 215))
         screen.blit(font.render("Opacity (0-255):", True, (255, 255, 255)), (self.rect.x + 40, self.rect.y + 305))
         screen.blit(font.render("Rotation:", True, (255, 255, 255)), (self.rect.x + 40, self.rect.y + 395))

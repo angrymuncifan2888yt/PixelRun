@@ -43,6 +43,14 @@ def create_ui(self) -> None:
         font=Fonts.NORMAL_30,
         callback=lambda: button_edit_entity_callback(self)
     )        
+    # Кнопка Edit id
+    btn_edit_id = NormalButton(
+        position=pygame.Vector2(const.WINDOW_SIZE[0] - 330, 10),
+        size=(100, 100),
+        text="ID",
+        font=Fonts.NORMAL_30,
+        callback=lambda: button_id_callback(self)
+    )        
     # Кнопка Delete
     btn_delete = NormalButton(
         position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, 120),
@@ -133,3 +141,4 @@ def create_ui(self) -> None:
     self.ui.add_ui_object(btn_play)
     self.ui.add_ui_object(self.btn_grid)
     self.ui.add_ui_object(self.entity_panel)
+    self.ui.add_ui_object(btn_edit_id)

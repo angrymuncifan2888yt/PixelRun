@@ -10,6 +10,10 @@ def button_edit_entity_callback(self):
     self.entity_edit_window.load_entity_data()
     self.window_manager.set_window(WindowType.EDIT_ENTITY)
 
+def button_id_callback(self):
+    self.entity_id_edit_window.entities = self.selected_entities
+    self.entity_id_edit_window.load_entity_data()
+    self.window_manager.set_window(WindowType.EDIT_ID_ENTITY)
 def button_save_callback(self):
     if not self.level_path:
         level_path = save_file_dialog(

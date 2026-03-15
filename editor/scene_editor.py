@@ -8,7 +8,7 @@ from .edit_level_window import LevelEditWindow
 from .edit_entity_window import EditEntityWindow
 from window import WindowManager
 from .scene_editor_buttons import *
-import json
+from .edit_entity_id_window import EditEntityIDWindow
 from .scene_editor_ui import create_ui
 import pygame
 
@@ -47,7 +47,9 @@ class SceneEditor(Scene):
             delete_level_objects_func=self._delete_all_objects
         )
         self.entity_edit_window = EditEntityWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
+        self.entity_id_edit_window = EditEntityIDWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.window_manager.add_window(self.level_edit_window)
+        self.window_manager.add_window(self.entity_id_edit_window)
         self.window_manager.add_window(self.entity_edit_window)
 
     def _back_to_menu(self):
@@ -61,6 +63,7 @@ class SceneEditor(Scene):
 
     def _set_level_name(self, name):
         self.level.name = name
+        print(self.level.name)
 
     def _delete_all_objects(self):
         self.world.entities.clear()
