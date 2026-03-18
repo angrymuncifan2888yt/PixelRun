@@ -36,8 +36,8 @@ class Serializator:
 
         if hasattr(entity, "color_fill"):
             data["color_fill"] = list(entity.color_fill)
-        if hasattr(entity, "target_ids"):
-            data["target_ids"] = entity.target_ids
+        if hasattr(entity, "target_id"):
+            data["target_id"] = entity.target_id
         if hasattr(entity, "target_opacity"):
             data["target_opacity"] = entity.target_opacity
         if hasattr(entity, "target_offset"):

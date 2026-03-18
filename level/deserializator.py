@@ -59,9 +59,15 @@ class Deserializator:
         if entity_json.get("id"):
             entity.id = list(entity_json["id"])
 
-        if entity_json.get("target_ids"):
-            entity.target_ids = list(entity_json["target_ids"])
+        # Новый формат
+        if entity_json.get("target_id") is not None:
+            entity.target_id = entity_json["target_id"]
 
+        # Старый формат (fallback)
+        elif entity_json.get("target_ids"):
+            ids = entity_json["target_ids"]
+            if isinstance(ids, list) and len(ids) > 0:
+                entity.target_id = ids[0]
         if entity_json.get("toggle"):
             entity.toggle = entity_json["toggle"]
     

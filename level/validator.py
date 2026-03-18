@@ -59,11 +59,16 @@ class Validator:
         if transition_time is not None:
             if not isinstance(transition_time, (int, float)) or transition_time < 0:
                 return False
-    
-        target_ids_ = entity_json.get("target_ids")
-        if not isinstance(target_ids_, list):
-            return False
+        target_id = entity_json.get("target_id")
+        target_ids = entity_json.get("target_ids")
 
+        if target_id is not None:
+            if not isinstance(target_id, (int, str)):
+                return False
+
+        elif target_ids is not None:
+            if not isinstance(target_ids, list):
+                return False
         rot = entity_json.get("rotation")
         if rot is not None and not isinstance(rot, (int, float)):
             return False
