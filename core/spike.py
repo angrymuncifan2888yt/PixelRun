@@ -27,3 +27,30 @@ class Spike(Entity):
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
             entity.kill()
+    def get_special_fields(self):
+        return {
+            "fill_r": {"type": "int", "value": self.color_fill[0]},
+            "fill_g": {"type": "int", "value": self.color_fill[1]},
+            "fill_b": {"type": "int", "value": self.color_fill[2]},
+
+            "border_r": {"type": "int", "value": self.color_border[0]},
+            "border_g": {"type": "int", "value": self.color_border[1]},
+            "border_b": {"type": "int", "value": self.color_border[2]},
+        }
+
+
+    def apply_special_fields(self, data):
+        try:
+            self.color_fill = (
+                int(data.get("fill_r", self.color_fill[0])),
+                int(data.get("fill_g", self.color_fill[1])),
+                int(data.get("fill_b", self.color_fill[2])),
+            )
+
+            self.color_border = (
+                int(data.get("border_r", self.color_border[0])),
+                int(data.get("border_g", self.color_border[1])),
+                int(data.get("border_b", self.color_border[2])),
+            )
+        except:
+            pass

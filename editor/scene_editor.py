@@ -9,6 +9,7 @@ from .edit_entity_window import EditEntityWindow
 from window import WindowManager
 from .scene_editor_buttons import *
 from .edit_entity_id_window import EditEntityIDWindow
+from.edit_special_window import EditSpecialWindow
 from .scene_editor_ui import create_ui
 import pygame
 
@@ -48,9 +49,11 @@ class SceneEditor(Scene):
         )
         self.entity_edit_window = EditEntityWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.entity_id_edit_window = EditEntityIDWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
+        self.edit_special_window = EditSpecialWindow(self.window_manager, self.selected_entities, const.WINDOW_SIZE)
         self.window_manager.add_window(self.level_edit_window)
         self.window_manager.add_window(self.entity_id_edit_window)
         self.window_manager.add_window(self.entity_edit_window)
+        self.window_manager.add_window(self.edit_special_window)
 
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
@@ -236,7 +239,8 @@ class SceneEditor(Scene):
                     if entity.rotation == 360:
                         entity.rotation = 0
 
-        self.ui.handle_pygame_event(event)
+        if not self.window_manager.current_window:
+            self.ui.handle_pygame_event(event)
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):

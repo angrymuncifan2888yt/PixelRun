@@ -5,6 +5,10 @@ from level import Serializator, Deserializator
 from scene import SceneType
 import pygame
 
+def button_edit_special_callback(self):
+    self.edit_special_window.entities = self.selected_entities
+    self.edit_special_window.load_entity_data()
+    self.window_manager.set_window(WindowType.EDIT_SPECIAL_ENTITY)
 def button_edit_entity_callback(self):
     self.entity_edit_window.entities = self.selected_entities
     self.entity_edit_window.load_entity_data()

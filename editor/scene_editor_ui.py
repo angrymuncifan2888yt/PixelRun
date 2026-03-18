@@ -65,7 +65,7 @@ def create_ui(self) -> None:
         size=(210, 100),
         text="Edit Special",
         font=Fonts.NORMAL_30,
-        callback=None
+        callback=lambda: button_edit_special_callback(self)
     )        
     # Кнопка Edit level
     btn_edit_level = NormalButton(
