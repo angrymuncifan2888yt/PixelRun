@@ -11,4 +11,5 @@ class Levels:
     def init(cls):
         cls.FIRST_LEVEL = cls.load_level_from_file("assets/levels/first_level.json")
         cls.SUPER_TRIGGER = cls.load_level_from_file("assets/levels/super_trigger.json")
-        cls.ALL_LEVELS = [cls.FIRST_LEVEL, cls.SUPER_TRIGGER]
+        cls.JUMP_PADS = cls.load_level_from_file("assets/levels/jump_pads.json")
+        cls.ALL_LEVELS = [cls.FIRST_LEVEL, cls.SUPER_TRIGGER, cls.JUMP_PADS]

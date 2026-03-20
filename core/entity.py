@@ -44,3 +44,9 @@ class Entity:
 
     def destroy(self):
         self.world.remove_entity(self)
+
+    def get_special_fields(self):
+        return {}
+
+    def apply_special_fields(self, data):
+        pass

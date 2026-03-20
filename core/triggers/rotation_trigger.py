@@ -20,6 +20,20 @@ class RotationTrigger(Trigger):
         self._active = False
         self._state = False
 
+    def update(self, delta_time):
+        if not self._active:
+            return
+
+        self._elapsed += delta_time
+
+        t = min(self._elapsed / self.transition_time, 1)
+
+        for target in self._targets:
+            start = self._start_rotations[target]
+            target.rotation = start + (self._target_rotation - start) * t
+
+        if t >= 1:
+            self._active = False
     def activate(self, player):
         if self._active:
             return
@@ -44,3 +58,20 @@ class RotationTrigger(Trigger):
 
         self._target_rotation = target_rotation
         self._active = True
+
+    def get_special_fields(self):
+        return {
+            "rotation_a": {"type": "float", "value": self.rotation_a},
+            "rotation_b": {"type": "float", "value": self.rotation_b},
+            "target_id": {"type": "str", "value": self.target_id or ""},
+            "transition_time": {"type": "float", "value": self.transition_time},
+        }
+
+    def apply_special_fields(self, data):
+        try:
+            self.rotation_a = float(data.get("rotation_a", self.rotation_a))
+            self.rotation_b = float(data.get("rotation_b", self.rotation_b))
+            self.target_id = data.get("target_id", None)
+            self.transition_time = float(data.get("transition_time", self.transition_time))
+        except:
+            pass

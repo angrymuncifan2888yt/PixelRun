@@ -35,3 +35,18 @@ class OpacityTrigger(Trigger):
             self._start_opacities[target] = target.opacity
 
         self._active = True
+
+    def get_special_fields(self):
+        return {
+            "target_opacity": {"type": "int", "value": self.target_opacity},
+            "target_id": {"type": "str", "value": self.target_id or ""},
+            "transition_time": {"type": "float", "value": self.transition_time},
+        }
+
+    def apply_special_fields(self, data):
+        try:
+            self.target_opacity = int(data.get("target_opacity", self.target_opacity))
+            self.target_id = data.get("target_id", None)
+            self.transition_time = float(data.get("transition_time", self.transition_time))
+        except:
+            pass

@@ -42,3 +42,16 @@ class SpawnTrigger(Trigger):
         for trigger in self.world.get_entities_by_id(self.target_id):
             if isinstance(trigger, Trigger):
                 trigger.activate(player)
+
+    def get_special_fields(self):
+        return {
+            "target_id": {"type": "str", "value": self.target_id or ""},
+            "delay": {"type": "float", "value": self.delay.duration}
+        }
+
+    def apply_special_fields(self, data):
+        try:
+            self.target_id = data.get("target_id", None)
+            self.delay.duration = float(data.get("delay", self.delay.duration))
+        except:
+            pass

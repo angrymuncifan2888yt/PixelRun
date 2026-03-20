@@ -34,6 +34,8 @@ class Serializator:
             "id": entity.id,
         }
 
+        if hasattr(entity, "power"):
+            data["power"] = entity.power
         if hasattr(entity, "color_fill"):
             data["color_fill"] = list(entity.color_fill)
         if hasattr(entity, "target_id"):

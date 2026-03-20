@@ -59,6 +59,8 @@ class Deserializator:
         if entity_json.get("id"):
             entity.id = list(entity_json["id"])
 
+        if entity_json.get("power"):
+            entity.power = int(entity_json["power"])
         # Новый формат
         if entity_json.get("target_id") is not None:
             entity.target_id = entity_json["target_id"]

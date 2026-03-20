@@ -62,6 +62,10 @@ class Validator:
         target_id = entity_json.get("target_id")
         target_ids = entity_json.get("target_ids")
 
+        power = entity_json.get("power")
+        if not str(power).isdigit():
+            return False
+        
         if target_id is not None:
             if not isinstance(target_id, (int, str)):
                 return False

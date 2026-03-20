@@ -22,3 +22,21 @@ class ToggleTrigger(Trigger):
             elif self.toggle is False:
                 to_set = False
             entity.active = to_set
+
+    def get_special_fields(self):
+        return {
+            "toggle": {"type": "bool", "value": self.toggle if self.toggle is not None else -1},
+            "target_id": {"type": "str", "value": self.target_id or ""}
+        }
+
+    def apply_special_fields(self, data):
+        try:
+            toggle = data.get("toggle", -1)
+            if toggle == -1:
+                self.toggle = None
+            else:
+                self.toggle = bool(toggle)
+
+            self.target_id = data.get("target_id", None)
+        except:
+            pass

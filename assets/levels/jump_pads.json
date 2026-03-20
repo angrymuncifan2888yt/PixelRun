@@ -1,0 +1,338 @@
+{
+    "name": "Jump pads",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                450.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                450.0,
+                400.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1000.0,
+                450.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                450.0,
+                400.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1450.0,
+                400.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                1450.0,
+                400.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 700,
+            "color": [
+                255,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1950.0,
+                450.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                2400.0,
+                400.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                2400.0,
+                400.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 2000,
+            "color": [
+                255,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1800.0,
+                450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                2800.0,
+                -250.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                3250.0,
+                -300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                3250.0,
+                -300.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "gravity_portal",
+            "position": [
+                3250.0,
+                -306.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "end",
+            "position": [
+                3300.0,
+                -950.0
+            ],
+            "size": [
+                195,
+                259
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                3300.0,
+                5000.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                3322.0,
+                4900.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        }
+    ]
+}

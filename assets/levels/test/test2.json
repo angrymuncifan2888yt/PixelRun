@@ -1,0 +1,72 @@
+{
+    "name": "EDitor test lol",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                500.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "rotation_trigger",
+            "position": [
+                700.0,
+                150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": null,
+            "transition_time": 0,
+            "activation_mode": "ON_ENTER"
+        }
+    ]
+}
