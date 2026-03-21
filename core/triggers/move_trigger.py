@@ -18,6 +18,20 @@ class MoveTrigger(Trigger):
         self._elapsed = 0
         self._active = False
 
+    def update(self, delta_time):
+        if not self._active:
+            return
+
+        self._elapsed += delta_time
+
+        t = min(self._elapsed / self.transition_time, 1)
+
+        for target in self._targets:
+            start = self._start_positions[target]
+            target.position = start + self.target_offset * t
+
+        if t >= 1:
+            self._active = False
     def activate(self, player):
         self._targets.clear()
         self._start_positions.clear()

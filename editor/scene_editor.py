@@ -66,7 +66,6 @@ class SceneEditor(Scene):
 
     def _set_level_name(self, name):
         self.level.name = name
-        print(self.level.name)
 
     def _delete_all_objects(self):
         self.world.entities.clear()

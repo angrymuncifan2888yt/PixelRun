@@ -36,6 +36,20 @@ class OpacityTrigger(Trigger):
 
         self._active = True
 
+    def update(self, delta_time):
+        if not self._active:
+            return
+
+        self._elapsed += delta_time
+
+        t = min(self._elapsed / self.transition_time, 1)
+
+        for target in self._targets:
+            start = self._start_opacities[target]
+            target.opacity = int(start + (self.target_opacity - start) * t)
+
+        if t >= 1:
+            self._active = False
     def get_special_fields(self):
         return {
             "target_opacity": {"type": "int", "value": self.target_opacity},

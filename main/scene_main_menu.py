@@ -12,7 +12,8 @@ class SceneMainMenu(Scene):
         self.ui = UiManager()
 
         # Фон
-        self.ui.add_ui_object(MainMenuBackground())
+        self.bg = MainMenuBackground()
+        self.ui.add_ui_object(self.bg)
 
         # Заголовок
         title = Text(

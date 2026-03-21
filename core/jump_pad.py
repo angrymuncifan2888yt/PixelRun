@@ -18,7 +18,6 @@ class JumpPad(Entity):
 
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
-            print(self.power)
             entity.on_ground = True
             prev = entity.jump_force
             entity.jump_force = self.power # Jump pad power
@@ -42,6 +41,5 @@ class JumpPad(Entity):
                 int(data.get("b", self.color[2])),
             )
             self.power = int(data.get("power", self.power))
-            print(data)
         except:
             pass

@@ -16,6 +16,14 @@ class MainMenuBackground(UiObject):
 
         self._build_scene()
 
+    def click(self):
+        self.player.is_clicking = True
+
+    def handle_pygame_event(self, pygame_event):
+        if pygame_event.type == pygame.KEYDOWN:
+            if pygame_event.key == pygame.K_SPACE:
+                self.click()
+
     def _build_scene(self):
         self.moving_platforms = []
         self.base_positions = []
@@ -86,6 +94,20 @@ class MainMenuBackground(UiObject):
 
         self.world.update_all_hitboxes()
         self.world.update_entities(self.world.entities, delta)
+
+        self.player.is_clicking = False
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            self.player.jump()
+        if keys[pygame.K_a]:
+            self.player.move_left(delta)
+        elif keys[pygame.K_d]:
+            self.player.move_right(delta)
+
+        mouse = pygame.mouse.get_pressed()
+        if mouse[0]:
+            self.player.jump()
 
     def draw(self, screen):
         for entity in self.world.entities:

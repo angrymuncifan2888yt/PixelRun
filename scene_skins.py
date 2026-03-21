@@ -148,14 +148,14 @@ class SceneSkins(Scene):
         game_scene = self.scene_manager.get_scene(SceneType.GAME)
         if game_scene:
             game_scene.set_skin(self.current_skin)
-            self.applied_skin = self.current_skin
-            self._update_apply_button()
-
+        main_menu_scene = self.scene_manager.get_scene(SceneType.MAIN_MENU)
+        if main_menu_scene:
+            main_menu_scene.bg.player.set_skin(self.current_skin)
         editor_playtest_scene = self.scene_manager.get_scene(SceneType.EDITOR_PLAYTEST)
         if editor_playtest_scene:
             editor_playtest_scene.set_skin(self.current_skin)
-            self.applied_skin = self.current_skin
-            self._update_apply_button()
+        self.applied_skin = self.current_skin
+        self._update_apply_button()
 
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
