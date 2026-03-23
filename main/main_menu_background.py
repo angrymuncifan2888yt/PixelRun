@@ -105,10 +105,6 @@ class MainMenuBackground(UiObject):
         elif keys[pygame.K_d]:
             self.player.move_right(delta)
 
-        mouse = pygame.mouse.get_pressed()
-        if mouse[0]:
-            self.player.jump()
-
     def draw(self, screen):
         for entity in self.world.entities:
             render_entity(screen, entity)

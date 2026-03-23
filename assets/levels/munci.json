@@ -2516,7 +2516,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2541,7 +2541,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2566,7 +2566,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2591,7 +2591,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2616,7 +2616,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2641,7 +2641,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2666,7 +2666,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2691,7 +2691,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2716,7 +2716,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -2741,7 +2741,7 @@
                 50
             ],
             "rotation": 0,
-            "opacity": 100,
+            "opacity": 255,
             "active": false,
             "id": [],
             "color_fill": [
@@ -3308,11 +3308,11 @@
         {
             "type": "color_trigger",
             "position": [
-                750.0,
+                950.0,
                 4500.0
             ],
             "size": [
-                500,
+                200,
                 500
             ],
             "rotation": 0,
@@ -3325,6 +3325,36 @@
                 0
             ],
             "activation_mode": "ON_ENTER"
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                0.0,
+                0.0
+            ],
+            "size": [
+                500,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                0.0,
+                0.0
+            ],
+            "size": [
+                500,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
         }
     ]
 }

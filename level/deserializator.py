@@ -70,15 +70,13 @@ class Deserializator:
             ids = entity_json["target_ids"]
             if isinstance(ids, list) and len(ids) > 0:
                 entity.target_id = ids[0]
-        if entity_json.get("toggle"):
+        if entity_json.get("toggle") is not None:
             entity.toggle = entity_json["toggle"]
-    
         if entity_json.get("target_rotation"):
             entity.target_rotation = float(entity_json["target_rotation"])
-            
-        if entity_json.get("opacity"):
+                    
+        if entity_json.get("opacity") is not None:
             entity.opacity = int(entity_json["opacity"])
-
         else:
             if isinstance(entity, Trigger):
                 entity.opacity = 0

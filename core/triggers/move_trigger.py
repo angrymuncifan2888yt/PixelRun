@@ -7,8 +7,6 @@ class MoveTrigger(Trigger):
     def __init__(self, world, position: Vector2,
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
-        self.activation_mode = TriggerActivationMode.ONCE
-
         self.target_offset = Vector2(0, 0)
         self.target_id = None
         self.transition_time = 0

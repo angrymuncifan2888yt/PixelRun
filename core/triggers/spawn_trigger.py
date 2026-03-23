@@ -8,8 +8,6 @@ class SpawnTrigger(Trigger):
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1],
                  rotation=0, delay_duration=0.5):
         super().__init__(world, position, width, height, rotation)
-        self.activation_mode = TriggerActivationMode.ON_ENTER
-
         self.target_id = None
         self.delay = Timer(delay_duration)
         self._waiting = False

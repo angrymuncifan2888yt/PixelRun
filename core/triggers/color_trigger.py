@@ -8,7 +8,6 @@ class ColorTrigger(Trigger):
                  height=const.TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
         self.target_color = (0, 0, 0)
-        self.activation_mode = TriggerActivationMode.ON_ENTER
 
     def activate(self, player):
         self.world.level_background_color = self.target_color

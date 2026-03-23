@@ -28,6 +28,7 @@ class EditEntityIDWindow(Window):
         self.start_y = self.rect.y + 140
 
         self.id_inputs = []
+        self.remove_buttons = []
 
         self.load_entity_data()
 
@@ -64,7 +65,11 @@ class EditEntityIDWindow(Window):
         for field in self.id_inputs:
             self.ui.remove_ui_object(field)
 
+        for btn in self.remove_buttons:
+            self.ui.remove_ui_object(btn)
+
         self.id_inputs.clear()
+        self.remove_buttons.clear()
 
     def load_entity_data(self):
 
@@ -86,19 +91,54 @@ class EditEntityIDWindow(Window):
 
     def add_id_field(self, text=""):
 
-        y = self.start_y + len(self.id_inputs) * 45
+        index = len(self.id_inputs)
+        y = self.start_y + index * 45
 
         input_id = LineEdit(
             (self.base_x, y),
-            (320, 40),
+            (260, 40),
             Fonts.NORMAL_30,
             max_length=64
         )
 
         input_id.text = text
 
+        btn_remove = NormalButton(
+            position=pygame.Vector2(self.base_x + 270, y),
+            size=(40, 40),
+            text="X",
+            font=Fonts.NORMAL_30,
+            callback=lambda i=index: self.remove_id_field(i)
+        )
+
         self.id_inputs.append(input_id)
+        self.remove_buttons.append(btn_remove)
+
         self.ui.add_ui_object(input_id)
+        self.ui.add_ui_object(btn_remove)
+
+    def remove_id_field(self, index):
+
+        if index < 0 or index >= len(self.id_inputs):
+            return
+
+        field = self.id_inputs.pop(index)
+        btn = self.remove_buttons.pop(index)
+
+        self.ui.remove_ui_object(field)
+        self.ui.remove_ui_object(btn)
+
+        self._rebuild_fields()
+
+    def _rebuild_fields(self):
+
+        for i, (field, btn) in enumerate(zip(self.id_inputs, self.remove_buttons)):
+            y = self.start_y + i * 45
+
+            field.position = pygame.Vector2(self.base_x, y)
+            btn.position = pygame.Vector2(self.base_x + 270, y)
+
+            btn.callback = lambda i=i: self.remove_id_field(i)
 
     def apply_ids(self):
 

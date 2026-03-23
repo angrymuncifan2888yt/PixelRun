@@ -262,7 +262,7 @@
             "opacity": 255,
             "active": true,
             "id": [],
-            "power": 1350,
+            "power": 0,
             "color": [
                 0,
                 0,
@@ -273,14 +273,14 @@
             "type": "gravity_portal",
             "position": [
                 3250.0,
-                -306.0
+                -300.0
             ],
             "size": [
                 50,
                 10
             ],
             "rotation": 0,
-            "opacity": 255,
+            "opacity": 0,
             "active": true,
             "id": []
         },

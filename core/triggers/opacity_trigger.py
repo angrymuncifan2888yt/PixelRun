@@ -7,8 +7,6 @@ class OpacityTrigger(Trigger):
     def __init__(self, world, position: Vector2,
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
-        self.activation_mode = TriggerActivationMode.ON_ENTER
-
         self.target_opacity = 0
         self.target_id = None
         self.transition_time = 0

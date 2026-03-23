@@ -7,8 +7,6 @@ class RotationTrigger(Trigger):
     def __init__(self, world, position: Vector2,
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
-        self.activation_mode = TriggerActivationMode.ON_ENTER
-
         self.rotation_a = 0
         self.rotation_b = 90
         self.target_id = None

@@ -1,0 +1,104 @@
+{
+    "name": "",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                50.0,
+                400.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                300.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                -250.0,
+                100.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                -150.0,
+                100.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_portal",
+            "position": [
+                -300.0,
+                100.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
+        }
+    ]
+}
