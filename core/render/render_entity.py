@@ -177,7 +177,7 @@ def render_spike(screen, spike: Spike, camera=None):
             (spike.width, spike.height),
         ]
         pygame.draw.polygon(surface, spike.color_fill, points)
-        pygame.draw.polygon(surface, spike.color_border, points, width=2)
+        pygame.draw.polygon(surface, spike.color_border, points, width=3)
         render_spike._cache[key] = surface
 
     surface = get_transformed(

@@ -250,7 +250,7 @@ class SceneEditor(Scene):
 
         if not self.window_manager.current_window:
             keys = pygame.key.get_pressed()
-            speed = 1000
+            speed = 2000
             if keys[pygame.K_w]:
                 self.camera.position.y -= speed * delta
             if keys[pygame.K_s]:
