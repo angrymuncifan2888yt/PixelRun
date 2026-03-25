@@ -1,0 +1,742 @@
+{
+    "name": "Execution",
+    "player_spawn": [
+        -300.0,
+        0.0
+    ],
+    "background_color": [
+        50,
+        50,
+        50
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                -350.0,
+                350.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "box"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -450.0,
+                50.0
+            ],
+            "size": [
+                100,
+                300
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "box"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -250.0,
+                50.0
+            ],
+            "size": [
+                100,
+                300
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "box"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -350.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "box"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                -350.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "box",
+            "target_offset": [
+                1000.0,
+                0.0
+            ],
+            "transition_time": 10.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                350.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                -50.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                -250.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                750.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                950.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                750.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                800.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                900.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                850.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                950.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                1000.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                650.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                850.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "executor"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                -350.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "main",
+                "triggers"
+            ],
+            "target_id": "second",
+            "delay": 1.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                400.0,
+                -100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "second",
+                "triggers"
+            ],
+            "target_id": "main",
+            "delay": 1.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                250.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "second",
+                "triggers"
+            ],
+            "target_id": "executor",
+            "target_offset": [
+                0.0,
+                200.0
+            ],
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                400.0,
+                0.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "main",
+                "triggers"
+            ],
+            "target_id": "executor",
+            "target_offset": [
+                0.0,
+                -200.0
+            ],
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                550.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "triggers",
+            "toggle": "OFF",
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                950.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "tr"
+            ],
+            "target_id": "executor",
+            "target_offset": [
+                0.0,
+                200.0
+            ],
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                700.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "tr",
+            "delay": 1.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "text",
+            "position": [
+                100.0,
+                400.0
+            ],
+            "size": [
+                73,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                0,
+                0
+            ],
+            "text": "Help",
+            "auto_resize": true
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 from pygame import Vector2
 from .entity_factory import ENTITY_FACTORY
-from core import Trigger, TriggerActivationType
+from core import Trigger, TriggerActivationType, ToggleMode
 from util import Timer
 
 
@@ -70,8 +70,6 @@ class Deserializator:
             ids = entity_json["target_ids"]
             if isinstance(ids, list) and len(ids) > 0:
                 entity.target_id = ids[0]
-        if entity_json.get("toggle") is not None:
-            entity.toggle = entity_json["toggle"]
         if entity_json.get("target_rotation"):
             entity.target_rotation = float(entity_json["target_rotation"])
                     
@@ -98,4 +96,7 @@ class Deserializator:
         mode = entity_json.get("activation_type") or entity_json.get("activation_mode")
         if mode:
             entity.activation_type = TriggerActivationType[mode]
+        toggle = entity_json.get("toggle")
+        if toggle:
+            entity.toggle = ToggleMode[toggle]
         return entity

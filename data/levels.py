@@ -14,4 +14,5 @@ class Levels:
         cls.MUNCI_STEP = cls.load_level_from_file("assets/levels/munci.json")
         cls.BALL = cls.load_level_from_file("assets/levels/ball.json")
         cls.TEXT_ANIMATION = cls.load_level_from_file("assets/levels/text_animation.json")
-        cls.ALL_LEVELS = [cls.FIRST_LEVEL, cls.JUMP_PADS, cls.MUNCI_STEP, cls.BALL, cls.TEXT_ANIMATION]
+        cls.EXECUTION = cls.load_level_from_file("assets/levels/execution.json")
+        cls.ALL_LEVELS = [cls.FIRST_LEVEL, cls.JUMP_PADS, cls.MUNCI_STEP, cls.BALL, cls.TEXT_ANIMATION, cls.EXECUTION]

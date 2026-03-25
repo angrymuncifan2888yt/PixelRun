@@ -79,9 +79,9 @@ class World:
         updated = 0
         for entity in entities:
             try:
-                entity.update(delta_time)
-                updated += 1
                 if entity.active:
+                    entity.update(delta_time)
+                    updated += 1
                     for other in entities:
                         if other is entity or not other.active:
                             continue
