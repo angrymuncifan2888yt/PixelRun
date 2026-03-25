@@ -1,6 +1,6 @@
 from pygame import Vector2
 from .entity_factory import ENTITY_FACTORY
-from core import Trigger, TriggerActivationMode
+from core import Trigger, TriggerActivationType
 from util import Timer
 
 
@@ -89,9 +89,13 @@ class Deserializator:
             entity.transition_time = float(entity_json["transition_time"])
         if entity_json.get("active") is not None:
             entity.active = entity_json["active"]
-
-        mode = entity_json.get("activation_mode")
+        if entity_json.get("text") is not None:
+            entity.text = str(entity_json["text"])
+            entity._dirty = True
+        if entity_json.get("auto_resize") is not None:
+            entity.auto_resize = bool(entity_json["auto_resize"])
+            entity._dirty = True
+        mode = entity_json.get("activation_type") or entity_json.get("activation_mode")
         if mode:
-            entity.activation_mode = TriggerActivationMode[mode]
-
+            entity.activation_type = TriggerActivationType[mode]
         return entity

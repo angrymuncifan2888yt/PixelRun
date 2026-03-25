@@ -1,6 +1,6 @@
 from pygame import Vector2
 from data.const import TRIGGER_SIZE
-from .trigger import Trigger, TriggerActivationMode
+from .trigger import Trigger, TriggerActivationType
 
 
 class RotationTrigger(Trigger):
@@ -63,6 +63,11 @@ class RotationTrigger(Trigger):
             "rotation_b": {"type": "float", "value": self.rotation_b},
             "target_id": {"type": "str", "value": self.target_id or ""},
             "transition_time": {"type": "float", "value": self.transition_time},
+            "activation_type": {
+                "type": "enum",
+                "value": self.activation_type.name,
+                "options": [e.name for e in TriggerActivationType]
+            }
         }
 
     def apply_special_fields(self, data):
@@ -71,5 +76,10 @@ class RotationTrigger(Trigger):
             self.rotation_b = float(data.get("rotation_b", self.rotation_b))
             self.target_id = data.get("target_id", None)
             self.transition_time = float(data.get("transition_time", self.transition_time))
+            if "activation_type" in data:
+                try:
+                    self.activation_type = TriggerActivationType[data["activation_type"]]
+                except:
+                    pass
         except:
             pass

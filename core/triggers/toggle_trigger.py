@@ -1,6 +1,6 @@
 from pygame import Vector2
 from data.const import TRIGGER_SIZE
-from .trigger import Trigger, TriggerActivationMode
+from .trigger import Trigger, TriggerActivationType
 
 
 class ToggleTrigger(Trigger):
@@ -14,6 +14,7 @@ class ToggleTrigger(Trigger):
         if self.target_id is None:
             return
 
+        print("af")
         for entity in self.world.get_entities_by_id(self.target_id):
             to_set = not entity.active
             if self.toggle is True:
@@ -25,7 +26,12 @@ class ToggleTrigger(Trigger):
     def get_special_fields(self):
         return {
             "toggle": {"type": "bool", "value": self.toggle if self.toggle is not None else -1},
-            "target_id": {"type": "str", "value": self.target_id or ""}
+            "target_id": {"type": "str", "value": self.target_id or ""},
+            "activation_type": {
+                "type": "enum",
+                "value": self.activation_type.name,
+                "options": [e.name for e in TriggerActivationType]
+            }
         }
 
     def apply_special_fields(self, data):
@@ -37,5 +43,10 @@ class ToggleTrigger(Trigger):
                 self.toggle = bool(toggle)
 
             self.target_id = data.get("target_id", None)
+            if "activation_type" in data:
+                try:
+                    self.activation_type = TriggerActivationType[data["activation_type"]]
+                except:
+                    pass
         except:
             pass

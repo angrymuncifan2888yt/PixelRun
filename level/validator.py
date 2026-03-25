@@ -2,7 +2,7 @@ from pygame import Vector2
 from .level import Level
 from .entity_factory import ENTITY_FACTORY
 from .deserializator import Deserializator
-from core import TriggerActivationMode
+from core import TriggerActivationType
 
 
 class Validator:

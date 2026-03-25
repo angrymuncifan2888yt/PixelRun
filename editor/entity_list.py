@@ -10,6 +10,7 @@ editor_entity_list = [
     Checkpoint,
     JumpOrb,
     GravityOrb,
+    Text,
     EndDoor,
     ColorTrigger,
     OpacityTrigger,

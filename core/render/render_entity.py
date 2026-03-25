@@ -1,6 +1,6 @@
 import pygame
 from util import Camera, PlayerDirection
-from data import Sprites
+from data import Sprites, Fonts
 from core import (
     Entity,
     Player,
@@ -19,7 +19,8 @@ from core import (
     MoveTrigger,
     SpawnTrigger,
     ToggleTrigger,
-    RotationTrigger
+    RotationTrigger,
+    Text
 )
 
 from .render_utils import (
@@ -134,6 +135,52 @@ def render_gravity_orb(screen, gravity_orb: GravityOrb, camera=None):
     render_sprite_entity(screen, gravity_orb, Sprites.GRAVITY_ORB, camera)
 
 
+def render_text(screen, text: Text, camera=None):
+    if text.opacity <= 0:
+        return
+
+    if text._dirty or text._text_surface is None:
+        text._update_surface()
+
+    pos = get_entity_screen_pos(text, camera)
+
+    surface = text._text_surface
+
+    # 🟢 AUTO RESIZE (entity под текст)
+    if text.auto_resize:
+        draw_surface = get_transformed(
+            surface,
+            width=surface.get_width(),
+            height=surface.get_height(),
+            angle=text.rotation,
+            opacity=text.opacity,
+        )
+
+        blit_centered(
+            screen,
+            draw_surface,
+            pos,
+            surface.get_width(),
+            surface.get_height()
+        )
+
+    # 🔵 MANUAL SIZE (текст под entity)
+    else:
+        draw_surface = get_transformed(
+            surface,
+            width=text.width,
+            height=text.height,
+            angle=text.rotation,
+            opacity=text.opacity,
+        )
+
+        blit_centered(
+            screen,
+            draw_surface,
+            pos,
+            text.width,
+            text.height
+        )
 def render_end_door(screen, end_door: EndDoor, camera=None):
     render_sprite_entity(screen, end_door, Sprites.END_DOOR, camera)
 
@@ -212,6 +259,7 @@ ENTITY_RENDERERS = {
     SpawnTrigger: render_spawn_trigger,
     ToggleTrigger: render_toggle_trigger,
     RotationTrigger: render_rotation_trigger,
+    Text: render_text
 }
 
 def render_entity(screen, entity: Entity, camera: Camera | None = None):

@@ -58,6 +58,10 @@ class Serializator:
             data["toggle"] = entity.toggle
         if hasattr(entity, "target_color"):
             data["target_color"] = list(entity.target_color)
-        if hasattr(entity, "activation_mode"):
-            data["activation_mode"] = entity.activation_mode.name
+        if hasattr(entity, "activation_type"):
+            data["activation_type"] = entity.activation_type.name
+        if hasattr(entity, "text"):
+            data["text"] = entity.text
+        if hasattr(entity, "auto_resize"):
+            data["auto_resize"] = entity.auto_resize
         return data

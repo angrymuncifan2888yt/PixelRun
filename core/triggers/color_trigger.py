@@ -1,4 +1,4 @@
-from .trigger import Trigger, TriggerActivationMode
+from .trigger import Trigger, TriggerActivationType
 from data import const
 import pygame
 
@@ -17,6 +17,11 @@ class ColorTrigger(Trigger):
             "r": {"type": "int", "value": self.target_color[0]},
             "g": {"type": "int", "value": self.target_color[1]},
             "b": {"type": "int", "value": self.target_color[2]},
+            "activation_type": {
+                "type": "enum",
+                "value": self.activation_type.name,
+                "options": [e.name for e in TriggerActivationType]
+            }
         }
 
     def apply_special_fields(self, data):
@@ -26,5 +31,10 @@ class ColorTrigger(Trigger):
                 int(data.get("g", self.target_color[1])),
                 int(data.get("b", self.target_color[2])),
             )
+            if "activation_type" in data:
+                try:
+                    self.activation_type = TriggerActivationType[data["activation_type"]]
+                except:
+                    pass
         except:
             pass

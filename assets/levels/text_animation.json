@@ -1,0 +1,463 @@
+{
+    "name": "Text animation",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        20,
+        20,
+        20
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                -50.0,
+                350.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                700.0,
+                50.0
+            ],
+            "size": [
+                100,
+                300
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "end",
+            "position": [
+                800.0,
+                100.0
+            ],
+            "size": [
+                195,
+                259
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                -50.0,
+                50.0
+            ],
+            "size": [
+                100,
+                300
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                500.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                450.0,
+                0.0
+            ],
+            "size": [
+                152,
+                60
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "press_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Press",
+            "auto_resize": false
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                476.0,
+                68.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "1_t",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "text",
+            "position": [
+                450.0,
+                200.0
+            ],
+            "size": [
+                37,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Yo",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                150.0,
+                250.0
+            ],
+            "size": [
+                541,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "This is in game text animation",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                300.0,
+                250.0
+            ],
+            "size": [
+                288,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "It is REALLY bad",
+            "auto_resize": true
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                650.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1_t"
+            ],
+            "target_id": "2_t",
+            "delay": 5.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                550.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1_t"
+            ],
+            "target_id": "1_text",
+            "target_opacity": 255,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                550.0,
+                550.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1_t"
+            ],
+            "target_id": "press_text",
+            "target_opacity": 0,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                350.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2_t"
+            ],
+            "target_id": "3_t",
+            "delay": 5.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                250.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2_t"
+            ],
+            "target_id": "2_text",
+            "target_opacity": 255,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                250.0,
+                550.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2_t"
+            ],
+            "target_id": "1_text",
+            "target_opacity": 0,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "text",
+            "position": [
+                200.0,
+                200.0
+            ],
+            "size": [
+                487,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "3_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Anyways, complete the level",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                400.0,
+                250.0
+            ],
+            "size": [
+                73,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "3_text"
+            ],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Bye!",
+            "auto_resize": true
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                -50.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "3_t"
+            ],
+            "target_id": "3_text",
+            "target_opacity": 255,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                -50.0,
+                550.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "3_t"
+            ],
+            "target_id": "2_text",
+            "target_opacity": 0,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                50.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "3_t"
+            ],
+            "target_id": "wall",
+            "target_offset": [
+                0.0,
+                300.0
+            ],
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        }
+    ]
+}

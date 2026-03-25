@@ -17,4 +17,5 @@ ENTITY_FACTORY = {
     "spawn_trigger": SpawnTrigger,
     "toggle_trigger": ToggleTrigger,
     "rotation_trigger": RotationTrigger,
+    "text": Text
 }

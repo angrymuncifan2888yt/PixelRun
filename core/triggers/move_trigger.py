@@ -1,6 +1,6 @@
 from pygame import Vector2
 from data.const import TRIGGER_SIZE
-from .trigger import Trigger, TriggerActivationMode
+from .trigger import Trigger, TriggerActivationType
 
 
 class MoveTrigger(Trigger):
@@ -17,6 +17,7 @@ class MoveTrigger(Trigger):
         self._active = False
 
     def update(self, delta_time):
+        super().update(delta_time)
         if not self._active:
             return
 
@@ -54,6 +55,11 @@ class MoveTrigger(Trigger):
             "offset_y": {"type": "float", "value": self.target_offset.y},
             "target_id": {"type": "str", "value": self.target_id or ""},
             "transition_time": {"type": "float", "value": self.transition_time},
+            "activation_type": {
+                "type": "enum",
+                "value": self.activation_type.name,
+                "options": [e.name for e in TriggerActivationType]
+            }
         }
 
     def apply_special_fields(self, data):
@@ -62,5 +68,10 @@ class MoveTrigger(Trigger):
             self.target_offset.y = float(data.get("offset_y", self.target_offset.y))
             self.target_id = data.get("target_id", None)
             self.transition_time = float(data.get("transition_time", self.transition_time))
+            if "activation_type" in data:
+                try:
+                    self.activation_type = TriggerActivationType[data["activation_type"]]
+                except:
+                    pass
         except:
             pass
