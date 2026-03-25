@@ -13,9 +13,8 @@ class SpawnTrigger(Trigger):
         self._waiting = False
         self._player = None
         self._activated = False
-
     def activate(self, player):
-        if self._activated or self._waiting:
+        if self._waiting:
             return
 
         self._player = player

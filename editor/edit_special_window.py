@@ -56,10 +56,29 @@ class EditSpecialWindow(Window):
         for entity in self.entities:
             entity.apply_special_fields({key: new_value})
 
+    def toggle_bool(self, key):
+        btn, value = self.inputs[key]
+
+        new_value = not value
+
+        # обновляем значение
+        self.inputs[key] = (btn, new_value)
+
+        # обновляем текст кнопки
+        btn.set_text(str(new_value))
+
+        # применяем
+        for entity in self.entities:
+            entity.apply_special_fields({key: new_value})
     def apply_enum(self, key):
         _, info = self.inputs[key]
 
         value = info["value"]
+
+        for entity in self.entities:
+            entity.apply_special_fields({key: value})
+    def apply_bool(self, key):
+        _, value = self.inputs[key]
 
         for entity in self.entities:
             entity.apply_special_fields({key: value})
@@ -105,6 +124,29 @@ class EditSpecialWindow(Window):
 
                 self.ui.add_ui_object(btn_apply)
 
+            elif field_type == "bool":
+                value = info.get("value", False)
+
+                btn = NormalButton(
+                    position=pygame.Vector2(base_x, y),
+                    size=(200, 45),
+                    text=str(value),
+                    font=Fonts.NORMAL_30,
+                    callback=lambda k=key: self.toggle_bool(k)
+                )
+
+                self.ui.add_ui_object(btn)
+                self.inputs[key] = (btn, value)
+
+                btn_apply = NormalButton(
+                    position=pygame.Vector2(base_x + 250, y),
+                    size=(180, 45),
+                    text=f"Apply {key}",
+                    font=Fonts.NORMAL_25,
+                    callback=lambda k=key: self.apply_bool(k)
+                )
+
+                self.ui.add_ui_object(btn_apply)
             # 🔵 ОБЫЧНЫЕ
             else:
                 input_box = LineEdit(

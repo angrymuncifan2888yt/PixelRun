@@ -1,0 +1,144 @@
+{
+    "name": "",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                450.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                800.0,
+                250.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                650.0,
+                -100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "1"
+            ],
+            "target_id": "wall",
+            "target_offset": [
+                0.0,
+                -100.0
+            ],
+            "transition_time": 1.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                550.0,
+                150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "2"
+            ],
+            "target_id": "1",
+            "delay": 0.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                650.0,
+                0.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "1"
+            ],
+            "target_id": "2",
+            "delay": 1.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                550.0,
+                -100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "2"
+            ],
+            "target_id": "wall",
+            "target_offset": [
+                0.0,
+                100.0
+            ],
+            "transition_time": 1.0,
+            "activation_type": "MANUAL"
+        }
+    ]
+}

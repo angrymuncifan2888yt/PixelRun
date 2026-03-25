@@ -101,6 +101,14 @@ def create_ui(self) -> None:
         font=Fonts.NORMAL_30,
         callback=lambda: button_load_callback(self)
     )
+    # Кнопка New
+    btn_new = NormalButton(
+        position=pygame.Vector2(120, const.WINDOW_SIZE[1] - 110),
+        size=(100, 100),
+        text="New",
+        font=Fonts.NORMAL_30,
+        callback=lambda: button_new_callback(self)
+    )
     # Кнопка Hitbox
     self.btn_hitbox = NormalButton(
         position=pygame.Vector2(const.WINDOW_SIZE[0] - 110, const.WINDOW_SIZE[1] - 110),
@@ -142,3 +150,4 @@ def create_ui(self) -> None:
     self.ui.add_ui_object(self.btn_grid)
     self.ui.add_ui_object(self.entity_panel)
     self.ui.add_ui_object(btn_edit_id)
+    self.ui.add_ui_object(btn_new)

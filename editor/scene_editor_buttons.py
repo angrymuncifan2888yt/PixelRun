@@ -2,6 +2,10 @@ from window import WindowType
 from util import save_file_dialog, open_file_dialog
 import json
 from level import Serializator, Deserializator
+from level import Level
+from core import World, Platform, Spike
+from util import Camera
+from data import const
 from scene import SceneType
 import pygame
 
@@ -9,6 +13,15 @@ def button_edit_special_callback(self):
     self.edit_special_window.entities = self.selected_entities
     self.edit_special_window.load_entity_data()
     self.window_manager.set_window(WindowType.EDIT_SPECIAL_ENTITY)
+    
+def button_new_callback(self):
+    self.level = Level()
+    self.level_path = None
+    self.world = World()
+    self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
+    self.world.add_entity(Platform(self.world, pygame.Vector2(0, 0)))
+    self.world.add_entity(Spike(self.world, pygame.Vector2(300, 300)))
+
 def button_edit_entity_callback(self):
     self.entity_edit_window.entities = self.selected_entities
     self.entity_edit_window.load_entity_data()
