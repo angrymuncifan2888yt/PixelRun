@@ -1993,8 +1993,8 @@
         {
             "type": "gravity_orb",
             "position": [
-                250.0,
-                50.0
+                100.0,
+                100.0
             ],
             "size": [
                 50,
@@ -3324,7 +3324,7 @@
                 0,
                 0
             ],
-            "activation_mode": "ON_ENTER"
+            "activation_type": "ON_ENTER"
         },
         {
             "type": "checkpoint",

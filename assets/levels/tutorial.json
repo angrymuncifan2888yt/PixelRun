@@ -1,0 +1,2403 @@
+{
+    "name": "Tutorial",
+    "player_spawn": [
+        0.0,
+        5000.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                -150.0,
+                5000.0
+            ],
+            "size": [
+                15000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -150.0,
+                4500.0
+            ],
+            "size": [
+                15000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -250.0,
+                4500.0
+            ],
+            "size": [
+                100,
+                600
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                300.0,
+                4650.0
+            ],
+            "size": [
+                397,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Hi. Welcome to my game",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                250.0,
+                4700.0
+            ],
+            "size": [
+                559,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "This is a small tutorial level,",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                250.0,
+                4750.0
+            ],
+            "size": [
+                505,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "made to teach you the basics",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                350.0,
+                4800.0
+            ],
+            "size": [
+                289,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Anyways, go! >>>",
+            "auto_resize": true
+        },
+        {
+            "type": "platform",
+            "position": [
+                900.0,
+                4600.0
+            ],
+            "size": [
+                100,
+                500
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "wall1"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                800.0,
+                4600.0
+            ],
+            "size": [
+                100,
+                400
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "wall1",
+            "target_offset": [
+                0.0,
+                -2000.0
+            ],
+            "transition_time": 0.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "platform",
+            "position": [
+                1550.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1650.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1750.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1850.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                1400.0,
+                4650.0
+            ],
+            "size": [
+                109,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Blocks",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                1300.0,
+                4700.0
+            ],
+            "size": [
+                379,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "You can stand on them",
+            "auto_resize": true
+        },
+        {
+            "type": "platform",
+            "position": [
+                1650.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1750.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "gravity_portal",
+            "position": [
+                2450.0,
+                4750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                2900.0,
+                4850.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                3150.0,
+                4600.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "text",
+            "position": [
+                2300.0,
+                4650.0
+            ],
+            "size": [
+                271,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Gravity portals",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                2800.0,
+                4800.0
+            ],
+            "size": [
+                199,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Upside down",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                3100.0,
+                4750.0
+            ],
+            "size": [
+                253,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Normal gravity",
+            "auto_resize": true
+        },
+        {
+            "type": "platform",
+            "position": [
+                4100.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                4100.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                4100.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                3950.0,
+                4990.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                3300.0,
+                4400.0
+            ],
+            "size": [
+                64,
+                800
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "text",
+            "position": [
+                3750.0,
+                4750.0
+            ],
+            "size": [
+                145,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Jump pad",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                3700.0,
+                4800.0
+            ],
+            "size": [
+                198,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Lauches you",
+            "auto_resize": true
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                4116.0,
+                4584.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                4300.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                4300.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                4300.0,
+                4600.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                4250.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                4391.0,
+                4880.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "text",
+            "position": [
+                4600.0,
+                4750.0
+            ],
+            "size": [
+                181,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Checkpoint",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                4550.0,
+                4800.0
+            ],
+            "size": [
+                343,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Saves your progress",
+            "auto_resize": true
+        },
+        {
+            "type": "spike",
+            "position": [
+                5650.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6000.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6050.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6100.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                5550.0,
+                4750.0
+            ],
+            "size": [
+                91,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Spike",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                5450.0,
+                4800.0
+            ],
+            "size": [
+                325,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Kills you on touch",
+            "auto_resize": true
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                6750.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                7150.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                7300.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "spike",
+            "position": [
+                7100.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7150.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7200.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7250.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7300.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7350.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7400.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7450.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7500.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7550.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7600.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                7450.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                7600.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "spike",
+            "position": [
+                7650.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                7700.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                6700.0,
+                4700.0
+            ],
+            "size": [
+                163,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Jump obj.",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                6600.0,
+                4750.0
+            ],
+            "size": [
+                378,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Launches you on click",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                6600.0,
+                4800.0
+            ],
+            "size": [
+                361,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Can lauch in the air",
+            "auto_resize": true
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                8050.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                6450.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                4900.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                8350.0,
+                4900.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "spike",
+            "position": [
+                8450.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8500.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8550.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8600.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8650.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8700.0,
+                4950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8850.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8900.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                8950.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                9000.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                9050.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                9100.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                8750.0,
+                4700.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "text",
+            "position": [
+                8050.0,
+                4700.0
+            ],
+            "size": [
+                145,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Jump orb",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                7950.0,
+                4750.0
+            ],
+            "size": [
+                433,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Changes gravity on click",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                9350.0,
+                4700.0
+            ],
+            "size": [
+                73,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Text",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                9050.0,
+                4750.0
+            ],
+            "size": [
+                541,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Text is what you see right now",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                9100.0,
+                4800.0
+            ],
+            "size": [
+                486,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                0
+            ],
+            "text": "It can have different color",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                9650.0,
+                4700.0
+            ],
+            "size": [
+                250,
+                200
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Or be like this",
+            "auto_resize": false
+        },
+        {
+            "type": "end",
+            "position": [
+                10600.0,
+                4750.0
+            ],
+            "size": [
+                195,
+                259
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                10500.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10500.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10500.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10800.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "end_wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10800.0,
+                4850.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "end_wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10800.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "end_wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10600.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                10700.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                10150.0,
+                4700.0
+            ],
+            "size": [
+                127,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "EndDoor",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                10000.0,
+                4750.0
+            ],
+            "size": [
+                451,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Allows to complete levels",
+            "auto_resize": true
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                10350.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "checkpoint",
+            "position": [
+                9200.0,
+                4850.0
+            ],
+            "size": [
+                50,
+                80
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "color_trigger",
+            "position": [
+                11050.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_color": [
+                0,
+                0,
+                0
+            ],
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                11200.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_id": "player",
+            "target_opacity": 150,
+            "transition_time": 1.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                11350.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_id": "end_wall",
+            "target_offset": [
+                0.0,
+                -1000.0
+            ],
+            "transition_time": 1.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                11800.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_id": null,
+            "delay": 0.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "rotation_trigger",
+            "position": [
+                11650.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_id": "player",
+            "transition_time": 1.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "text",
+            "position": [
+                11100.0,
+                4650.0
+            ],
+            "size": [
+                145,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Triggers",
+            "auto_resize": true
+        },
+        {
+            "type": "text",
+            "position": [
+                11000.0,
+                4700.0
+            ],
+            "size": [
+                307,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Try trigger some!",
+            "auto_resize": true
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                11500.0,
+                4750.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "target_id": null,
+            "toggle": "TOGGLE",
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                10900.0,
+                4600.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                11900.0,
+                4900.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                11900.0,
+                4800.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                11900.0,
+                4700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                11900.0,
+                4600.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        }
+    ]
+}

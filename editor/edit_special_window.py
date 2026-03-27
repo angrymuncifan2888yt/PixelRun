@@ -115,7 +115,7 @@ class EditSpecialWindow(Window):
 
                 # 🔥 APPLY ДЛЯ ENUM
                 btn_apply = NormalButton(
-                    position=pygame.Vector2(base_x + 250, y),
+                    position=pygame.Vector2(base_x + 450, y),
                     size=(180, 45),
                     text=f"Apply {key}",
                     font=Fonts.NORMAL_25,
@@ -139,7 +139,7 @@ class EditSpecialWindow(Window):
                 self.inputs[key] = (btn, value)
 
                 btn_apply = NormalButton(
-                    position=pygame.Vector2(base_x + 250, y),
+                    position=pygame.Vector2(base_x + 450, y),
                     size=(180, 45),
                     text=f"Apply {key}",
                     font=Fonts.NORMAL_25,
@@ -151,7 +151,7 @@ class EditSpecialWindow(Window):
             else:
                 input_box = LineEdit(
                     (base_x, y),
-                    (200, 45),
+                    (400, 45),
                     Fonts.NORMAL_30
                 )
                 input_box.text = str(info.get("value", ""))
@@ -161,7 +161,7 @@ class EditSpecialWindow(Window):
 
                 # 🔥 APPLY ДЛЯ ОБЫЧНЫХ
                 btn_apply = NormalButton(
-                    position=pygame.Vector2(base_x + 250, y),
+                    position=pygame.Vector2(base_x + 450, y),
                     size=(180, 45),
                     text=f"Apply {key}",
                     font=Fonts.NORMAL_25,

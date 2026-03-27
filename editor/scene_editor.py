@@ -2,7 +2,7 @@ from scene import Scene
 from util import Camera
 from core import World, Platform, Spike, Trigger
 from core.render import render_entity, render_hitbox
-from data import const
+from data import const, Settings
 from level import Level
 from .edit_level_window import LevelEditWindow
 from .edit_entity_window import EditEntityWindow
@@ -250,7 +250,7 @@ class SceneEditor(Scene):
 
         if not self.window_manager.current_window:
             keys = pygame.key.get_pressed()
-            speed = 2000
+            speed = Settings.EDITOR_CAMERA_SPEED
             if keys[pygame.K_w]:
                 self.camera.position.y -= speed * delta
             if keys[pygame.K_s]:

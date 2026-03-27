@@ -27,7 +27,7 @@ class Player(Entity):
 
         self.gravity_dir = 1
         self.gravity = 2400
-        self.jump_force = 1000
+        self.jump_force = 750
 
         self.on_ground = False
         self.rotation = 0

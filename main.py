@@ -56,7 +56,7 @@ class PixelRun:
         pygame.mixer.music.play(-1)
 
         while self.running:
-            delta_time = self.clock.tick(const.TARGET_FPS) / 1000
+            delta_time = self.clock.tick(Settings.TARGET_FPS) / 1000
 
             self.scene_manager.update_current_scene(delta_time, clock=self.clock)
             self.scene_manager.render_current_scene(self.screen)

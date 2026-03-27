@@ -1,6 +1,6 @@
 from scene import Scene, SceneType
 from ui import UiManager, Text, NormalButton
-from data import Fonts, const, Skins
+from data import Fonts, const, Skins, Settings
 import pygame
 
 
@@ -196,7 +196,7 @@ class SceneSkins(Scene):
         self.ui.update(delta)
 
     def draw(self, screen):
-        screen.fill(const.WINDOW_BACKGROUND_COLOR)
+        screen.fill(Settings.WINDOW_BACKGROUND_COLOR)
 
         self.ui.draw(screen)
 

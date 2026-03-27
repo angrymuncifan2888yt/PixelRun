@@ -1,6 +1,6 @@
 from scene import Scene, SceneType, SceneManager
 from ui import NormalButton, Text, UiManager
-from data import Fonts, Levels, const
+from data import Fonts, Levels, const, Settings
 from util import open_file_dialog
 from level import Validator
 import pygame
@@ -181,5 +181,5 @@ class SceneLevels(Scene):
         self.ui.update(delta)
 
     def draw(self, screen):
-        screen.fill(const.WINDOW_BACKGROUND_COLOR)
+        screen.fill(Settings.WINDOW_BACKGROUND_COLOR)
         self.ui.draw(screen)

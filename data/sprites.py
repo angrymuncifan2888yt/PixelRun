@@ -4,29 +4,13 @@ from .const import *
 class Sprites:
     @classmethod
     def init(cls):
-        # Angry Munci skin
-        cls.ANGRY_MUNCI_STANDING = pygame.transform.scale(pygame.image.load("assets/images/angry_munci/angry_munci_standing.png"), PLAYER_SIZE)
-        cls.ANGRY_MUNCI = [
-            pygame.transform.scale(pygame.image.load("assets/images/angry_munci/angry_munci_running.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/angry_munci/angry_munci_running2.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/angry_munci/angry_munci_running3.png"), PLAYER_SIZE),
-        ]
-        # Cat Jard skin    
-        cls.CAT_JARD_STANDING = pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_standing.png"), PLAYER_SIZE)
-        cls.CAT_JARD = [
-            pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running2.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running3.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running4.png"), PLAYER_SIZE),
-            pygame.transform.scale(pygame.image.load("assets/images/cat_jard/cat_jard_running5.png"), PLAYER_SIZE),
-        ]
-        # Sliding garou skin
-        cls.SLIDING_GAROU_STANDING = pygame.transform.flip(
-            pygame.transform.scale(pygame.image.load("assets/images/sliding_garou.png"), PLAYER_SIZE),
-            True, False)
-        cls.SLIDING_GAROU = [
-            cls.SLIDING_GAROU_STANDING,
-        ]
+        # Skins
+        cls.DEFAULT = pygame.image.load("assets/images/skins/default.png")
+        cls.MINI = pygame.image.load("assets/images/skins/mini.png")
+        cls.ELECTRODYNAMIX = pygame.image.load("assets/images/skins/nexus.png")
+        cls.DOGGIE = pygame.image.load("assets/images/skins/doggie.png")
+        cls.MICHIGUN = pygame.image.load("assets/images/skins/michigun.png")
+        cls.RUBRUB = pygame.image.load("assets/images/skins/rubrub.png")
 
         # World objects
         cls.GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/gravity_portal.png"), PORTAL_SIZE)

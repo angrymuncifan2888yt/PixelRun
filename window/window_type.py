@@ -6,3 +6,5 @@ class WindowType(Enum):
     EDIT_SPECIAL_ENTITY = auto()
     EDIT_ENTITY = auto()
     EDIT_ID_ENTITY = auto()
+    SETTINGS = auto()
+    STATS = auto()

@@ -15,15 +15,28 @@ class Skin:
 class Skins:
     @classmethod
     def init(cls):
-        cls.ANGRY_MUNCI = Skin("Angry Munci",
-                               "Angry Munci on top",
-                               Sprites.ANGRY_MUNCI_STANDING,
-                               Sprites.ANGRY_MUNCI)
-        cls.CAT_JARD = Skin("Cat Jard",
-                        "He stays on your ass and he makes sure you die pretty much",
-                               Sprites.CAT_JARD_STANDING,
-                               Sprites.CAT_JARD)
-        cls.SLIDING_GAROU = Skin("Sliding garou",
-                                 "We waited for this for so long",
-                                 Sprites.SLIDING_GAROU_STANDING, Sprites.SLIDING_GAROU)
-        cls.ALL_SKINS = [cls.CAT_JARD, cls.ANGRY_MUNCI, cls.SLIDING_GAROU]
+        cls.DEFAULT = Skin("Default",
+                               "Default skin",
+                               Sprites.DEFAULT,
+                               [Sprites.DEFAULT])
+        cls.MINI = Skin("Mini",
+                               "Idk what to type here lol",
+                               Sprites.MINI,
+                               [Sprites.MINI])
+        cls.ELECTRODYNAMIX = Skin("Electrodynamix",
+                               "Complete Extreme Demon \"Electrodynamix\" to get this icon",
+                               Sprites.ELECTRODYNAMIX,
+                               [Sprites.ELECTRODYNAMIX])
+        cls.DOGGIE = Skin("Doggie",
+                               "Doggie's icon",
+                               Sprites.DOGGIE,
+                               [Sprites.DOGGIE])
+        cls.MICHIGUN = Skin("Michigun",
+                               "Michigun's icon",
+                               Sprites.MICHIGUN,
+                               [Sprites.MICHIGUN])
+        cls.RUBRUB = Skin("Rubrub (Robtop)",
+                               "Creator of the original game (Geometry Dash)",
+                               Sprites.RUBRUB,
+                               [Sprites.RUBRUB])
+        cls.ALL_SKINS = [cls.DEFAULT, cls.MINI, cls.ELECTRODYNAMIX, cls.DOGGIE, cls.MICHIGUN, cls.RUBRUB]

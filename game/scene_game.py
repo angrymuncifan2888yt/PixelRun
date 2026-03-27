@@ -6,7 +6,7 @@ from util import PlayerDirection, Camera, Timer
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
-from data import Skins, const, Levels, Sounds, SoundChannels
+from data import Skins, const, Sounds, SoundChannels, Settings
 from event import EventType
 from .debug_menu import DebugMenu
 
@@ -42,7 +42,7 @@ class SceneGame(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
+        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.DEFAULT)
 
     def on_enter(self):
         pygame.mixer.music.pause()
@@ -136,7 +136,7 @@ class SceneGame(Scene):
                 if not self.dying_animation:
                     # Upd world
                     hitboxes_updated = self.world.update_all_hitboxes()
-                    entities_to_upd = self.world.get_nearest_entities(self.player.position, const.WORLD_LOAD_DISTANCE)
+                    entities_to_upd = self.world.get_nearest_entities(self.player.position, Settings.WORLD_LOAD_DISTANCE)
                     objects_updated = self.world.update_entities(entities_to_upd, delta)
 
                     self.camera.update(pygame.Vector2(self.player.hitbox.center))

@@ -1,6 +1,6 @@
 from scene import Scene, SceneType
 from ui import UiManager, Text, NormalButton
-from data import Fonts, const
+from data import Fonts, const, Settings
 from .main_menu_background import MainMenuBackground
 import pygame
 
@@ -59,9 +59,29 @@ class SceneMainMenu(Scene):
         )
         btn_editor.center_by_x(const.WINDOW_SIZE[0])
 
+        # Stats
+        btn_stats = NormalButton(
+            position=pygame.Vector2(0, start_y + spacing * 3),
+            size=(button_width, button_height),
+            text="Stats",
+            font=Fonts.NORMAL_30,
+            callback=None
+        )
+        btn_stats.center_by_x(const.WINDOW_SIZE[0])
+
+        # Settings
+        btn_settings = NormalButton(
+            position=pygame.Vector2(0, start_y + spacing * 4),
+            size=(button_width, button_height),
+            text="Settings",
+            font=Fonts.NORMAL_30,
+            callback=None
+        )
+        btn_settings.center_by_x(const.WINDOW_SIZE[0])
+
         # Exit
         btn_exit = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 3),
+            position=pygame.Vector2(0, start_y + spacing * 5),
             size=(button_width, button_height),
             text="Exit",
             font=Fonts.NORMAL_30,
@@ -73,6 +93,8 @@ class SceneMainMenu(Scene):
         self.ui.add_ui_object(btn_skins)
         self.ui.add_ui_object(btn_levels)
         self.ui.add_ui_object(btn_editor)
+        self.ui.add_ui_object(btn_stats)
+        self.ui.add_ui_object(btn_settings)
         self.ui.add_ui_object(btn_exit)
 
     def _button_skins_callback(self):
@@ -95,5 +117,5 @@ class SceneMainMenu(Scene):
         self.ui.update(delta)
 
     def draw(self, screen):
-        screen.fill(const.WINDOW_BACKGROUND_COLOR)
+        screen.fill(Settings.WINDOW_BACKGROUND_COLOR)
         self.ui.draw(screen)

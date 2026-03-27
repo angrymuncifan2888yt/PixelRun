@@ -2,9 +2,9 @@ import pygame
 from scene import Scene, SceneType
 from core import *
 from core.render import render_entity, render_hitbox
-from util import PlayerDirection, Camera, Timer
+from util import Camera, Timer
 from level import Level
-from data import Skins, const, Levels, Sounds, SoundChannels, Fonts
+from data import Skins, const, Settings, Sounds, SoundChannels, Fonts
 from event import EventType
 from game import DebugMenu
 from ui import NormalButton
@@ -27,7 +27,7 @@ class SceneEditorPlaytest(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.CAT_JARD)
+        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.DEFAULT)
 
         self.editor_btn = NormalButton(pygame.Vector2(10, 10),
                                        "Back",
@@ -107,7 +107,7 @@ class SceneEditorPlaytest(Scene):
         if not self.dying_animation:
             # Upd world
             hitboxes_updated = self.world.update_all_hitboxes()
-            entities_to_upd = self.world.get_nearest_entities(self.player.position, const.WORLD_LOAD_DISTANCE)
+            entities_to_upd = self.world.get_nearest_entities(self.player.position, Settings.WORLD_LOAD_DISTANCE)
             objects_updated = self.world.update_entities(entities_to_upd, delta)
 
             self.camera.update(pygame.Vector2(self.player.hitbox.center))
