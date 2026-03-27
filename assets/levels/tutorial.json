@@ -1,7 +1,7 @@
 {
     "name": "Tutorial",
     "player_spawn": [
-        0.0,
+        10.0,
         5000.0
     ],
     "background_color": [

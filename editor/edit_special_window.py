@@ -42,34 +42,27 @@ class EditSpecialWindow(Window):
         btn, info = self.inputs[key]
 
         options = info["options"]
-        current = info["value"]   # ❗ берем из data, а не из UI
+        current = info["value"]
 
         idx = options.index(current)
         idx = (idx + 1) % len(options)
 
         new_value = options[idx]
 
-        # 🔥 обновляем И данные И UI
+        # меняем ТОЛЬКО данные и UI
         info["value"] = new_value
         btn.set_text(new_value)
-
-        for entity in self.entities:
-            entity.apply_special_fields({key: new_value})
 
     def toggle_bool(self, key):
         btn, value = self.inputs[key]
 
         new_value = not value
 
-        # обновляем значение
+        # обновляем локально
         self.inputs[key] = (btn, new_value)
 
-        # обновляем текст кнопки
+        # обновляем UI
         btn.set_text(str(new_value))
-
-        # применяем
-        for entity in self.entities:
-            entity.apply_special_fields({key: new_value})
     def apply_enum(self, key):
         _, info = self.inputs[key]
 

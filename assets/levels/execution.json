@@ -2,7 +2,7 @@
     "name": "Execution",
     "player_spawn": [
         -300.0,
-        0.0
+        100.0
     ],
     "background_color": [
         50,
@@ -24,7 +24,8 @@
             "opacity": 255,
             "active": true,
             "id": [
-                "box"
+                "box",
+                "pl"
             ],
             "color": [
                 80,
@@ -46,7 +47,8 @@
             "opacity": 255,
             "active": true,
             "id": [
-                "box"
+                "box",
+                "pl"
             ],
             "color": [
                 80,
@@ -68,7 +70,8 @@
             "opacity": 255,
             "active": true,
             "id": [
-                "box"
+                "box",
+                "pl"
             ],
             "color": [
                 80,
@@ -90,7 +93,8 @@
             "opacity": 255,
             "active": true,
             "id": [
-                "box"
+                "box",
+                "pl"
             ],
             "color": [
                 80,
@@ -132,8 +136,10 @@
             ],
             "rotation": 0,
             "opacity": 255,
-            "active": true,
-            "id": [],
+            "active": false,
+            "id": [
+                "pl"
+            ],
             "color": [
                 0,
                 0,
@@ -688,7 +694,8 @@
             "opacity": 0,
             "active": true,
             "id": [
-                "tr"
+                "tr",
+                "tr2"
             ],
             "target_id": "executor",
             "target_offset": [
@@ -737,6 +744,209 @@
             ],
             "text": "Help",
             "auto_resize": true
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                800.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "toggle1"
+            ],
+            "target_id": "tr2",
+            "toggle": "OFF",
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                700.0,
+                450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "tr"
+            ],
+            "target_id": "toggle1",
+            "delay": 0.4,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                1100.0,
+                -50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "tr"
+            ],
+            "target_id": "toggle2",
+            "delay": 1.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                1100.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "toggle2"
+            ],
+            "target_id": "box",
+            "toggle": "OFF",
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                4900.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "pl"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "color_trigger",
+            "position": [
+                250.0,
+                650.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_color": [
+                0,
+                0,
+                0
+            ],
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "text",
+            "position": [
+                1000.0,
+                4600.0
+            ],
+            "size": [
+                127,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Wake up",
+            "auto_resize": true
+        },
+        {
+            "type": "end",
+            "position": [
+                1350.0,
+                4650.0
+            ],
+            "size": [
+                195,
+                259
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "text",
+            "position": [
+                900.0,
+                4650.0
+            ],
+            "size": [
+                324,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "It was all a dream",
+            "auto_resize": true
+        },
+        {
+            "type": "color_trigger",
+            "position": [
+                550.0,
+                4750.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_color": [
+                25,
+                25,
+                25
+            ],
+            "activation_type": "ONCE_ON_ENTER"
         }
     ]
 }

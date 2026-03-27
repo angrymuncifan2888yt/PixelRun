@@ -17,4 +17,4 @@ class Levels:
         cls.TEXT_ANIMATION = cls.load_level_from_file("assets/levels/text_animation.json")
         cls.EXECUTION = cls.load_level_from_file("assets/levels/execution.json")
         cls.VERY_HARD_JUMP = cls.load_level_from_file("assets/levels/hard_jump.json")
-        cls.ALL_LEVELS = [cls.TUTORIAL, cls.FIRST_LEVEL, cls.JUMP_PADS, cls.MUNCI_STEP, cls.BALL, cls.TEXT_ANIMATION, cls.EXECUTION, cls.VERY_HARD_JUMP]
+        cls.ALL_LEVELS = [cls.TUTORIAL, cls.FIRST_LEVEL, cls.BALL, cls.EXECUTION]

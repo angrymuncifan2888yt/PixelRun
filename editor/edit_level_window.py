@@ -127,6 +127,13 @@ class LevelEditWindow(Window):
         self.input_spawn_x.text = str(player_spawn[0])
         self.input_spawn_y.text = str(player_spawn[1])
 
+    def clamp_color(self, value):
+        return max(0, min(255, value))
+    def safe_int(self, text):
+        try:
+            return float(text.strip())
+        except:
+            return 0
     def apply(self):
 
         if self.input_r.text.isdigit():
@@ -144,15 +151,8 @@ class LevelEditWindow(Window):
         else:
             b = 0
 
-        try:
-            spawn_x = int(self.input_spawn_x.text)
-        except:
-            spawn_x = 0
-
-        try:
-            spawn_y = int(self.input_spawn_y.text)
-        except:
-            spawn_y = 0
+        spawn_x = self.safe_int(self.input_spawn_x.text)
+        spawn_y = self.safe_int(self.input_spawn_y.text)
 
         self.set_background(r, g, b)
         self.set_spawn(spawn_x, spawn_y)
@@ -191,16 +191,13 @@ class LevelEditWindow(Window):
             100
         )
 
-        color = (
-            int(self.input_r.text) if self.input_r.text.isdigit() else 0,
-            int(self.input_g.text) if self.input_g.text.isdigit() else 0,
-            int(self.input_b.text) if self.input_b.text.isdigit() else 0
-        )
-        for color2 in color:
-            if color2 > 255:
-                break
-        else:
-            pygame.draw.rect(screen, color, preview_rect)
+        r = self.clamp_color(int(self.input_r.text)) if self.input_r.text.isdigit() else 0
+        g = self.clamp_color(int(self.input_g.text)) if self.input_g.text.isdigit() else 0
+        b = self.clamp_color(int(self.input_b.text)) if self.input_b.text.isdigit() else 0
+
+        color = (r, g, b)
+
+        pygame.draw.rect(screen, color, preview_rect)
         pygame.draw.rect(screen, (255, 255, 255), preview_rect, 3)
 
         spawn_label = font.render("Player Spawn:", True, (255, 255, 255))

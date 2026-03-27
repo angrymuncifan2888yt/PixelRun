@@ -18,7 +18,6 @@ class ToggleTrigger(Trigger):
     def activate(self, player):
         if self.target_id is None:
             return
-
         for entity in self.world.get_entities_by_id(self.target_id):
             if self.toggle == ToggleMode.ON:
                 entity.active = True
