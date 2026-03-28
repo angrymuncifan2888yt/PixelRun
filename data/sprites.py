@@ -20,7 +20,6 @@ class Sprites:
         cls.CHECKPOINT = pygame.transform.scale(pygame.image.load("assets/images/checkpoint.png"), CHECKPOINT_SIZE)
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)
         cls.GRAVITY_ORB = pygame.transform.scale(pygame.image.load("assets/images/gravity_orb.png"), ORB_SIZE)
-        # cls.END_DOOR = pygame.image.load("assets/images/end_door.png")
         cls.END_DOOR = pygame.transform.scale(pygame.image.load("assets/images/end_door.png"), END_DOOR_SIZE)
 
         # Triggers
@@ -32,3 +31,4 @@ class Sprites:
         cls.SPAWN_TRIGGER = pygame.transform.scale(pygame.image.load("assets/images/triggers/spawn_trigger.png"), TRIGGER_SIZE).convert_alpha()
 
         # Other
+        cls.YOUTUBE_ICON = pygame.image.load("assets/images/youtube.png")

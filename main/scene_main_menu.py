@@ -1,10 +1,12 @@
 from scene import Scene, SceneType
-from ui import UiManager, Text, NormalButton
-from data import Fonts, const, Settings
+from ui import UiManager, Text, NormalButton, ImageButton
+from data import Fonts, const, Settings, Sprites
 from .main_menu_background import MainMenuBackground
 from window import WindowManager, WindowType
 import pygame
 from .settings_window import SettingsWindow
+from .credits_window import CreditsWindow
+import webbrowser
 
 
 class SceneMainMenu(Scene):
@@ -14,7 +16,9 @@ class SceneMainMenu(Scene):
         # Window
         self.window_manager = WindowManager()
         self.settings_window = SettingsWindow(self.window_manager)
+        self.credits_window = CreditsWindow(self.window_manager)
         self.window_manager.add_window(self.settings_window)
+        self.window_manager.add_window(self.credits_window)
 
         # UI
         self.ui = UiManager()
@@ -66,15 +70,15 @@ class SceneMainMenu(Scene):
         )
         btn_editor.center_by_x(const.WINDOW_SIZE[0])
 
-        # Stats
-        btn_stats = NormalButton(
+        # Credits
+        btn_credits = NormalButton(
             position=pygame.Vector2(0, start_y + spacing * 3),
             size=(button_width, button_height),
-            text="Stats",
+            text="Credits",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=lambda: self.window_manager.set_window(WindowType.CREDITS)
         )
-        btn_stats.center_by_x(const.WINDOW_SIZE[0])
+        btn_credits.center_by_x(const.WINDOW_SIZE[0])
 
         # Settings
         btn_settings = NormalButton(
@@ -96,13 +100,18 @@ class SceneMainMenu(Scene):
         )
         btn_exit.center_by_x(const.WINDOW_SIZE[0])
 
+        btn_youtube = ImageButton(
+            pygame.Vector2(20, const.WINDOW_SIZE[1] - 120),
+            Sprites.YOUTUBE_ICON, lambda: webbrowser.open("https://youtube.com/@angrymuncifan2888"))
+
         self.ui.add_ui_object(title)
         self.ui.add_ui_object(btn_skins)
         self.ui.add_ui_object(btn_levels)
         self.ui.add_ui_object(btn_editor)
-        self.ui.add_ui_object(btn_stats)
+        self.ui.add_ui_object(btn_credits)
         self.ui.add_ui_object(btn_settings)
         self.ui.add_ui_object(btn_exit)
+        self.ui.add_ui_object(btn_youtube)
 
     def _button_skins_callback(self):
         self.scene_manager.set_scene(SceneType.SKINS)
