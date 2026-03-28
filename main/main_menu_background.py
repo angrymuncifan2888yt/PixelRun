@@ -78,7 +78,7 @@ class MainMenuBackground(UiObject):
     def _on_player_death(self, event):
         self.player.respawn()
 
-    def update(self, delta, **kwargs):
+    def update(self, delta, player_input=True):
         self.time += delta
 
         for i, plat in enumerate(self.moving_platforms):
@@ -97,13 +97,14 @@ class MainMenuBackground(UiObject):
 
         self.player.is_clicking = False
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE]:
-            self.player.jump()
-        if keys[pygame.K_a]:
-            self.player.move_left(delta)
-        elif keys[pygame.K_d]:
-            self.player.move_right(delta)
+        if player_input:
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_SPACE]:
+                self.player.jump()
+            if keys[pygame.K_a]:
+                self.player.move_left(delta)
+            elif keys[pygame.K_d]:
+                self.player.move_right(delta)
 
     def draw(self, screen):
         for entity in self.world.entities:

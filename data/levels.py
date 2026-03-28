@@ -11,10 +11,6 @@ class Levels:
     def init(cls):
         cls.TUTORIAL = cls.load_level_from_file("assets/levels/tutorial.json")
         cls.FIRST_LEVEL = cls.load_level_from_file("assets/levels/first_level.json")
-        cls.JUMP_PADS = cls.load_level_from_file("assets/levels/jump_pads.json")
-        cls.MUNCI_STEP = cls.load_level_from_file("assets/levels/munci.json")
         cls.BALL = cls.load_level_from_file("assets/levels/ball.json")
-        cls.TEXT_ANIMATION = cls.load_level_from_file("assets/levels/text_animation.json")
         cls.EXECUTION = cls.load_level_from_file("assets/levels/execution.json")
-        cls.VERY_HARD_JUMP = cls.load_level_from_file("assets/levels/hard_jump.json")
         cls.ALL_LEVELS = [cls.TUTORIAL, cls.FIRST_LEVEL, cls.BALL, cls.EXECUTION]

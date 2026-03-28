@@ -40,10 +40,8 @@ class Deserializator:
         if entity_json.get("target_offset"):
             entity.target_offset = Vector2(entity_json["target_offset"])
             
-        if entity_json.get("delay"):
-            if isinstance(entity_json.get("delay"), int) or isinstance(entity_json.get("delay"), float):
-                entity.delay = Timer(entity_json["delay"])
-        
+        if entity_json.get("delay") is not None:
+            entity.delay = float(entity_json["delay"])
         if entity_json.get("color_fill"):
             entity.color_fill = tuple(entity_json["color_fill"])
 

@@ -1,0 +1,360 @@
+{
+    "name": "",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                250.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                400.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                450.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                500.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1300.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "block"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                300.0,
+                250.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                550.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "triggers",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                700.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "spike"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                650.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers"
+            ],
+            "target_id": "block",
+            "target_offset": [
+                -600.0,
+                0.0
+            ],
+            "transition_time": 0.2,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                800.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers"
+            ],
+            "target_id": "spike",
+            "target_offset": [
+                0.0,
+                -500.0
+            ],
+            "transition_time": 0.1,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                550.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers"
+            ],
+            "target_id": "triggers2",
+            "delay": 0.2,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                450.0,
+                -150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers2"
+            ],
+            "target_id": "spike",
+            "target_opacity": 0,
+            "transition_time": 0.0,
+            "activation_type": "MANUAL"
+        }
+    ]
+}

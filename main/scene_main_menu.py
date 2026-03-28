@@ -2,18 +2,25 @@ from scene import Scene, SceneType
 from ui import UiManager, Text, NormalButton
 from data import Fonts, const, Settings
 from .main_menu_background import MainMenuBackground
+from window import WindowManager, WindowType
 import pygame
+from .settings_window import SettingsWindow
 
 
 class SceneMainMenu(Scene):
     def __init__(self, scene_manager) -> None:
         super().__init__(scene_manager, SceneType.MAIN_MENU)
 
+        # Window
+        self.window_manager = WindowManager()
+        self.settings_window = SettingsWindow(self.window_manager)
+        self.window_manager.add_window(self.settings_window)
+
+        # UI
         self.ui = UiManager()
 
         # Фон
         self.bg = MainMenuBackground()
-        self.ui.add_ui_object(self.bg)
 
         # Заголовок
         title = Text(
@@ -75,7 +82,7 @@ class SceneMainMenu(Scene):
             size=(button_width, button_height),
             text="Settings",
             font=Fonts.NORMAL_30,
-            callback=None
+            callback=lambda: self.window_manager.set_window(WindowType.SETTINGS)
         )
         btn_settings.center_by_x(const.WINDOW_SIZE[0])
 
@@ -111,11 +118,18 @@ class SceneMainMenu(Scene):
         raise SystemExit
 
     def handle_pygame_event(self, event):
-        self.ui.handle_pygame_event(event)
+        if not self.window_manager.current_window:
+            self.ui.handle_pygame_event(event)
+            self.bg.handle_pygame_event(event)
+        self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
+        player_input = True if not self.window_manager.current_window else False
+        self.bg.update(delta, player_input)
         self.ui.update(delta)
 
     def draw(self, screen):
         screen.fill(Settings.WINDOW_BACKGROUND_COLOR)
+        self.bg.draw(screen)
         self.ui.draw(screen)
+        self.window_manager.draw_current_window(screen)

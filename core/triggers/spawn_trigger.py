@@ -1,24 +1,32 @@
 from pygame import Vector2
 from data.const import TRIGGER_SIZE
 from .trigger import Trigger, TriggerActivationType
-from util import Timer
+
 
 class SpawnTrigger(Trigger):
     def __init__(self, world, position: Vector2,
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1],
-                 rotation=0, delay_duration=0.5):
+                 rotation=0, delay=0.0):
         super().__init__(world, position, width, height, rotation)
+
         self.target_id = None
-        self.delay = Timer(delay_duration)
+        self.delay = max(0.0, delay)
+
         self._waiting = False
+        self._elapsed = 0.0
         self._player = None
-        self._activated = False
+
     def activate(self, player):
         if self._waiting:
             return
 
+        # 🔥 если delay = 0 → сразу активируем
+        if self.delay == 0:
+            self._spawn(player)
+            return
+
         self._player = player
-        self.delay.reset()
+        self._elapsed = 0.0
         self._waiting = True
 
     def update(self, delta_time):
@@ -27,13 +35,13 @@ class SpawnTrigger(Trigger):
         if not self._waiting:
             return
 
-        self.delay.update(delta_time)
+        self._elapsed += delta_time
 
-        if self.delay.finished:
+        if self._elapsed >= self.delay:
             self._spawn(self._player)
             self._waiting = False
             self._player = None
-            self._activated = True
+
     def _spawn(self, player):
         if self.target_id is None:
             return
@@ -45,7 +53,7 @@ class SpawnTrigger(Trigger):
     def get_special_fields(self):
         return {
             "target_id": {"type": "str", "value": self.target_id or ""},
-            "delay": {"type": "float", "value": self.delay.duration},
+            "delay": {"type": "float", "value": self.delay},
             "activation_type": {
                 "type": "enum",
                 "value": self.activation_type.name,
@@ -56,7 +64,7 @@ class SpawnTrigger(Trigger):
     def apply_special_fields(self, data):
         try:
             self.target_id = data.get("target_id", None)
-            self.delay.duration = float(data.get("delay", self.delay.duration))
+            self.delay = float(data.get("delay", self.delay))
 
             if "activation_type" in data:
                 try:
