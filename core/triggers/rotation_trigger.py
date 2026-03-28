@@ -7,8 +7,8 @@ class RotationTrigger(Trigger):
     def __init__(self, world, position: Vector2,
                  width=TRIGGER_SIZE[0], height=TRIGGER_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
-        self.rotation_a = 0
-        self.rotation_b = 90
+
+        self.target_rotation = 90
         self.target_id = None
         self.transition_time = 0
 
@@ -16,7 +16,6 @@ class RotationTrigger(Trigger):
         self._start_rotations = {}
         self._elapsed = 0
         self._active = False
-        self._state = False
 
     def update(self, delta_time):
         if not self._active:
@@ -28,10 +27,11 @@ class RotationTrigger(Trigger):
 
         for target in self._targets:
             start = self._start_rotations[target]
-            target.rotation = start + (self._target_rotation - start) * t
+            target.rotation = start + self.target_rotation * t
 
         if t >= 1:
             self._active = False
+
     def activate(self, player):
         if self._active:
             return
@@ -43,24 +43,24 @@ class RotationTrigger(Trigger):
         if self.target_id is not None:
             self._targets = self.world.get_entities_by_id(self.target_id)
 
-        self._state = not self._state
-        target_rotation = self.rotation_b if self._state else self.rotation_a
-
-        if self.transition_time <= 0:
-            for target in self._targets:
-                target.rotation = target_rotation
+        if not self._targets:
             return
 
+        # 🔥 МГНОВЕННОЕ ВРАЩЕНИЕ
+        if self.transition_time <= 0:
+            for target in self._targets:
+                target.rotation += self.target_rotation
+            return
+
+        # 🔥 ПЛАВНОЕ ВРАЩЕНИЕ
         for target in self._targets:
             self._start_rotations[target] = target.rotation
 
-        self._target_rotation = target_rotation
         self._active = True
 
     def get_special_fields(self):
         return {
-            "rotation_a": {"type": "float", "value": self.rotation_a},
-            "rotation_b": {"type": "float", "value": self.rotation_b},
+            "target_rotation": {"type": "float", "value": self.target_rotation},
             "target_id": {"type": "str", "value": self.target_id or ""},
             "transition_time": {"type": "float", "value": self.transition_time},
             "activation_type": {
@@ -72,10 +72,15 @@ class RotationTrigger(Trigger):
 
     def apply_special_fields(self, data):
         try:
-            self.rotation_a = float(data.get("rotation_a", self.rotation_a))
-            self.rotation_b = float(data.get("rotation_b", self.rotation_b))
-            self.target_id = data.get("target_id", None)
-            self.transition_time = float(data.get("transition_time", self.transition_time))
+            if "target_rotation" in data:
+                self.target_rotation = float(data["target_rotation"])
+
+            if "target_id" in data:
+                self.target_id = data["target_id"] or None
+
+            if "transition_time" in data:
+                self.transition_time = float(data["transition_time"])
+
             if "activation_type" in data:
                 try:
                     self.activation_type = TriggerActivationType[data["activation_type"]]

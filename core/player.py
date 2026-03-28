@@ -12,7 +12,7 @@ class Player(Entity):
         self.kill_y = 5000
         self.direction = PlayerDirection.RIGHT
         self.current_checkpoint = None
-        self.is_moving = False  # <-- добавили флаг движения
+        self.is_moving = False
 
         self.is_clicking = False
         self.base_spawn_position = position.copy()
@@ -32,42 +32,49 @@ class Player(Entity):
         self.on_ground = False
         self.rotation = 0
 
+        self.rotation_step = 90
+        self.rotation_target = 0
+        self.rotation_speed = 720
+
         self.move_speed = 600
         self.acceleration = 10000
         self.friction = 4000
 
-        self.step_timer = Timer(0.25)  # шаг каждые 0.25 сек
+        self.step_timer = Timer(0.25)
 
     @property
     def is_upside_down(self):
         return self.gravity_dir == -1
 
     def update_rotation(self):
-        self.rotation = 180 if self.is_upside_down else 0
+        pass
+        # self.rotation = 180 if self.is_upside_down else 0
 
     def set_skin(self, skin: Skin):
         self.skin = skin
         self.animator.set_sprite_count(self.skin.animation_length)
 
     def jump(self):
-        if self.on_ground:
-            self.velocity.y = -self.jump_force * self.gravity_dir
-            self.on_ground = False
-            self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+        if not self.on_ground:
+            return
+
+        self.velocity.y = -self.jump_force * self.gravity_dir
+        self.on_ground = False
+        self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     def move_right(self, delta_time: float):
         self.velocity.x += self.acceleration * delta_time
         if self.velocity.x > self.move_speed:
             self.velocity.x = self.move_speed
         self.direction = PlayerDirection.RIGHT
-        self.is_moving = True  # <-- игрок двигается
+        self.is_moving = True
 
     def move_left(self, delta_time: float):
         self.velocity.x -= self.acceleration * delta_time
         if self.velocity.x < -self.move_speed:
             self.velocity.x = -self.move_speed
         self.direction = PlayerDirection.LEFT
-        self.is_moving = True  # <-- игрок двигается
+        self.is_moving = True
 
     def stop_horizontal(self, delta_time: float):
         if self.velocity.x > 0:
@@ -83,30 +90,35 @@ class Player(Entity):
         self.prev_position = self.position.copy()
         self.prev_rect = self.hitbox.copy()
 
-        # Обновляем анимацию (SpriteAnimator сам выбирает кадр в зависимости от direction)
         self.animator.update(delta_time)
 
         self.velocity.y += self.gravity * delta_time * self.gravity_dir
         self.position += self.velocity * delta_time
 
         self.stop_horizontal(delta_time)
-        self.update_rotation()
 
+        if not self.on_ground:
+            dir_mult = 1 if self.direction == PlayerDirection.LEFT else -1
+
+            self.rotation_target += self.rotation_step * dir_mult * self.gravity_dir * delta_time * 4
+
+            if self.rotation_target >= 360:
+                self.rotation_target -= 360
+            elif self.rotation_target < 0:
+                self.rotation_target += 360
+
+            self.rotation = self.rotation_target
+        else:
+            self.rotation = round(self.rotation / 90) * 90
         if abs(self.position.y) >= self.kill_y:
             self.kill()
 
-        # Обновление таймера шагов
         self.step_timer.update(delta_time)
         if self.step_timer.finished and self.is_moving:
             self.step_timer.reset()
             if self.on_ground:
                 self.world.event_bus.emit(Event(EventType.PLAYER_WALK, {}))
 
-        # Обновляем направление в зависимости от скорости
-        if abs(self.velocity.x) < 1:  # почти стоим
-            self.direction = PlayerDirection.STANDING
-
-        # Сбрасываем флаг движения для следующего кадра
         self.is_moving = False
 
     def kill(self):
@@ -131,10 +143,12 @@ class Player(Entity):
         self.step_timer.reset()
         self.is_moving = False
         self.velocity = Vector2(0, 0)
+        self.update_rotation()
 
     def reverse_gravity(self):
         self.gravity_dir *= -1
         self.on_ground = False
+        self.update_rotation()
 
     def handle_platform_collision(self, platform):
         plat_rect = platform.hitbox

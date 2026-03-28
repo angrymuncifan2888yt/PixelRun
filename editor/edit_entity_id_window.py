@@ -149,9 +149,6 @@ class EditEntityIDWindow(Window):
             if text:
                 ids.append(text)
 
-        if not ids:
-            return
-
         for entity in self.entities:
             entity.id = ids.copy()
 

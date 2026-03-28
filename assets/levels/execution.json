@@ -826,28 +826,6 @@
             "activation_type": "MANUAL"
         },
         {
-            "type": "platform",
-            "position": [
-                550.0,
-                4900.0
-            ],
-            "size": [
-                1000,
-                100
-            ],
-            "rotation": 0,
-            "opacity": 255,
-            "active": true,
-            "id": [
-                "pl"
-            ],
-            "color": [
-                0,
-                0,
-                0
-            ]
-        },
-        {
             "type": "color_trigger",
             "position": [
                 250.0,
@@ -869,69 +847,10 @@
             "activation_type": "ONCE_ON_ENTER"
         },
         {
-            "type": "text",
-            "position": [
-                1000.0,
-                4600.0
-            ],
-            "size": [
-                127,
-                36
-            ],
-            "rotation": 0,
-            "opacity": 255,
-            "active": true,
-            "id": [],
-            "color": [
-                255,
-                255,
-                255
-            ],
-            "text": "Wake up",
-            "auto_resize": true
-        },
-        {
-            "type": "end",
-            "position": [
-                1350.0,
-                4650.0
-            ],
-            "size": [
-                195,
-                259
-            ],
-            "rotation": 0,
-            "opacity": 255,
-            "active": true,
-            "id": []
-        },
-        {
-            "type": "text",
-            "position": [
-                900.0,
-                4650.0
-            ],
-            "size": [
-                324,
-                36
-            ],
-            "rotation": 0,
-            "opacity": 255,
-            "active": true,
-            "id": [],
-            "color": [
-                255,
-                255,
-                255
-            ],
-            "text": "It was all a dream",
-            "auto_resize": true
-        },
-        {
             "type": "color_trigger",
             "position": [
-                550.0,
-                4750.0
+                350.0,
+                3650.0
             ],
             "size": [
                 1000,
@@ -947,6 +866,777 @@
                 25
             ],
             "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                250.0,
+                4850.0
+            ],
+            "size": [
+                1500,
+                500
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                650.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                800.0,
+                4400.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                900.0,
+                4700.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                900.0,
+                4450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1000.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1250.0,
+                4450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1300.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1650.0,
+                4700.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1500.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1500.0,
+                4500.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1350.0,
+                4450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1400.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1250.0,
+                4550.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1100.0,
+                4650.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                800.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                550.0,
+                4450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                450.0,
+                4550.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                500.0,
+                4800.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                250.0,
+                4750.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                300.0,
+                4700.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                300.0,
+                4600.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                300.0,
+                4500.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                450.0,
+                4650.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1000.0,
+                4150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1150.0,
+                3950.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1250.0,
+                4000.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                1350.0,
+                4150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                1150.0,
+                4150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                900.0,
+                4000.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                800.0,
+                4100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                650.0,
+                4150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                650.0,
+                4050.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                800.0,
+                4200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1300.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1150.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1000.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                850.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                700.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                550.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                400.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                250.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                100.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1750.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1600.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1450.0,
+                3750.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                1150.0,
+                4350.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                250.0,
+                4250.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "upside_down_portal",
+            "position": [
+                350.0,
+                4000.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1000.0,
+                3950.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "normal_gravity_portal",
+            "position": [
+                1550.0,
+                4200.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
         }
     ]
 }

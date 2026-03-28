@@ -7,18 +7,6 @@ class Portal(Entity):
     def __init__(self, world, position: Vector2, width=const.PORTAL_SIZE[0], height=const.PORTAL_SIZE[1], rotation=0):
         super().__init__(world, position, width, height, rotation)
 
-    def update_hitbox(self):
-        # Don't ask why I swapped width and height
-        # self.hitbox.width = int(self.height)
-        # self.hitbox.height = int(self.width/2)
-        self.hitbox.width = int(self.width)
-        self.hitbox.height = int(self.height/2)
-
-        self.hitbox.center = (
-            int(self.position.x + self.width / 2),
-            int(self.position.y + self.height / 2),
-        )
-
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
             # проверяем вход игрока в портал с помощью prev_rect

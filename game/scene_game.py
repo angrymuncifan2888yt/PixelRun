@@ -139,9 +139,6 @@ class SceneGame(Scene):
                     entities_to_upd = self.world.get_nearest_entities(self.player.position, Settings.WORLD_LOAD_DISTANCE)
                     objects_updated = self.world.update_entities(entities_to_upd, delta)
 
-                    self.camera.update(pygame.Vector2(self.player.hitbox.center))
-                    self.player.is_clicking = False
-
                     keys = pygame.key.get_pressed()
                     if keys[pygame.K_SPACE]:
                         self.player.jump()
@@ -153,6 +150,8 @@ class SceneGame(Scene):
                     mouse = pygame.mouse.get_pressed()
                     if mouse[0]:
                         self.player.jump()
+                    self.camera.update(pygame.Vector2(self.player.hitbox.center))
+                    self.player.is_clicking = False
 
                     self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)
 
