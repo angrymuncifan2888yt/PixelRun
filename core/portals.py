@@ -1,6 +1,6 @@
 from pygame.math import Vector2
 from .entity import Entity
-from .player import Player
+from .player.player import Player
 from data import const
 
 class Portal(Entity):

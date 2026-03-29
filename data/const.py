@@ -1,3 +1,6 @@
+import os
+
+SAVE_FILE_FILE_PATH = os.path.join(os.path.expanduser("~"), "pixelrun.json")
 WINDOW_SIZE = (1300, 800)
 WINDOW_CAPTION = "PixelRun"
 PLAYER_SIZE = (75, 75)

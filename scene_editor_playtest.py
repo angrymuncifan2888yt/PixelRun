@@ -2,9 +2,9 @@ import pygame
 from scene import Scene, SceneType
 from core import *
 from core.render import render_entity, render_hitbox
-from util import Camera, Timer
+from util import Camera, Timer, player_click, player_input
 from level import Level
-from data import Skins, const, Settings, Sounds, SoundChannels, Fonts
+from data import Skins, const, PlayerData, Sounds, SoundChannels, Fonts
 from event import EventType
 from game import DebugMenu
 from ui import NormalButton
@@ -87,19 +87,13 @@ class SceneEditorPlaytest(Scene):
         self.level_ended = False
         self.pause = False
 
-    def click(self):
-        self.player.is_clicking = True
-
     def handle_pygame_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_F3:
                 self.show_hitboxes = not self.show_hitboxes
             if event.key == pygame.K_F2:
                 self.debug = not self.debug
-            if event.key == pygame.K_SPACE:
-                self.click()
-        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            self.click()
+        player_click(self.player, event)
         self.editor_btn.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
@@ -107,24 +101,13 @@ class SceneEditorPlaytest(Scene):
         if not self.dying_animation:
             # Upd world
             hitboxes_updated = self.world.update_all_hitboxes()
-            entities_to_upd = self.world.get_nearest_entities(self.player.position, Settings.WORLD_LOAD_DISTANCE)
+            entities_to_upd = self.world.get_nearest_entities(self.player.position, PlayerData.WORLD_LOAD_DISTANCE)
             objects_updated = self.world.update_entities(entities_to_upd, delta)
 
             self.camera.update(pygame.Vector2(self.player.hitbox.center))
             self.player.is_clicking = False
 
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
-                self.player.jump()
-            if keys[pygame.K_a]:
-                self.player.move_left(delta)
-            elif keys[pygame.K_d]:
-                self.player.move_right(delta)
-
-            mouse = pygame.mouse.get_pressed()
-            if mouse[0]:
-                self.player.jump()
-
+            player_input(self.player, delta)
             self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)
 
         else:

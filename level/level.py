@@ -4,7 +4,7 @@ from .entity_factory import ENTITY_FACTORY
 from .deserializator import Deserializator
 
 class Level:
-    def __init__(self, name="", player_spawn=Vector2(0, 0), background_color=(100, 100, 100), objects=None):
+    def __init__(self, name="Unnamed Level", player_spawn=Vector2(0, 0), background_color=(100, 100, 100), objects=None):
         self.name = name
         self.player_spawn = player_spawn
         self.background_color = background_color

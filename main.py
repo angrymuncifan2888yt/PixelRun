@@ -1,6 +1,5 @@
 import pygame
 from data import *
-from data import const
 from scene import SceneManager, SceneType
 from main import SceneMainMenu
 from game import SceneGame
@@ -17,6 +16,7 @@ def init_assets():
     Levels.init()
     SoundChannels.init()
     Sounds.init()
+    PlayerData.init()
 
 class PixelRun:
     def __init__(self):
@@ -51,12 +51,13 @@ class PixelRun:
 
         # Background music
         pygame.mixer.music.load("assets/sounds/background.mp3")
+        pygame.mixer.music.set_volume(PlayerData.BACKGROUND_MUSIC_VOLUME)
 
     def mainloop(self):
         pygame.mixer.music.play(-1)
 
         while self.running:
-            delta_time = self.clock.tick(Settings.TARGET_FPS) / 1000
+            delta_time = self.clock.tick(PlayerData.TARGET_FPS) / 1000
 
             self.scene_manager.update_current_scene(delta_time, clock=self.clock)
             self.scene_manager.render_current_scene(self.screen)

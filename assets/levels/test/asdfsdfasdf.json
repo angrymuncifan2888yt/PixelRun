@@ -1,0 +1,59 @@
+{
+    "name": "Unnamed Level",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                0.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                300.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        }
+    ]
+}

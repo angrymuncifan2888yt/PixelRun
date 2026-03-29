@@ -1,5 +1,5 @@
 from pygame import Vector2, Rect
-from .entity import Entity
+from ..entity import Entity
 from data import Skin, const
 from util import SpriteAnimator, PlayerDirection, Timer
 from event import Event, EventType

@@ -1,0 +1,1139 @@
+{
+    "name": "Animation",
+    "player_spawn": [
+        -300.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                500.0,
+                50.0
+            ],
+            "size": [
+                250,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                500.0,
+                300.0
+            ],
+            "size": [
+                250,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                500.0,
+                150.0
+            ],
+            "size": [
+                250,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                600.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                500.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                700.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                550.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                650.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                500.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                500.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                500.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                750.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                750.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                750.0,
+                150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                450.0,
+                100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                450.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                450.0,
+                150.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "head"
+            ],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                450.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                750.0,
+                300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                500.0,
+                350.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                550.0,
+                350.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                650.0,
+                350.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                600.0,
+                350.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                350.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                255,
+                0
+            ],
+            "color_border": [
+                0,
+                0,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -450.0,
+                300.0
+            ],
+            "size": [
+                750,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                150.0,
+                100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                0
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                150.0,
+                100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "start",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                400.0,
+                -450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "start",
+                "1"
+            ],
+            "target_id": "2",
+            "delay": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                550.0,
+                -450.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2"
+            ],
+            "target_id": "head",
+            "target_offset": [
+                0.0,
+                -100.0
+            ],
+            "transition_time": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                550.0,
+                -300.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "2"
+            ],
+            "target_id": "1",
+            "delay": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                400.0,
+                -300.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "1"
+            ],
+            "target_id": "head",
+            "target_offset": [
+                0.0,
+                100.0
+            ],
+            "transition_time": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "text",
+            "position": [
+                121.0,
+                45.0
+            ],
+            "size": [
+                163,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Animation",
+            "auto_resize": true
+        },
+        {
+            "type": "spike",
+            "position": [
+                -200.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                -150.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        }
+    ]
+}

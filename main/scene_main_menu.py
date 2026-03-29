@@ -1,6 +1,6 @@
 from scene import Scene, SceneType
 from ui import UiManager, Text, NormalButton, ImageButton
-from data import Fonts, const, Settings, Sprites
+from data import Fonts, const, PlayerData, Sprites
 from .main_menu_background import MainMenuBackground
 from window import WindowManager, WindowType
 import pygame
@@ -138,7 +138,7 @@ class SceneMainMenu(Scene):
         self.ui.update(delta)
 
     def draw(self, screen):
-        screen.fill(Settings.WINDOW_BACKGROUND_COLOR)
+        screen.fill(PlayerData.WINDOW_BACKGROUND_COLOR)
         self.bg.draw(screen)
         self.ui.draw(screen)
         self.window_manager.draw_current_window(screen)

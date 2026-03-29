@@ -2,11 +2,11 @@ import pygame
 from scene import Scene, SceneType
 from core import *
 from core.render import render_entity, render_hitbox
-from util import PlayerDirection, Camera, Timer
+from util import player_click, player_input, Camera, Timer
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
-from data import Skins, const, Sounds, SoundChannels, Settings
+from data import Skins, const, Sounds, SoundChannels, PlayerData
 from event import EventType
 from .debug_menu import DebugMenu
 
@@ -25,7 +25,8 @@ class SceneGame(Scene):
             pygame.Vector2(0, 0),
             const.WINDOW_SIZE,
             self._toogle_pause,
-            lambda: self.scene_manager.set_scene(SceneType.MAIN_MENU)
+            lambda: self.scene_manager.set_scene(SceneType.MAIN_MENU),
+            lambda: self._on_player_death(None)
         )
         self.level_complete_menu = LevelCompleteMenu(
             pygame.Vector2(0, 0),
@@ -67,6 +68,7 @@ class SceneGame(Scene):
         self.dying_animation = True
         self.player.opacity = 50
         Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME)
+        self.pause = False
 
     def _toogle_pause(self):
         if not self.level_ended:  # нельзя ставить на паузу после конца уровня
@@ -106,9 +108,6 @@ class SceneGame(Scene):
         self.level_ended = False
         self.pause = False
 
-    def click(self):
-        self.player.is_clicking = True
-
     def handle_pygame_event(self, event):
         if self.level_ended:
             self.level_complete_menu.handle_pygame_event(event)
@@ -118,17 +117,14 @@ class SceneGame(Scene):
                 if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
                     self._toogle_pause()
         else:
+            player_click(self.player, event)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F3:
                     self.show_hitboxes = not self.show_hitboxes
                 if event.key == pygame.K_F2:
                     self.debug = not self.debug
-                if event.key == pygame.K_SPACE:
-                    self.click()
                 if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
                     self._toogle_pause()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                self.click()
 
     def update(self, delta, **kwargs):
         if not self.level_ended:
@@ -136,20 +132,10 @@ class SceneGame(Scene):
                 if not self.dying_animation:
                     # Upd world
                     hitboxes_updated = self.world.update_all_hitboxes()
-                    entities_to_upd = self.world.get_nearest_entities(self.player.position, Settings.WORLD_LOAD_DISTANCE)
+                    entities_to_upd = self.world.get_nearest_entities(self.player.position, PlayerData.WORLD_LOAD_DISTANCE)
                     objects_updated = self.world.update_entities(entities_to_upd, delta)
 
-                    keys = pygame.key.get_pressed()
-                    if keys[pygame.K_SPACE]:
-                        self.player.jump()
-                    if keys[pygame.K_a]:
-                        self.player.move_left(delta)
-                    elif keys[pygame.K_d]:
-                        self.player.move_right(delta)
-
-                    mouse = pygame.mouse.get_pressed()
-                    if mouse[0]:
-                        self.player.jump()
+                    player_input(self.player, delta)
                     self.camera.update(pygame.Vector2(self.player.hitbox.center))
                     self.player.is_clicking = False
 

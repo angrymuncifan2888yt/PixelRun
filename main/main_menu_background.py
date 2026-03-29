@@ -3,6 +3,7 @@ from ui import UiObject
 from core import World, GravityPortal, Platform, JumpOrb, GravityOrb, Player, NormalGravityPortal, UpsideDownPortal
 from core.render import render_entity
 from event import EventType
+from util import player_click, player_input
 import pygame
 import math
 
@@ -20,10 +21,8 @@ class MainMenuBackground(UiObject):
         self.player.is_clicking = True
 
     def handle_pygame_event(self, pygame_event):
-        if pygame_event.type == pygame.KEYDOWN:
-            if pygame_event.key == pygame.K_SPACE:
-                self.click()
-
+        player_click(self.player, pygame_event, False)
+        
     def _build_scene(self):
         self.moving_platforms = []
         self.base_positions = []
@@ -78,7 +77,7 @@ class MainMenuBackground(UiObject):
     def _on_player_death(self, event):
         self.player.respawn()
 
-    def update(self, delta, player_input=True):
+    def update(self, delta, player_input_=True):
         self.time += delta
 
         for i, plat in enumerate(self.moving_platforms):
@@ -97,14 +96,8 @@ class MainMenuBackground(UiObject):
 
         self.player.is_clicking = False
 
-        if player_input:
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
-                self.player.jump()
-            if keys[pygame.K_a]:
-                self.player.move_left(delta)
-            elif keys[pygame.K_d]:
-                self.player.move_right(delta)
+        if player_input_:
+            player_input(self.player, delta, False)
 
     def draw(self, screen):
         for entity in self.world.entities:

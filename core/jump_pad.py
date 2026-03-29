@@ -1,7 +1,7 @@
 from pygame.math import Vector2
 from .entity import Entity
 from data import const
-from .player import Player
+from .player.player import Player
 
 
 class JumpPad(Entity):

@@ -1,7 +1,7 @@
 from .entity import Entity
 import pygame
 from data import const
-from .player import Player
+from .player.player import Player
 from event import Event, EventType
 
 

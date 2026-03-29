@@ -1,6 +1,6 @@
 from ..entity import Entity
 from data import const
-from ..player import Player
+from ..player.player import Player
 from enum import Enum, auto
 import pygame
 

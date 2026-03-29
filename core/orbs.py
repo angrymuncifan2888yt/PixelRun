@@ -1,7 +1,7 @@
 from pygame import Vector2
 from .entity import Entity
 from data.const import ORB_SIZE
-from .player import Player
+from .player.player import Player
 from event import EventType, Event
 
 
