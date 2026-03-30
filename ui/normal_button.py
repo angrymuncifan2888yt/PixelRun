@@ -53,7 +53,7 @@ class NormalButton(UiObject):
             if self.is_mouse_on_button():
                 if callable(self.callback):
                     self.callback()
-                    Sounds.play_sound(Sounds.BUTTON_PRESS, SoundChannels.SYSTEM, PlayerData.SFX_VOLUME)
+                    Sounds.play_sound(Sounds.BUTTON_PRESS, SoundChannels.SYSTEM)
 
     def draw_at(self, screen, position: pygame.Vector2):
         rect = pygame.Rect(position.x, position.y, self.size.x, self.size.y)

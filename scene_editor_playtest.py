@@ -48,15 +48,15 @@ class SceneEditorPlaytest(Scene):
         self.play_again()
 
     def _on_player_walk(self, event):
-        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME, PlayerData.SFX_VOLUME)
+        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME, PlayerData.PLAYER_VOLUME)
 
     def _on_player_jump(self, event):
-        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME, PlayerData.SFX_VOLUME)
+        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME, PlayerData.PLAYER_VOLUME)
 
     def _on_player_death(self, event):
         self.dying_animation = True
         self.player.opacity = 50
-        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME, PlayerData.SFX_VOLUME)
+        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME, PlayerData.PLAYER_VOLUME)
 
     def subscribe_world_event(self):
         # Subscribe event

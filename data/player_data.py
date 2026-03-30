@@ -13,7 +13,8 @@ class PlayerData:
                 "window_background_color": list(cls.WINDOW_BACKGROUND_COLOR),
                 "world_load_distance": cls.WORLD_LOAD_DISTANCE,
                 "music_volume": cls.MUSIC_VOLUME,
-                "sfx_volume": cls.SFX_VOLUME,
+                "player_volume": cls.PLAYER_VOLUME,
+                "player_death_volume": cls.PLAYER_DEATH_VOLUME,
                 "camera_speed": cls.CAMERA_SPEED,
                 "skin": cls.SKIN.name
             }
@@ -34,7 +35,8 @@ class PlayerData:
         cls.MUSIC_VOLUME = 0.5
         cls.CAMERA_SPEED = 6.0
         cls.SKIN = Skins.DEFAULT
-        cls.SFX_VOLUME = 0.5
+        cls.PLAYER_VOLUME = 1
+        cls.PLAYER_DEATH_VOLUME = 1
         try:
             with open(SAVE_FILE_FILE_PATH, "r") as file:
                 data = json.load(file)
@@ -68,9 +70,13 @@ class PlayerData:
             cls.MUSIC_VOLUME
         )
 
-        cls.SFX_VOLUME = cls._safe_float(
-            settings.get("sfx_volume"),
-            cls.SFX_VOLUME
+        cls.PLAYER_VOLUME = cls._safe_float(
+            settings.get("player_volume"),
+            cls.PLAYER_VOLUME
+        )
+        cls.PLAYER_DEATH_VOLUME = cls._safe_float(
+            settings.get("player_death_volume"),
+            cls.PLAYER_DEATH_VOLUME
         )
 
         cls.CAMERA_SPEED = cls._safe_float(

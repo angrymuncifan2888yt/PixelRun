@@ -189,36 +189,68 @@ class SettingsWindow(Window):
         self.input_camera_speed.text = str(PlayerData.CAMERA_SPEED)
 
         # =========================
-        # 🟢 SFX VOLUME
+        # 🟢 PLAYER VOLUME
         # =========================
-        self.label_sfx = Text(
+        self.label_player_volume = Text(
             pygame.Vector2(x, start_y),
             Fonts.NORMAL_30,
-            "SFX Volume"
+            "Player Volume"
         )
 
-        self.sfx_value = PlayerData.SFX_VOLUME
+        self.player_volume = PlayerData.PLAYER_VOLUME
 
-        self.text_sfx = Text(
+        self.text_player_volume = Text(
             pygame.Vector2(x + 85, start_y + 35),
             Fonts.NORMAL_30,
-            f"{self.sfx_value:.2f}"
+            f"{self.player_volume:.2f}"
         )
 
-        self.btn_sfx_down = NormalButton(
+        self.btn_player_volume_down = NormalButton(
             position=pygame.Vector2(x, start_y + 35),
             size=(40, 40),
             text="<",
             font=Fonts.NORMAL_30,
-            callback=self.decrease_sfx
+            callback=self.decrease_player_volume
         )
 
-        self.btn_sfx_up = NormalButton(
+        self.btn_player_volume_up = NormalButton(
             position=pygame.Vector2(x + 200, start_y + 35),
             size=(40, 40),
             text=">",
             font=Fonts.NORMAL_30,
-            callback=self.increase_sfx
+            callback=self.increase_player_volume
+        )
+        # =========================
+        # 🟢 PLAYER DEATH VOLUME
+        # =========================
+        self.label_player_death_volume = Text(
+            pygame.Vector2(x, start_y + spacing),
+            Fonts.NORMAL_30,
+            "Player Death Volume"
+        )
+
+        self.player_death_value = PlayerData.PLAYER_DEATH_VOLUME
+
+        self.text_player_death_volume = Text(
+            pygame.Vector2(x + 85, start_y + spacing + 35),
+            Fonts.NORMAL_30,
+            f"{self.player_death_value:.2f}"
+        )
+
+        self.btn_player_death_volume_down = NormalButton(
+            position=pygame.Vector2(x, start_y + spacing + 35),
+            size=(40, 40),
+            text="<",
+            font=Fonts.NORMAL_30,
+            callback=self.decrease_player_death_volume
+        )
+
+        self.btn_player_death_volume_up = NormalButton(
+            position=pygame.Vector2(x + 200, start_y + spacing + 35),
+            size=(40, 40),
+            text=">",
+            font=Fonts.NORMAL_30,
+            callback=self.increase_player_death_volume
         )
         # =========================
         # 🟢 КНОПКИ
@@ -263,7 +295,8 @@ class SettingsWindow(Window):
             self.label_volume, self.text_volume, self.btn_volume_down, self.btn_volume_up,
         ]
         second_tab = [
-            self.label_sfx, self.text_sfx, self.btn_sfx_down, self.btn_sfx_up,
+            self.label_player_volume, self.text_player_volume, self.btn_player_volume_down, self.btn_player_volume_up,
+            self.label_player_death_volume, self.text_player_death_volume, self.btn_player_death_volume_down, self.btn_player_death_volume_up
         ]
         self.tabs.add_tab(first_tab)
         self.tabs.add_tab(second_tab)
@@ -278,13 +311,21 @@ class SettingsWindow(Window):
         ]:
             self.ui.add_ui_object(obj)
 
-    def increase_sfx(self):
-        self.sfx_value = min(1.0, self.sfx_value + 0.05)
-        self.text_sfx.text = f"{self.sfx_value:.2f}"
+    def increase_player_death_volume(self):
+        self.player_death_value = min(1.0, self.player_death_value + 0.05)
+        self.text_player_death_volume.text = f"{self.player_death_value:.2f}"
 
-    def decrease_sfx(self):
-        self.sfx_value = max(0.0, self.sfx_value - 0.05)
-        self.text_sfx.text = f"{self.sfx_value:.2f}"
+    def decrease_player_death_volume(self):
+        self.player_death_value = max(0.0, self.player_death_value - 0.05)
+        self.text_player_death_volume.text = f"{self.player_death_value:.2f}"
+
+    def increase_player_volume(self):
+        self.player_volume = min(1.0, self.player_volume + 0.05)
+        self.text_player_volume.text = f"{self.player_volume:.2f}"
+
+    def decrease_player_volume(self):
+        self.player_volume = max(0.0, self.player_volume - 0.05)
+        self.text_player_volume.text = f"{self.player_volume:.2f}"
     def increase_music_volume(self):
         self.volume_value = min(1.0, self.volume_value + 0.05)
         self.text_volume.text = f"{self.volume_value:.2f}"
@@ -320,7 +361,8 @@ class SettingsWindow(Window):
         except:
             pass
         PlayerData.MUSIC_VOLUME = self.volume_value
-        PlayerData.SFX_VOLUME = self.sfx_value
+        PlayerData.PLAYER_VOLUME = self.player_volume
+        PlayerData.PLAYER_DEATH_VOLUME = self.player_death_value
         PlayerData.save()
         pygame.mixer.music.set_volume(PlayerData.MUSIC_VOLUME)
 
