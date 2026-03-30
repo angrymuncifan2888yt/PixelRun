@@ -23,6 +23,9 @@ class LineEdit(UiObject):
 
     def handle_pygame_event(self, event):
 
+        pos = self.get_global_position()
+        self.hitbox.topleft = (pos.x, pos.y)
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 self.active = self.hitbox.collidepoint(event.pos)
@@ -41,7 +44,6 @@ class LineEdit(UiObject):
             else:
                 if len(self.text) < self.max_length:
                     self.text += event.unicode
-
     def update(self, delta, **kwargs):
         pass
 

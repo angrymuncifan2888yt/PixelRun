@@ -1,4 +1,5 @@
 from data import Skins
+from data.player_data import PlayerData
 from ui import UiObject
 from core import World, GravityPortal, Platform, JumpOrb, GravityOrb, Player, NormalGravityPortal, UpsideDownPortal
 from core.render import render_entity
@@ -62,7 +63,7 @@ class MainMenuBackground(UiObject):
         for orb in self.gravity_orbs:
             self.world.add_entity(orb)
 
-        self.player = Player(self.world, pygame.Vector2(1100, 500), Skins.DEFAULT)
+        self.player = Player(self.world, pygame.Vector2(1100, 500), PlayerData.SKIN)
         self.world.add_entity(
             self.player
         )

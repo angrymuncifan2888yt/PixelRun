@@ -1,18 +1,26 @@
 import pygame
+import math
 
 class Camera:
     def __init__(self, position, width, height):
         self.position = position
         self.width = width
         self.height = height
-        self.smooth = 0.1
 
-    def update(self, target_pos: pygame.Vector2):
+        self.smooth = 8.0  # fallback значение
+
+    def update(self, target_pos: pygame.Vector2, delta_time: float):
+        # 🔥 ЛЕНИВЫЙ ИМПОРТ (разрывает цикл)
+        from data import PlayerData
+        self.smooth = PlayerData.CAMERA_SPEED
+
         target_x = target_pos.x - self.width / 2
         target_y = target_pos.y - self.height / 2
 
-        self.position.x += (target_x - self.position.x) * self.smooth
-        self.position.y += (target_y - self.position.y) * self.smooth
+        factor = 1 - math.exp(-self.smooth * delta_time)
+
+        self.position.x += (target_x - self.position.x) * factor
+        self.position.y += (target_y - self.position.y) * factor
 
     def get_screen_position(self, world_pos: pygame.Vector2):
         return world_pos - self.position

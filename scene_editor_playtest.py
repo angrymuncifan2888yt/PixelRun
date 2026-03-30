@@ -27,7 +27,7 @@ class SceneEditorPlaytest(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.DEFAULT)
+        self.player = Player(self.world, pygame.Vector2(400, 400), PlayerData.SKIN)
 
         self.editor_btn = NormalButton(pygame.Vector2(10, 10),
                                        "Back",
@@ -48,15 +48,15 @@ class SceneEditorPlaytest(Scene):
         self.play_again()
 
     def _on_player_walk(self, event):
-        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME, PlayerData.SFX_VOLUME)
 
     def _on_player_jump(self, event):
-        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME, PlayerData.SFX_VOLUME)
 
     def _on_player_death(self, event):
         self.dying_animation = True
         self.player.opacity = 50
-        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME, PlayerData.SFX_VOLUME)
 
     def subscribe_world_event(self):
         # Subscribe event
@@ -104,7 +104,7 @@ class SceneEditorPlaytest(Scene):
             entities_to_upd = self.world.get_nearest_entities(self.player.position, PlayerData.WORLD_LOAD_DISTANCE)
             objects_updated = self.world.update_entities(entities_to_upd, delta)
 
-            self.camera.update(pygame.Vector2(self.player.hitbox.center))
+            self.camera.update(pygame.Vector2(self.player.hitbox.center), delta)
             self.player.is_clicking = False
 
             player_input(self.player, delta)

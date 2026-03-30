@@ -1,6 +1,5 @@
 import pygame
-from ui import NormalButton, LineEdit, Text
-from ui.ui_manager import UiManager
+from ui import NormalButton, LineEdit, Text, TabContainer, UiManager
 from data import Fonts, const, PlayerData
 from window import Window, WindowType
 
@@ -23,10 +22,20 @@ class SettingsWindow(Window):
             WINDOW_HEIGHT
         )
 
-        start_y = self.rect.y + 140
+        # start_y = self.rect.y + 140
+        start_y = 60
         spacing = 80
-        x = self.rect.x + 80
+        # x = self.rect.x + 80
+        x = 20
+        padding = 20
 
+        self.tabs = TabContainer(
+            pygame.Vector2(self.rect.x + padding, self.rect.y + padding + 80),
+            (
+                self.rect.width - padding * 2,
+                self.rect.height - padding * 2 - 80  # место под кнопки снизу
+            )
+        )
         # 🔹 Заголовок
         self.title = Text(
             pygame.Vector2(0, self.rect.y + 40),
@@ -36,7 +45,7 @@ class SettingsWindow(Window):
         self.title.center_by_x(const.WINDOW_SIZE[0])
 
         # =========================
-        # 🟢 CAMERA SPEED
+        # 🟢 EDITOR CAMERA SPEED
         # =========================
         self.label_speed = Text(
             pygame.Vector2(x, start_y),
@@ -132,41 +141,90 @@ class SettingsWindow(Window):
         # 🟢 MUSIC VOLUME
         # =========================
         self.label_volume = Text(
-            pygame.Vector2(x, start_y + spacing * 4),
+            pygame.Vector2(x, start_y + spacing * 5),
             Fonts.NORMAL_30,
             "Music Volume"
         )
 
-        self.volume_value = PlayerData.BACKGROUND_MUSIC_VOLUME
+        self.volume_value = PlayerData.MUSIC_VOLUME
 
         self.text_volume = Text(
-            pygame.Vector2(x + 85, start_y + spacing * 4 + 35),
+            pygame.Vector2(x + 85, start_y + spacing * 5 + 35),
             Fonts.NORMAL_30,
             f"{self.volume_value:.2f}"
         )
 
         # Кнопка <
         self.btn_volume_down = NormalButton(
-            position=pygame.Vector2(x, start_y + spacing * 4 + 35),
+            position=pygame.Vector2(x, start_y + spacing * 5 + 35),
             size=(40, 40),
             text="<",
             font=Fonts.NORMAL_30,
-            callback=self.decrease_volume
+            callback=self.decrease_music_volume
         )
 
         # Кнопка >
         self.btn_volume_up = NormalButton(
-            position=pygame.Vector2(x + 200, start_y + spacing * 4 + 35),
+            position=pygame.Vector2(x + 200, start_y + spacing * 5 + 35),
             size=(40, 40),
             text=">",
             font=Fonts.NORMAL_30,
-            callback=self.increase_volume
+            callback=self.increase_music_volume
+        )
+
+        # =========================
+        # 🟢 CAMERA SPEED
+        # =========================
+        self.label_camera_speed = Text(
+            pygame.Vector2(x, start_y + spacing * 4),
+            Fonts.NORMAL_30,
+            "Camera Speed"
+        )
+
+        self.input_camera_speed = LineEdit(
+            (x, start_y + spacing * 4 + 35),
+            (250, 40),
+            Fonts.NORMAL_30
+        )
+        self.input_camera_speed.text = str(PlayerData.CAMERA_SPEED)
+
+        # =========================
+        # 🟢 SFX VOLUME
+        # =========================
+        self.label_sfx = Text(
+            pygame.Vector2(x, start_y),
+            Fonts.NORMAL_30,
+            "SFX Volume"
+        )
+
+        self.sfx_value = PlayerData.SFX_VOLUME
+
+        self.text_sfx = Text(
+            pygame.Vector2(x + 85, start_y + 35),
+            Fonts.NORMAL_30,
+            f"{self.sfx_value:.2f}"
+        )
+
+        self.btn_sfx_down = NormalButton(
+            position=pygame.Vector2(x, start_y + 35),
+            size=(40, 40),
+            text="<",
+            font=Fonts.NORMAL_30,
+            callback=self.decrease_sfx
+        )
+
+        self.btn_sfx_up = NormalButton(
+            position=pygame.Vector2(x + 200, start_y + 35),
+            size=(40, 40),
+            text=">",
+            font=Fonts.NORMAL_30,
+            callback=self.increase_sfx
         )
         # =========================
         # 🟢 КНОПКИ
         # =========================
         self.btn_apply = NormalButton(
-            position=pygame.Vector2(self.rect.x + 120, self.rect.bottom - 90),
+            position=pygame.Vector2(self.rect.x + 220, self.rect.bottom - 90),
             size=(200, 55),
             text="Apply",
             font=Fonts.NORMAL_30,
@@ -180,26 +238,58 @@ class SettingsWindow(Window):
             font=Fonts.NORMAL_30,
             callback=self.close
         )
+        self.btn_tab_left = NormalButton(
+            position=pygame.Vector2(self.rect.x + 20, self.rect.bottom - 90),
+            size=(60, 55),
+            text="<",
+            font=Fonts.NORMAL_30,
+            callback=self.tabs.prev_tab
+        )
+
+        self.btn_tab_right = NormalButton(
+            position=pygame.Vector2(self.rect.x + 90, self.rect.bottom - 90),
+            size=(60, 55),
+            text=">",
+            font=Fonts.NORMAL_30,
+            callback=self.tabs.next_tab
+        )
+
+        first_tab = [
+            self.label_speed, self.input_speed,
+            self.label_fps, self.input_fps,
+            self.label_distance, self.input_distance,
+            self.label_camera_speed, self.input_camera_speed,
+            self.label_color, self.input_r, self.input_g, self.input_b,
+            self.label_volume, self.text_volume, self.btn_volume_down, self.btn_volume_up,
+        ]
+        second_tab = [
+            self.label_sfx, self.text_sfx, self.btn_sfx_down, self.btn_sfx_up,
+        ]
+        self.tabs.add_tab(first_tab)
+        self.tabs.add_tab(second_tab)
 
         # =========================
         # 🟢 ADD UI
         # =========================
         for obj in [
-            self.title,
-            self.label_speed, self.input_speed,
-            self.label_fps, self.input_fps,
-            self.label_distance, self.input_distance,
-            self.label_color, self.input_r, self.input_b, self.input_g,
-            self.label_volume, self.text_volume, self.btn_volume_down, self.btn_volume_up,
+            self.tabs, self.title,
+            self.btn_tab_left, self.btn_tab_right,
             self.btn_apply, self.btn_close
         ]:
             self.ui.add_ui_object(obj)
 
-    def increase_volume(self):
+    def increase_sfx(self):
+        self.sfx_value = min(1.0, self.sfx_value + 0.05)
+        self.text_sfx.text = f"{self.sfx_value:.2f}"
+
+    def decrease_sfx(self):
+        self.sfx_value = max(0.0, self.sfx_value - 0.05)
+        self.text_sfx.text = f"{self.sfx_value:.2f}"
+    def increase_music_volume(self):
         self.volume_value = min(1.0, self.volume_value + 0.05)
         self.text_volume.text = f"{self.volume_value:.2f}"
 
-    def decrease_volume(self):
+    def decrease_music_volume(self):
         self.volume_value = max(0.0, self.volume_value - 0.05)
         self.text_volume.text = f"{self.volume_value:.2f}"
 
@@ -208,12 +298,14 @@ class SettingsWindow(Window):
             PlayerData.EDITOR_CAMERA_SPEED = float(self.input_speed.text)
         except:
             pass
-
         try:
             PlayerData.TARGET_FPS = int(self.input_fps.text)
         except:
             pass
-
+        try:
+            PlayerData.CAMERA_SPEED = float(self.input_camera_speed.text)
+        except:
+            pass
         try:
             PlayerData.WORLD_LOAD_DISTANCE = float(self.input_distance.text)
         except:
@@ -227,9 +319,10 @@ class SettingsWindow(Window):
             PlayerData.WINDOW_BACKGROUND_COLOR = (r, g, b)
         except:
             pass
-        PlayerData.BACKGROUND_MUSIC_VOLUME = self.volume_value
+        PlayerData.MUSIC_VOLUME = self.volume_value
+        PlayerData.SFX_VOLUME = self.sfx_value
         PlayerData.save()
-        pygame.mixer.music.set_volume(PlayerData.BACKGROUND_MUSIC_VOLUME)
+        pygame.mixer.music.set_volume(PlayerData.MUSIC_VOLUME)
 
     def handle_pygame_event(self, event):
         self.ui.handle_pygame_event(event)

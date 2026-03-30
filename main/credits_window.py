@@ -15,10 +15,12 @@ class CreditsWindow(Window):
         super().__init__(manager, WindowType.CREDITS)
         text = """
 Game by Angry Muni 
+
 Skins textures by: RobTopGames
 
 Portals, orbs, triggers,
 checkpoint textures by RobTopGames
+
 Background music: Me Time by Avanti
 
 Inspired by Geometry Dash by RobTopGames

@@ -156,6 +156,8 @@ class SceneSkins(Scene):
             editor_playtest_scene.set_skin(self.current_skin)
         self.applied_skin = self.current_skin
         self._update_apply_button()
+        PlayerData.SKIN = self.current_skin
+        PlayerData.save()
 
     def _back_to_menu(self):
         self.scene_manager.set_scene(SceneType.MAIN_MENU)

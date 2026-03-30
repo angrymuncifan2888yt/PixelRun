@@ -4,3 +4,4 @@ from .ui_manager import UiManager
 from .image_button import ImageButton
 from .normal_button import NormalButton
 from .line_edit import LineEdit
+from .tab_container import TabContainer

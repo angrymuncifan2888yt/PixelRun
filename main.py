@@ -51,7 +51,7 @@ class PixelRun:
 
         # Background music
         pygame.mixer.music.load("assets/sounds/background.mp3")
-        pygame.mixer.music.set_volume(PlayerData.BACKGROUND_MUSIC_VOLUME)
+        pygame.mixer.music.set_volume(PlayerData.MUSIC_VOLUME)
 
     def mainloop(self):
         pygame.mixer.music.play(-1)

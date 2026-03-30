@@ -1,14 +1,9 @@
 import json
 from .const import SAVE_FILE_FILE_PATH
+from .skins import Skins
 
 
 class PlayerData:
-    EDITOR_CAMERA_SPEED = 2000
-    TARGET_FPS = 120
-    WINDOW_BACKGROUND_COLOR = (25, 25, 25)
-    WORLD_LOAD_DISTANCE = 1200
-    BACKGROUND_MUSIC_VOLUME = 0.5
-
     @classmethod
     def save(cls):
         data = {
@@ -17,18 +12,29 @@ class PlayerData:
                 "target_fps": cls.TARGET_FPS,
                 "window_background_color": list(cls.WINDOW_BACKGROUND_COLOR),
                 "world_load_distance": cls.WORLD_LOAD_DISTANCE,
-                "background_music_volume": cls.BACKGROUND_MUSIC_VOLUME
+                "music_volume": cls.MUSIC_VOLUME,
+                "sfx_volume": cls.SFX_VOLUME,
+                "camera_speed": cls.CAMERA_SPEED,
+                "skin": cls.SKIN.name
             }
         }
 
         try:
             with open(SAVE_FILE_FILE_PATH, "w") as file:
-                json.dump(data, file, indent=4)
+                json.dump(data, file)
         except Exception:
             pass
 
     @classmethod
     def init(cls):
+        cls.EDITOR_CAMERA_SPEED = 2000
+        cls.TARGET_FPS = 120
+        cls.WINDOW_BACKGROUND_COLOR = (25, 25, 25)
+        cls.WORLD_LOAD_DISTANCE = 1200
+        cls.MUSIC_VOLUME = 0.5
+        cls.CAMERA_SPEED = 6.0
+        cls.SKIN = Skins.DEFAULT
+        cls.SFX_VOLUME = 0.5
         try:
             with open(SAVE_FILE_FILE_PATH, "r") as file:
                 data = json.load(file)
@@ -57,9 +63,26 @@ class PlayerData:
             cls.WORLD_LOAD_DISTANCE
         )
 
-        cls.BACKGROUND_MUSIC_VOLUME = cls._safe_float(
-            settings.get("background_music_volume"),
-            cls.BACKGROUND_MUSIC_VOLUME
+        cls.MUSIC_VOLUME = cls._safe_float(
+            settings.get("music_volume"),
+            cls.MUSIC_VOLUME
+        )
+
+        cls.SFX_VOLUME = cls._safe_float(
+            settings.get("sfx_volume"),
+            cls.SFX_VOLUME
+        )
+
+        cls.CAMERA_SPEED = cls._safe_float(
+            settings.get("camera_speed"),
+            cls.CAMERA_SPEED
+        )
+
+        skin_name = settings.get("skin", cls.SKIN.name)
+
+        cls.SKIN = next(
+            (skin for skin in Skins.ALL_SKINS if skin.name == skin_name),
+            Skins.DEFAULT
         )
 
     @staticmethod

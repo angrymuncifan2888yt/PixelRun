@@ -43,7 +43,7 @@ class SceneGame(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), Skins.DEFAULT)
+        self.player = Player(self.world, pygame.Vector2(400, 400), PlayerData.SKIN)
 
     def on_enter(self):
         pygame.mixer.music.pause()
@@ -59,15 +59,15 @@ class SceneGame(Scene):
         self.pause = False
 
     def _on_player_walk(self, event):
-        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_WALK, SoundChannels.GAME, PlayerData.SFX_VOLUME)
 
     def _on_player_jump(self, event):
-        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_JUMP, SoundChannels.GAME, PlayerData.SFX_VOLUME)
 
     def _on_player_death(self, event):
         self.dying_animation = True
         self.player.opacity = 50
-        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME)
+        Sounds.play_sound(Sounds.PLAYER_DEATH, SoundChannels.GAME, PlayerData.SFX_VOLUME)
         self.pause = False
 
     def _toogle_pause(self):
@@ -136,7 +136,7 @@ class SceneGame(Scene):
                     objects_updated = self.world.update_entities(entities_to_upd, delta)
 
                     player_input(self.player, delta)
-                    self.camera.update(pygame.Vector2(self.player.hitbox.center))
+                    self.camera.update(pygame.Vector2(self.player.hitbox.center), delta)
                     self.player.is_clicking = False
 
                     self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)

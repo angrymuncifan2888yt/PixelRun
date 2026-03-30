@@ -24,7 +24,9 @@ class Sounds:
         cls.PLAYER_JUMP.set_volume(cls.VOLUME * 3) # To make jump a bit louder
 
     @staticmethod
-    def play_sound(sound: pygame.mixer.Sound, channel: pygame.mixer.Channel):
+    def play_sound(sound: pygame.mixer.Sound, channel: pygame.mixer.Channel, volume: float | None = None):
+        if volume is not None:
+            sound.set_volume(volume)
         channel.play(sound)
 
     @classmethod

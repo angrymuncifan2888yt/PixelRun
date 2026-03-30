@@ -36,7 +36,7 @@ class Player(Entity):
         self.rotation_target = 0
         self.rotation_speed = 720
 
-        self.move_speed = 600
+        self.move_speed = 500
         self.acceleration = 10000
         self.friction = 4000
 
