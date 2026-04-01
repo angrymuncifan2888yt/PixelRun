@@ -3,6 +3,7 @@ from ..entity import Entity
 from data import Skin, const
 from util import SpriteAnimator, PlayerDirection, Timer
 from event import Event, EventType
+from .gamemode import GameMode
 
 
 class Player(Entity):
@@ -41,10 +42,22 @@ class Player(Entity):
         self.friction = 4000
 
         self.step_timer = Timer(0.25)
+        self.gamemode = GameMode.CUBE
 
     @property
     def is_upside_down(self):
         return self.gravity_dir == -1
+
+    def set_gamemode(self, gamemode: GameMode):
+        self.gamemode = gamemode
+        self.rotation = 0
+
+        if self.gamemode == GameMode.UFO:
+            self.jump_force = 350
+            self.gravity = 2400
+        elif self.gamemode == GameMode.CUBE:
+            self.jump_force = 750
+            self.gravity = 2400
 
     def update_rotation(self):
         pass
@@ -55,9 +68,9 @@ class Player(Entity):
         self.animator.set_sprite_count(self.skin.animation_length)
 
     def jump(self):
-        if not self.on_ground:
-            return
-
+        if self.gamemode != GameMode.UFO:
+            if not self.on_ground:
+                return
         self.velocity.y = -self.jump_force * self.gravity_dir
         self.on_ground = False
         self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
@@ -97,19 +110,20 @@ class Player(Entity):
 
         self.stop_horizontal(delta_time)
 
-        if not self.on_ground:
-            dir_mult = 1 if self.direction == PlayerDirection.LEFT else -1
+        if self.gamemode != GameMode.UFO:
+            if not self.on_ground:
+                dir_mult = 1 if self.direction == PlayerDirection.LEFT else -1
 
-            self.rotation_target += self.rotation_step * dir_mult * self.gravity_dir * delta_time * 4
+                self.rotation_target += self.rotation_step * dir_mult * self.gravity_dir * delta_time * 4
 
-            if self.rotation_target >= 360:
-                self.rotation_target -= 360
-            elif self.rotation_target < 0:
-                self.rotation_target += 360
+                if self.rotation_target >= 360:
+                    self.rotation_target -= 360
+                elif self.rotation_target < 0:
+                    self.rotation_target += 360
 
-            self.rotation = self.rotation_target
-        else:
-            self.rotation = round(self.rotation / 90) * 90
+                self.rotation = self.rotation_target
+            else:
+                self.rotation = round(self.rotation / 90) * 90
         if abs(self.position.y) >= self.kill_y:
             self.kill()
 
@@ -138,6 +152,10 @@ class Player(Entity):
         else:
             self.gravity_dir = 1
 
+        if self.current_checkpoint:
+            self.set_gamemode(self.current_checkpoint.gamemode)
+        else:
+            self.set_gamemode(GameMode.CUBE)
         self.on_ground = False
         self.animator.reset()
         self.step_timer.reset()

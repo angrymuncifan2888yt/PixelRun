@@ -4,6 +4,9 @@ from .const import *
 class Sprites:
     @classmethod
     def init(cls):
+        # Player
+        cls.UFO = pygame.image.load("assets/images/ufo.png")
+
         # Skins
         cls.DEFAULT = pygame.image.load("assets/images/skins/default.png")
         cls.MINI = pygame.image.load("assets/images/skins/mini.png")
@@ -16,6 +19,7 @@ class Sprites:
         cls.GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/gravity_portal.png"), PORTAL_SIZE)
         cls.UPSIDE_DOWN_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/upside_down_portal.png"), PORTAL_SIZE)
         cls.NORMAL_GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/normal_gravity_portal.png"), PORTAL_SIZE)
+        cls.UFO_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/ufo_portal.png"), PORTAL_SIZE)
         cls.SPIKE = pygame.transform.scale(pygame.image.load("assets/images/spike.png"), SPIKE_SIZE)
         cls.CHECKPOINT = pygame.transform.scale(pygame.image.load("assets/images/checkpoint.png"), CHECKPOINT_SIZE)
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)

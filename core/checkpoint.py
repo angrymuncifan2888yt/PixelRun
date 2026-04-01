@@ -26,6 +26,7 @@ class Checkpoint(Entity):
     def activate(self, player: Player):
         self.activated = True
         self.active = False
+        self.gamemode = player.gamemode
         player.current_checkpoint = self
         self.opacity /= 2
 

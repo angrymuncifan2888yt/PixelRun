@@ -1,6 +1,7 @@
 import pygame
+from ..player.gamemode import GameMode
 from util import Camera, PlayerDirection
-from data import Sprites, Fonts
+from data import Sprites
 from core import (
     Entity,
     Player,
@@ -8,6 +9,7 @@ from core import (
     GravityPortal,
     NormalGravityPortal,
     UpsideDownPortal,
+    UFOPortal,
     JumpPad,
     Spike,
     Checkpoint,
@@ -34,11 +36,43 @@ from .render_utils import (
 # ===============================
 
 def render_player(screen, player: Player, camera=None):
-    if player.opacity <= 0:
-        return
-
     pos = get_entity_screen_pos(player, camera)
 
+    # 🛸 UFO режим
+    if player.gamemode == GameMode.UFO:
+        # # 🔼 Иконка игрока сверху по центру
+        # icon_size = 100
+
+        # icon_sprite = player.skin.animations[0]
+
+        # icon_sprite = get_transformed(
+        #     icon_sprite,
+        #     width=icon_size,
+        #     height=icon_size,
+        #     flip_x=(player.direction == PlayerDirection.LEFT),
+        #     angle=0,
+        #     opacity=player.opacity,
+        # )
+
+        # icon_pos = (
+        #     pos[0],
+        #     pos[1] - player.height // 2
+        # )
+
+        # blit_centered(screen, icon_sprite, icon_pos, icon_size, icon_size)
+
+        base_sprite = get_transformed(
+            Sprites.UFO,
+            width=player.width,
+            height=player.height,
+            angle=player.rotation,
+            opacity=player.opacity,
+        )
+
+        blit_centered(screen, base_sprite, pos, player.width, player.height)
+        return
+
+    # 🟩 Обычный режим (Cube и др.)
     sprite = (
         player.animator.get_current_sprite(player.skin.animations)
         if player.is_moving
@@ -55,7 +89,6 @@ def render_player(screen, player: Player, camera=None):
     )
 
     blit_centered(screen, sprite, pos, player.width, player.height)
-
 
 def render_colored_rect(screen, entity, color, camera=None):
     if entity.opacity <= 0:
@@ -121,6 +154,10 @@ def render_upside_down_portal(screen, portal: UpsideDownPortal, camera=None):
 
 def render_normal_gravity_portal(screen, portal: NormalGravityPortal, camera=None):
     render_sprite_entity(screen, portal, Sprites.NORMAL_GRAVITY_PORTAL, camera)
+
+
+def render_ufoportal(screen, portal: UFOPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.UFO_PORTAL, camera)
 
 
 def render_checkpoint(screen, checkpoint: Checkpoint, camera=None):
@@ -248,6 +285,7 @@ ENTITY_RENDERERS = {
     GravityPortal: render_gravity_portal,
     UpsideDownPortal: render_upside_down_portal,
     NormalGravityPortal: render_normal_gravity_portal,
+    UFOPortal: render_ufoportal,
     Spike: render_spike,
     Checkpoint: render_checkpoint,
     JumpOrb: render_jump_orb,

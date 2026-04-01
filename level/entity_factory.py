@@ -9,6 +9,7 @@ ENTITY_FACTORY = {
     "gravity_portal": GravityPortal,
     "normal_gravity_portal": NormalGravityPortal,
     "upside_down_portal": UpsideDownPortal,
+    "ufo_portal": UFOPortal,
     "checkpoint": Checkpoint,
     "end": EndDoor,
     "color_trigger": ColorTrigger,

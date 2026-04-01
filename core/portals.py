@@ -1,4 +1,5 @@
 from pygame.math import Vector2
+from .player.gamemode import GameMode
 from .entity import Entity
 from .player.player import Player
 from data import const
@@ -35,3 +36,7 @@ class NormalGravityPortal(Portal):
     def apply(self, player: Player):
         if player.is_upside_down:
             player.reverse_gravity()
+
+class UFOPortal(Portal):
+    def apply(self, player: Player):
+        player.set_gamemode(GameMode.UFO)
