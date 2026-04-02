@@ -58,10 +58,11 @@ class Player(Entity):
         elif self.gamemode == GameMode.CUBE:
             self.jump_force = 750
             self.gravity = 2400
+        self.update_rotation()
 
     def update_rotation(self):
         pass
-        # self.rotation = 180 if self.is_upside_down else 0
+        self.rotation = 180 if self.is_upside_down else 0
 
     def set_skin(self, skin: Skin):
         self.skin = skin

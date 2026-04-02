@@ -36,35 +36,31 @@ from .render_utils import (
 # ===============================
 
 def render_player(screen, player: Player, camera=None):
-    pos = get_entity_screen_pos(player, camera)
+    pos = pygame.Vector2(get_entity_screen_pos(player, camera))
 
     # 🛸 UFO режим
     if player.gamemode == GameMode.UFO:
-        # # 🔼 Иконка игрока сверху по центру
-        # icon_size = 100
+        # 🟩 Обычный режим (Cube и др.)
+        sprite = (
+            player.skin.standing_sprite
+        )
+        size = 25
 
-        # icon_sprite = player.skin.animations[0]
+        sprite = get_transformed(
+            sprite,
+            width=size,
+            height=size,
+            flip_x=(player.direction == PlayerDirection.LEFT),
+            angle=player.rotation,
+            opacity=player.opacity,
+        )
 
-        # icon_sprite = get_transformed(
-        #     icon_sprite,
-        #     width=icon_size,
-        #     height=icon_size,
-        #     flip_x=(player.direction == PlayerDirection.LEFT),
-        #     angle=0,
-        #     opacity=player.opacity,
-        # )
-
-        # icon_pos = (
-        #     pos[0],
-        #     pos[1] - player.height // 2
-        # )
-
-        # blit_centered(screen, icon_sprite, icon_pos, icon_size, icon_size)
-
+        blit_centered(screen, sprite, (pos[0] + player.width / 2 - size / 2, pos[1] + 10), size, size)
+ 
         base_sprite = get_transformed(
             Sprites.UFO,
-            width=player.width,
-            height=player.height,
+            width=90,
+            height=75,
             angle=player.rotation,
             opacity=player.opacity,
         )

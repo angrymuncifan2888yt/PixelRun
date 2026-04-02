@@ -47,6 +47,7 @@ def get_entity_screen_pos(entity: Entity, camera: Camera | None):
 
 
 def blit_centered(screen, surface, pos, width, height):
+    pos = pygame.Vector2(pos)
     rect = surface.get_rect(
         center=(int(pos.x + width / 2), int(pos.y + height / 2))
     )
