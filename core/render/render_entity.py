@@ -10,6 +10,7 @@ from core import (
     NormalGravityPortal,
     UpsideDownPortal,
     UFOPortal,
+    CubePortal,
     JumpPad,
     Spike,
     Checkpoint,
@@ -44,7 +45,7 @@ def render_player(screen, player: Player, camera=None):
         sprite = (
             player.skin.standing_sprite
         )
-        size = 25
+        size = 35
 
         sprite = get_transformed(
             sprite,
@@ -54,8 +55,8 @@ def render_player(screen, player: Player, camera=None):
             angle=player.rotation,
             opacity=player.opacity,
         )
-
-        blit_centered(screen, sprite, (pos[0] + player.width / 2 - size / 2, pos[1] + 10), size, size)
+        y = player.height - size - 10 if player.is_upside_down else 10
+        blit_centered(screen, sprite, (pos[0] + player.width / 2 - size / 2, pos[1] + y), size, size)
  
         base_sprite = get_transformed(
             Sprites.UFO,
@@ -155,6 +156,8 @@ def render_normal_gravity_portal(screen, portal: NormalGravityPortal, camera=Non
 def render_ufoportal(screen, portal: UFOPortal, camera=None):
     render_sprite_entity(screen, portal, Sprites.UFO_PORTAL, camera)
 
+def render_cubeportal(screen, portal: CubePortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.CUBE_PORTAL, camera)
 
 def render_checkpoint(screen, checkpoint: Checkpoint, camera=None):
     render_sprite_entity(screen, checkpoint, Sprites.CHECKPOINT, camera)
@@ -282,6 +285,7 @@ ENTITY_RENDERERS = {
     UpsideDownPortal: render_upside_down_portal,
     NormalGravityPortal: render_normal_gravity_portal,
     UFOPortal: render_ufoportal,
+    CubePortal: render_cubeportal,
     Spike: render_spike,
     Checkpoint: render_checkpoint,
     JumpOrb: render_jump_orb,

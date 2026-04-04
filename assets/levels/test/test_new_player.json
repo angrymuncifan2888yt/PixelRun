@@ -1,0 +1,115 @@
+{
+    "name": "Unnamed Level",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                -300.0,
+                0.0
+            ],
+            "size": [
+                1500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                1150.0,
+                -150.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -300.0,
+                -150.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_orb",
+            "position": [
+                450.0,
+                -200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "gravity_orb",
+            "position": [
+                600.0,
+                -200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "jump_pad",
+            "position": [
+                301.0,
+                -10.0
+            ],
+            "size": [
+                50,
+                10
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "power": 1350,
+            "color": [
+                255,
+                255,
+                0
+            ]
+        }
+    ]
+}

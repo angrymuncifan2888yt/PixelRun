@@ -2,6 +2,7 @@ from pygame.math import Vector2
 from .entity import Entity
 from data import const
 from .player.player import Player
+from event import Event, EventType
 
 
 class JumpPad(Entity):
@@ -23,6 +24,7 @@ class JumpPad(Entity):
             entity.jump_force = self.power # Jump pad power
             entity.jump()
             entity.jump_force = prev
+            self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     def get_special_fields(self):
         return {

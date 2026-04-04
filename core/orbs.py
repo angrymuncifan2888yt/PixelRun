@@ -13,7 +13,7 @@ class Orb(Entity):
         if isinstance(entity, Player):
             if entity.is_clicking:
                 self.activate(entity)
-                # self.world.event_bus.emit(Event(EventType.ORB_ACTIVATE, data={"orb": self}))
+                self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     # To be made in child classes
     def activate(self, player: Player):

@@ -48,6 +48,25 @@ class Player(Entity):
     def is_upside_down(self):
         return self.gravity_dir == -1
 
+    def click(self):
+        if self.gamemode == GameMode.CUBE:
+            if self.on_ground:
+                self.jump()
+                self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+        elif self.gamemode == GameMode.UFO:
+            self.jump()
+            self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+        self.is_clicking = True
+
+    def hold(self):
+        if self.gamemode == GameMode.CUBE:
+            if self.on_ground:
+                self.jump()
+                self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+
+    def jump(self):
+        self.velocity.y = -self.jump_force * self.gravity_dir
+        self.on_ground = False
     def set_gamemode(self, gamemode: GameMode):
         self.gamemode = gamemode
         self.rotation = 0
@@ -67,14 +86,6 @@ class Player(Entity):
     def set_skin(self, skin: Skin):
         self.skin = skin
         self.animator.set_sprite_count(self.skin.animation_length)
-
-    def jump(self):
-        if self.gamemode != GameMode.UFO:
-            if not self.on_ground:
-                return
-        self.velocity.y = -self.jump_force * self.gravity_dir
-        self.on_ground = False
-        self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     def move_right(self, delta_time: float):
         self.velocity.x += self.acceleration * delta_time
@@ -135,6 +146,7 @@ class Player(Entity):
                 self.world.event_bus.emit(Event(EventType.PLAYER_WALK, {}))
 
         self.is_moving = False
+        self.is_clicking = False
 
     def kill(self):
         self.world.event_bus.emit(Event(EventType.PLAYER_DEATH, {}))

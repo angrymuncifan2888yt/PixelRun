@@ -20,6 +20,7 @@ class Sprites:
         cls.UPSIDE_DOWN_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/upside_down_portal.png"), PORTAL_SIZE)
         cls.NORMAL_GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/normal_gravity_portal.png"), PORTAL_SIZE)
         cls.UFO_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/ufo_portal.png"), PORTAL_SIZE)
+        cls.CUBE_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/cube_portal.png"), PORTAL_SIZE)
         cls.SPIKE = pygame.transform.scale(pygame.image.load("assets/images/spike.png"), SPIKE_SIZE)
         cls.CHECKPOINT = pygame.transform.scale(pygame.image.load("assets/images/checkpoint.png"), CHECKPOINT_SIZE)
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)

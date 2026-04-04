@@ -13,4 +13,5 @@ class Levels:
         cls.FIRST_LEVEL = cls.load_level_from_file("assets/levels/first_level.json")
         cls.BALL = cls.load_level_from_file("assets/levels/ball.json")
         cls.EXECUTION = cls.load_level_from_file("assets/levels/execution.json")
-        cls.ALL_LEVELS = [cls.TUTORIAL, cls.FIRST_LEVEL, cls.BALL, cls.EXECUTION]
+        cls.UFO = cls.load_level_from_file("assets/levels/ufo.json")
+        cls.ALL_LEVELS = [cls.TUTORIAL, cls.FIRST_LEVEL, cls.BALL, cls.EXECUTION, cls.UFO]

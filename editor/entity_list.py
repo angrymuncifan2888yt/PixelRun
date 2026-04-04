@@ -6,6 +6,7 @@ editor_entity_list = [
     NormalGravityPortal,
     UpsideDownPortal,
     UFOPortal,
+    CubePortal,
     JumpPad,
     Spike,
     Checkpoint,

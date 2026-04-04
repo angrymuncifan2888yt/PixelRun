@@ -40,3 +40,7 @@ class NormalGravityPortal(Portal):
 class UFOPortal(Portal):
     def apply(self, player: Player):
         player.set_gamemode(GameMode.UFO)
+
+class CubePortal(Portal):
+    def apply(self, player: Player):
+        player.set_gamemode(GameMode.CUBE)
