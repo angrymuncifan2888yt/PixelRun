@@ -7,6 +7,7 @@ editor_entity_list = [
     UpsideDownPortal,
     UFOPortal,
     CubePortal,
+    BallPortal,
     JumpPad,
     Spike,
     Checkpoint,

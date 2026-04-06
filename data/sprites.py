@@ -4,7 +4,6 @@ from .const import *
 class Sprites:
     @classmethod
     def init(cls):
-        # Player
         # Skins
         cls.CUBE_DEFAULT = pygame.image.load("assets/images/skins/cube/cube_default.png")
         cls.CUBE_MINI = pygame.image.load("assets/images/skins/cube/cube_mini.png")
@@ -19,12 +18,18 @@ class Sprites:
         cls.UFO_KING = pygame.image.load("assets/images/skins/ufo/ufo_king.png")
         cls.UFO_TETRIS = pygame.image.load("assets/images/skins/ufo/ufo_tetris.png")
 
+        cls.BALL_DEFAULT = pygame.image.load("assets/images/skins/ball/ball_default.png")
+        cls.BALL_BALL = pygame.image.load("assets/images/skins/ball/ball_ball.png")
+        cls.BALL_SONIC = pygame.image.load("assets/images/skins/ball/ball_sonic.png")
+        cls.BALL_SMILE = pygame.image.load("assets/images/skins/ball/ball_smile.png")
+
         # World objects
         cls.GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/gravity_portal.png"), PORTAL_SIZE)
         cls.UPSIDE_DOWN_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/upside_down_portal.png"), PORTAL_SIZE)
         cls.NORMAL_GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/normal_gravity_portal.png"), PORTAL_SIZE)
         cls.UFO_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/ufo_portal.png"), PORTAL_SIZE)
         cls.CUBE_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/cube_portal.png"), PORTAL_SIZE)
+        cls.BALL_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/ball_portal.png"), PORTAL_SIZE)
         cls.SPIKE = pygame.transform.scale(pygame.image.load("assets/images/spike.png"), SPIKE_SIZE)
         cls.CHECKPOINT = pygame.transform.scale(pygame.image.load("assets/images/checkpoint.png"), CHECKPOINT_SIZE)
         cls.JUMP_ORB = pygame.transform.scale(pygame.image.load("assets/images/jump_orb.png"), ORB_SIZE)

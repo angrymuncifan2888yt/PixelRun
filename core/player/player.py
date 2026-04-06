@@ -7,7 +7,7 @@ from .gamemode import GameMode
 
 
 class Player(Entity):
-    def __init__(self, world, position: Vector2, cube_skin, ufo_skin, rotation=0):
+    def __init__(self, world, position: Vector2, cube_skin, ufo_skin, ball_skin,rotation=0):
         super().__init__(world, position, *PLAYER_SIZE, rotation)
 
         self.id = ["player"]
@@ -24,6 +24,7 @@ class Player(Entity):
 
         self.cube_skin = cube_skin
         self.ufo_skin = ufo_skin
+        self.ball_skin = ball_skin
 
         self.velocity = Vector2(0, 0)
 
@@ -56,6 +57,11 @@ class Player(Entity):
         elif self.gamemode == GameMode.UFO:
             self.jump()
             self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+        elif self.gamemode == GameMode.BALL:
+            if self.on_ground:
+                self.reverse_gravity()
+                self.on_ground = False
+                self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
         self.is_clicking = True
 
     def hold(self):
@@ -73,7 +79,7 @@ class Player(Entity):
         self.rotation = 0
 
         if self.gamemode == GameMode.UFO:
-            self.jump_force = 450
+            self.jump_force = 500
             self.gravity = 2400
         elif self.gamemode == GameMode.CUBE:
             self.jump_force = 750
@@ -82,7 +88,8 @@ class Player(Entity):
         self.update_rotation()
 
     def update_rotation(self):
-        self.rotation = 180 if self.is_upside_down else 0
+        if self.gamemode != GameMode.BALL:
+            self.rotation = 180 if self.is_upside_down else 0
 
     def move_right(self, delta_time: float):
         self.velocity.x += self.acceleration * delta_time
@@ -117,7 +124,7 @@ class Player(Entity):
 
         self.stop_horizontal(delta_time)
 
-        if self.gamemode != GameMode.UFO:
+        if self.gamemode == GameMode.CUBE:
             if not self.on_ground:
                 dir_mult = 1 if self.direction == PlayerDirection.LEFT else -1
 
@@ -132,6 +139,18 @@ class Player(Entity):
             else:
                 self.rotation = round(self.rotation / 90) * 90
 
+        elif self.gamemode == GameMode.BALL:
+            if self.is_moving or not self.on_ground:
+                dir_mult = 1 if self.direction == PlayerDirection.LEFT else -1
+
+                self.rotation_target += self.rotation_step * dir_mult * self.gravity_dir * delta_time * 4
+
+                if self.rotation_target >= 360:
+                    self.rotation_target -= 360
+                elif self.rotation_target < 0:
+                    self.rotation_target += 360
+
+                self.rotation = self.rotation_target
         if abs(self.position.y) >= self.kill_y:
             self.kill()
 

@@ -3,10 +3,9 @@ from .ui_object import UiObject
 
 
 class TabContainer(UiObject):
-
-    def __init__(self, position, size):
+    def __init__(self, position, size, show_tabs=False):
         super().__init__(position)
-
+        self.show_tabs = show_tabs
         self.size = size
 
         self.tabs = []  # [[ui_objects]]
@@ -85,17 +84,18 @@ class TabContainer(UiObject):
 
         tab_width = self.size[0] // len(self.tabs)
 
-        # 🔝 рисуем вкладки (просто полоски)
-        for i in range(len(self.tabs)):
-            rect = pygame.Rect(
-                pos.x + i * tab_width,
-                pos.y,
-                tab_width,
-                self.tab_height
-            )
+        if self.show_tabs:
+            # 🔝 рисуем вкладки (просто полоски)
+            for i in range(len(self.tabs)):
+                rect = pygame.Rect(
+                    pos.x + i * tab_width,
+                    pos.y,
+                    tab_width,
+                    self.tab_height
+                )
 
-            color = self.active_tab_color if i == self.current_tab else self.tab_color
-            pygame.draw.rect(screen, color, rect)
+                color = self.active_tab_color if i == self.current_tab else self.tab_color
+                pygame.draw.rect(screen, color, rect)
 
         # 📦 рисуем содержимое
         for obj in self.tabs[self.current_tab]:

@@ -67,7 +67,8 @@ class MainMenuBackground(UiObject):
             self.world,
             pygame.Vector2(1100, 500),
             PlayerData.CUBE_SKIN,
-            PlayerData.UFO_SKIN
+            PlayerData.UFO_SKIN,
+            PlayerData.BALL_SKIN
         )
         self.world.add_entity(
             self.player

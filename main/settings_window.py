@@ -34,7 +34,8 @@ class SettingsWindow(Window):
             (
                 self.rect.width - padding * 2,
                 self.rect.height - padding * 2 - 80  # место под кнопки снизу
-            )
+            ),
+            True
         )
         # 🔹 Заголовок
         self.title = Text(

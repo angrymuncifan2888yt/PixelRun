@@ -17,7 +17,8 @@ class PlayerData:
                 "player_death_volume": cls.PLAYER_DEATH_VOLUME,
                 "camera_speed": cls.CAMERA_SPEED,
                 "cube_skin": cls.CUBE_SKIN.name,
-                "ufo_skin": cls.UFO_SKIN.name
+                "ufo_skin": cls.UFO_SKIN.name,
+                "ball_skin": cls.BALL_SKIN.name
             }
         }
 
@@ -41,6 +42,7 @@ class PlayerData:
 
         cls.CUBE_SKIN = Skins.CUBE_SKINS[0]
         cls.UFO_SKIN = Skins.UFO_SKINS[0] if Skins.UFO_SKINS else cls.CUBE_SKIN
+        cls.BALL_SKIN = Skins.BALL_SKINS[0] if hasattr(Skins, "BALL_SKINS") and Skins.BALL_SKINS else cls.CUBE_SKIN
 
         try:
             with open(SAVE_FILE_FILE_PATH, "r") as file:
@@ -92,15 +94,21 @@ class PlayerData:
 
         cube_skin_name = settings.get("cube_skin", cls.CUBE_SKIN.name)
         ufo_skin_name = settings.get("ufo_skin", cls.UFO_SKIN.name)
+        ball_skin_name = settings.get("ball_skin", cls.BALL_SKIN.name)
 
         cls.CUBE_SKIN = next(
-            (skin for skin in Skins.ALL_SKINS if skin.name == cube_skin_name),
+            (skin for skin in Skins.CUBE_SKINS if skin.name == cube_skin_name),
             Skins.CUBE_SKINS[0]
         )
 
         cls.UFO_SKIN = next(
-            (skin for skin in Skins.ALL_SKINS if skin.name == ufo_skin_name),
+            (skin for skin in Skins.UFO_SKINS if skin.name == ufo_skin_name),
             Skins.UFO_SKINS[0] if Skins.UFO_SKINS else cls.CUBE_SKIN
+        )
+
+        cls.BALL_SKIN = next(
+            (skin for skin in getattr(Skins, "BALL_SKINS", []) if skin.name == ball_skin_name),
+            Skins.BALL_SKINS[0] if hasattr(Skins, "BALL_SKINS") and Skins.BALL_SKINS else cls.CUBE_SKIN
         )
 
     @staticmethod

@@ -44,3 +44,7 @@ class UFOPortal(Portal):
 class CubePortal(Portal):
     def apply(self, player: Player):
         player.set_gamemode(GameMode.CUBE)
+
+class BallPortal(Portal):
+    def apply(self, player: Player):
+        player.set_gamemode(GameMode.BALL)

@@ -47,7 +47,8 @@ class SceneGame(Scene):
             self.world,
             pygame.Vector2(400, 400),
             PlayerData.CUBE_SKIN,
-            PlayerData.UFO_SKIN
+            PlayerData.UFO_SKIN,
+            PlayerData.BALL_SKIN,
         )
 
     def on_enter(self):
@@ -93,7 +94,8 @@ class SceneGame(Scene):
         self.background_color = level.background_color
         self.level_ended = False
         self.camera.position = self.player.position.copy()
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
+        self.player = Player(self.world, self.current_level.player_spawn,
+                             self.player.cube_skin, self.player.ufo_skin, self.player.ball_skin)
         level.load_to_world(self.world, self.player)
         self.subscribe_world_event()
 
@@ -102,7 +104,8 @@ class SceneGame(Scene):
         self.world = World()
 
         # Пересоздаем игрока
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
+        self.player = Player(self.world, self.current_level.player_spawn,
+                             self.player.cube_skin, self.player.ufo_skin, self.player.ball_skin)
         # Перезагружаем текущий уровень
         self.load_level(self.current_level)
         self.background_color = self.current_level.background_color

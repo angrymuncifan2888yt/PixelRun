@@ -11,6 +11,7 @@ from core import (
     UpsideDownPortal,
     UFOPortal,
     CubePortal,
+    BallPortal,
     JumpPad,
     Spike,
     Checkpoint,
@@ -71,17 +72,30 @@ def render_player(screen, player: Player, camera=None):
         blit_centered(screen, base_sprite, pos, player.width, player.height)
         return
 
-    # 🟩 Cube режим
-    sprite = get_transformed(
-        player.cube_skin.sprite,
-        width=player.cube_skin.size[0],
-        height=player.cube_skin.size[1],
-        flip_x=(player.direction == PlayerDirection.LEFT),
-        angle=player.rotation,
-        opacity=player.opacity,
-    )
+    elif player.gamemode == GameMode.BALL:
+        sprite = get_transformed(
+            player.ball_skin.sprite,
+            width=player.ball_skin.size[0],
+            height=player.ball_skin.size[1],
+            flip_x=(player.direction == PlayerDirection.LEFT),
+            angle=player.rotation,
+            opacity=player.opacity,
+        )
 
-    blit_centered(screen, sprite, pos, player.width, player.height)
+        blit_centered(screen, sprite, pos, player.width, player.height)
+        return
+    elif player.gamemode == GameMode.CUBE:
+        # 🟩 Cube режим
+        sprite = get_transformed(
+            player.cube_skin.sprite,
+            width=player.cube_skin.size[0],
+            height=player.cube_skin.size[1],
+            flip_x=(player.direction == PlayerDirection.LEFT),
+            angle=player.rotation,
+            opacity=player.opacity,
+        )
+
+        blit_centered(screen, sprite, pos, player.width, player.height)
 
 def render_colored_rect(screen, entity, color, camera=None):
     if entity.opacity <= 0:
@@ -155,6 +169,8 @@ def render_ufoportal(screen, portal: UFOPortal, camera=None):
 def render_cubeportal(screen, portal: CubePortal, camera=None):
     render_sprite_entity(screen, portal, Sprites.CUBE_PORTAL, camera)
 
+def render_ballportal(screen, portal: BallPortal, camera=None):
+    render_sprite_entity(screen, portal, Sprites.BALL_PORTAL, camera)
 def render_checkpoint(screen, checkpoint: Checkpoint, camera=None):
     render_sprite_entity(screen, checkpoint, Sprites.CHECKPOINT, camera)
 
@@ -282,6 +298,7 @@ ENTITY_RENDERERS = {
     NormalGravityPortal: render_normal_gravity_portal,
     UFOPortal: render_ufoportal,
     CubePortal: render_cubeportal,
+    BallPortal: render_ballportal,
     Spike: render_spike,
     Checkpoint: render_checkpoint,
     JumpOrb: render_jump_orb,
