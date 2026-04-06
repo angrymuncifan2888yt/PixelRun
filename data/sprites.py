@@ -5,15 +5,19 @@ class Sprites:
     @classmethod
     def init(cls):
         # Player
-        cls.UFO = pygame.image.load("assets/images/ufo.png")
-
         # Skins
-        cls.DEFAULT = pygame.image.load("assets/images/skins/default.png")
-        cls.MINI = pygame.image.load("assets/images/skins/mini.png")
-        cls.ELECTRODYNAMIX = pygame.image.load("assets/images/skins/nexus.png")
-        cls.DOGGIE = pygame.image.load("assets/images/skins/doggie.png")
-        cls.MICHIGUN = pygame.image.load("assets/images/skins/michigun.png")
-        cls.RUBRUB = pygame.image.load("assets/images/skins/rubrub.png")
+        cls.CUBE_DEFAULT = pygame.image.load("assets/images/skins/cube/cube_default.png")
+        cls.CUBE_MINI = pygame.image.load("assets/images/skins/cube/cube_mini.png")
+        cls.CUBE_ELECTRODYNAMIX = pygame.image.load("assets/images/skins/cube/cube_nexus.png")
+        cls.CUBE_DOGGIE = pygame.image.load("assets/images/skins/cube/cube_doggie.png")
+        cls.CUBE_MICHIGUN = pygame.image.load("assets/images/skins/cube/cube_michigun.png")
+        cls.CUBE_RUBRUB = pygame.image.load("assets/images/skins/cube/cube_rubrub.png")
+
+        cls.UFO_DEFAULT = pygame.image.load("assets/images/skins/ufo/ufo_default.png")
+        cls.UFO_CLUBSTEP = pygame.image.load("assets/images/skins/ufo/ufo_clubstep.png")
+        cls.UFO_CLOUD = pygame.image.load("assets/images/skins/ufo/ufo_cloud.png")
+        cls.UFO_KING = pygame.image.load("assets/images/skins/ufo/ufo_king.png")
+        cls.UFO_TETRIS = pygame.image.load("assets/images/skins/ufo/ufo_tetris.png")
 
         # World objects
         cls.GRAVITY_PORTAL = pygame.transform.scale(pygame.image.load("assets/images/gravity_portal.png"), PORTAL_SIZE)

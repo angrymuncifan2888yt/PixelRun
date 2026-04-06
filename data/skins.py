@@ -1,42 +1,41 @@
 from .sprites import Sprites
+from core import GameMode
+
 
 class Skin:
-    def __init__(self, name: str, description: str, standing_sprite, animations) -> None:
-        self.standing_sprite = standing_sprite
+    def __init__(self, name: str, description: str, sprite, gamemode, size=(75, 75)) -> None:
         self.name = name
         self.description = description
-        self.animations = animations
-
-    @property
-    def animation_length(self):
-        return len(self.animations)
+        self.sprite = sprite
+        self.gamemode = gamemode
+        self.size = size
 
 
 class Skins:
     @classmethod
     def init(cls):
-        cls.DEFAULT = Skin("Default",
-                               "Default skin",
-                               Sprites.DEFAULT,
-                               [Sprites.DEFAULT])
-        cls.MINI = Skin("Mini",
-                               "Idk what to type here lol",
-                               Sprites.MINI,
-                               [Sprites.MINI])
-        cls.ELECTRODYNAMIX = Skin("Electrodynamix",
-                               "Complete Extreme Demon \"Electrodynamix\" to get this icon",
-                               Sprites.ELECTRODYNAMIX,
-                               [Sprites.ELECTRODYNAMIX])
-        cls.DOGGIE = Skin("Doggie",
-                               "Doggie's icon",
-                               Sprites.DOGGIE,
-                               [Sprites.DOGGIE])
-        cls.MICHIGUN = Skin("Michigun",
-                               "Michigun's icon",
-                               Sprites.MICHIGUN,
-                               [Sprites.MICHIGUN])
-        cls.RUBRUB = Skin("Rubrub (Robtop)",
-                               "Creator of the original game (Geometry Dash)",
-                               Sprites.RUBRUB,
-                               [Sprites.RUBRUB])
-        cls.ALL_SKINS = [cls.DEFAULT, cls.MINI, cls.ELECTRODYNAMIX, cls.DOGGIE, cls.MICHIGUN, cls.RUBRUB]
+        cls.ALL_SKINS = []
+
+        cls.CUBE_SKINS = []
+        cls.UFO_SKINS = []
+
+        def add(skin):
+            cls.ALL_SKINS.append(skin)
+
+            if skin.gamemode == GameMode.CUBE:
+                cls.CUBE_SKINS.append(skin)
+            elif skin.gamemode == GameMode.UFO:
+                cls.UFO_SKINS.append(skin)
+
+        add(Skin("Default", "Default skin", Sprites.CUBE_DEFAULT, GameMode.CUBE))
+        add(Skin("Mini", "Idk what to type here lol", Sprites.CUBE_MINI, GameMode.CUBE))
+        add(Skin("Electrodynamix", "Complete Extreme Demon \"Electrodynamix\" to get this icon", Sprites.CUBE_ELECTRODYNAMIX, GameMode.CUBE))
+        add(Skin("Doggie", "Doggie's icon", Sprites.CUBE_DOGGIE, GameMode.CUBE))
+        add(Skin("Michigun", "Michigun's icon", Sprites.CUBE_MICHIGUN, GameMode.CUBE))
+        add(Skin("Rubrub (Robtop)", "Creator of the original game (Geometry Dash)", Sprites.CUBE_RUBRUB, GameMode.CUBE))
+
+        add(Skin("Default", "Default UFO skin", Sprites.UFO_DEFAULT, GameMode.UFO, size=(90, 75)))
+        add(Skin("Clubstep", "You are lucky there is no Clubstep in PixelRun", Sprites.UFO_CLUBSTEP, GameMode.UFO, size=(90, 75)))
+        add(Skin("Cloud", "Cloudy weather!", Sprites.UFO_CLOUD, GameMode.UFO, size=(75, 75)))
+        add(Skin("Nexus", "Nexus's UFO", Sprites.UFO_KING, GameMode.UFO, size=(90, 75)))
+        add(Skin("Tetris", "The real most popular game", Sprites.UFO_TETRIS, GameMode.UFO, size=(90, 75)))

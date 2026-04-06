@@ -1,5 +1,5 @@
 from .entity import Entity
-from data import Fonts
+from data.fonts import Fonts
 import pygame
 
 

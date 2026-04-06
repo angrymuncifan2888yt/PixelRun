@@ -62,8 +62,13 @@ class MainMenuBackground(UiObject):
         ]
         for orb in self.gravity_orbs:
             self.world.add_entity(orb)
-
-        self.player = Player(self.world, pygame.Vector2(1100, 500), PlayerData.SKIN)
+            
+        self.player = Player(
+            self.world,
+            pygame.Vector2(1100, 500),
+            PlayerData.CUBE_SKIN,
+            PlayerData.UFO_SKIN
+        )
         self.world.add_entity(
             self.player
         )

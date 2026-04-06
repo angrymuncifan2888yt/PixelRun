@@ -27,8 +27,12 @@ class SceneEditorPlaytest(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), PlayerData.SKIN)
-
+        self.player = Player(
+            self.world,
+            pygame.Vector2(400, 400),
+            PlayerData.CUBE_SKIN,
+            PlayerData.UFO_SKIN
+        )
         self.editor_btn = NormalButton(pygame.Vector2(10, 10),
                                        "Back",
                                        Fonts.NORMAL_25,
@@ -40,9 +44,6 @@ class SceneEditorPlaytest(Scene):
 
     def on_exit(self):
         pygame.mixer.music.unpause()
-
-    def set_skin(self, skin):
-        self.player.set_skin(skin)
 
     def _on_player_reach_end_door(self, event):
         self.play_again()
@@ -70,7 +71,8 @@ class SceneEditorPlaytest(Scene):
         self.background_color = level.background_color
         self.level_ended = False
         self.camera.position = self.player.position.copy()
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
+        
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
         level.load_to_world(self.world, self.player)
         self.subscribe_world_event()
 
@@ -79,7 +81,7 @@ class SceneEditorPlaytest(Scene):
         self.world = World()
 
         # Пересоздаем игрока
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
 
         # Перезагружаем текущий уровень
         self.load_level(self.current_level)

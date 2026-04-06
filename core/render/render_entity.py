@@ -41,27 +41,29 @@ def render_player(screen, player: Player, camera=None):
 
     # 🛸 UFO режим
     if player.gamemode == GameMode.UFO:
-        # 🟩 Обычный режим (Cube и др.)
-        sprite = (
-            player.skin.standing_sprite
-        )
-        size = 35
-
         sprite = get_transformed(
-            sprite,
-            width=size,
-            height=size,
+            player.cube_skin.sprite,
+            width=35,
+            height=35,
             flip_x=(player.direction == PlayerDirection.LEFT),
             angle=player.rotation,
             opacity=player.opacity,
         )
-        y = player.height - size - 10 if player.is_upside_down else 10
-        blit_centered(screen, sprite, (pos[0] + player.width / 2 - size / 2, pos[1] + y), size, size)
- 
+
+        y = player.height - 35 - 10 if player.is_upside_down else 10
+
+        blit_centered(
+            screen,
+            sprite,
+            (pos[0] + player.width / 2 - 35 / 2, pos[1] + y),
+            35,
+            35
+        )
+
         base_sprite = get_transformed(
-            Sprites.UFO,
-            width=90,
-            height=75,
+            player.ufo_skin.sprite,
+            width=player.ufo_skin.size[0],
+            height=player.ufo_skin.size[1],
             angle=player.rotation,
             opacity=player.opacity,
         )
@@ -69,17 +71,11 @@ def render_player(screen, player: Player, camera=None):
         blit_centered(screen, base_sprite, pos, player.width, player.height)
         return
 
-    # 🟩 Обычный режим (Cube и др.)
-    sprite = (
-        player.animator.get_current_sprite(player.skin.animations)
-        if player.is_moving
-        else player.skin.standing_sprite
-    )
-
+    # 🟩 Cube режим
     sprite = get_transformed(
-        sprite,
-        width=player.width,
-        height=player.height,
+        player.cube_skin.sprite,
+        width=player.cube_skin.size[0],
+        height=player.cube_skin.size[1],
         flip_x=(player.direction == PlayerDirection.LEFT),
         angle=player.rotation,
         opacity=player.opacity,

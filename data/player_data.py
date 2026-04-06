@@ -16,7 +16,8 @@ class PlayerData:
                 "player_volume": cls.PLAYER_VOLUME,
                 "player_death_volume": cls.PLAYER_DEATH_VOLUME,
                 "camera_speed": cls.CAMERA_SPEED,
-                "skin": cls.SKIN.name
+                "cube_skin": cls.CUBE_SKIN.name,
+                "ufo_skin": cls.UFO_SKIN.name
             }
         }
 
@@ -34,9 +35,13 @@ class PlayerData:
         cls.WORLD_LOAD_DISTANCE = 1200
         cls.MUSIC_VOLUME = 0.5
         cls.CAMERA_SPEED = 6.0
-        cls.SKIN = Skins.DEFAULT
+
         cls.PLAYER_VOLUME = 1
         cls.PLAYER_DEATH_VOLUME = 1
+
+        cls.CUBE_SKIN = Skins.CUBE_SKINS[0]
+        cls.UFO_SKIN = Skins.UFO_SKINS[0] if Skins.UFO_SKINS else cls.CUBE_SKIN
+
         try:
             with open(SAVE_FILE_FILE_PATH, "r") as file:
                 data = json.load(file)
@@ -74,6 +79,7 @@ class PlayerData:
             settings.get("player_volume"),
             cls.PLAYER_VOLUME
         )
+
         cls.PLAYER_DEATH_VOLUME = cls._safe_float(
             settings.get("player_death_volume"),
             cls.PLAYER_DEATH_VOLUME
@@ -84,11 +90,17 @@ class PlayerData:
             cls.CAMERA_SPEED
         )
 
-        skin_name = settings.get("skin", cls.SKIN.name)
+        cube_skin_name = settings.get("cube_skin", cls.CUBE_SKIN.name)
+        ufo_skin_name = settings.get("ufo_skin", cls.UFO_SKIN.name)
 
-        cls.SKIN = next(
-            (skin for skin in Skins.ALL_SKINS if skin.name == skin_name),
-            Skins.DEFAULT
+        cls.CUBE_SKIN = next(
+            (skin for skin in Skins.ALL_SKINS if skin.name == cube_skin_name),
+            Skins.CUBE_SKINS[0]
+        )
+
+        cls.UFO_SKIN = next(
+            (skin for skin in Skins.ALL_SKINS if skin.name == ufo_skin_name),
+            Skins.UFO_SKINS[0] if Skins.UFO_SKINS else cls.CUBE_SKIN
         )
 
     @staticmethod

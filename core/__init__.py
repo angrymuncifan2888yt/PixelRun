@@ -1,6 +1,6 @@
 from .world import World
 from .entity import Entity
-from .player import Player
+from .player import Player, GameMode
 from .platform import Platform
 from .portals import GravityPortal, NormalGravityPortal, UpsideDownPortal, UFOPortal, CubePortal
 from .jump_pad import JumpPad

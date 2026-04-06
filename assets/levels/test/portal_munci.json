@@ -1,0 +1,509 @@
+{
+    "name": "Unnamed Level",
+    "player_spawn": [
+        0.0,
+        -1200.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "cube_portal",
+            "position": [
+                -400.0,
+                -450.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 340,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -351.0,
+                -569.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 340,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -303.0,
+                -687.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 340,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -240.0,
+                -647.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -168.0,
+                -650.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 340,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -20.0,
+                -454.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -62.0,
+                -565.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                -101.0,
+                -674.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                71.0,
+                -687.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                69.0,
+                -564.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                113.0,
+                -476.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                206.0,
+                -449.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                286.0,
+                -473.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 340,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                322.0,
+                -677.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                320.0,
+                -554.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                415.0,
+                -745.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                415.0,
+                -616.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                417.0,
+                -475.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                585.0,
+                -532.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                521.0,
+                -647.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                468.0,
+                -762.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 20,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                633.0,
+                -741.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                633.0,
+                -612.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                635.0,
+                -471.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                895.0,
+                -773.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                793.0,
+                -744.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 120,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                747.0,
+                -662.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                748.0,
+                -548.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                788.0,
+                -466.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 240,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                896.0,
+                -438.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                1053.0,
+                -590.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                1051.0,
+                -474.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                1051.0,
+                -814.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        }
+    ]
+}

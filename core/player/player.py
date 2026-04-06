@@ -1,14 +1,15 @@
-from pygame import Vector2, Rect
+from pygame import Vector2
 from ..entity import Entity
-from data import Skin, const
-from util import SpriteAnimator, PlayerDirection, Timer
+from data.const import PLAYER_SIZE
+from util import PlayerDirection, Timer
 from event import Event, EventType
 from .gamemode import GameMode
 
 
 class Player(Entity):
-    def __init__(self, world, position: Vector2, skin: Skin, rotation=0):
-        super().__init__(world, position, *const.PLAYER_SIZE, rotation)
+    def __init__(self, world, position: Vector2, cube_skin, ufo_skin, rotation=0):
+        super().__init__(world, position, *PLAYER_SIZE, rotation)
+
         self.id = ["player"]
         self.kill_y = 5000
         self.direction = PlayerDirection.RIGHT
@@ -21,8 +22,8 @@ class Player(Entity):
         self.prev_position = self.position.copy()
         self.prev_rect = self.hitbox.copy()
 
-        self.skin = skin
-        self.animator = SpriteAnimator(skin.animation_length, 0.1)
+        self.cube_skin = cube_skin
+        self.ufo_skin = ufo_skin
 
         self.velocity = Vector2(0, 0)
 
@@ -35,7 +36,6 @@ class Player(Entity):
 
         self.rotation_step = 90
         self.rotation_target = 0
-        self.rotation_speed = 720
 
         self.move_speed = 500
         self.acceleration = 10000
@@ -67,25 +67,22 @@ class Player(Entity):
     def jump(self):
         self.velocity.y = -self.jump_force * self.gravity_dir
         self.on_ground = False
+
     def set_gamemode(self, gamemode: GameMode):
         self.gamemode = gamemode
         self.rotation = 0
 
         if self.gamemode == GameMode.UFO:
-            self.jump_force = 350
+            self.jump_force = 450
             self.gravity = 2400
         elif self.gamemode == GameMode.CUBE:
             self.jump_force = 750
             self.gravity = 2400
+
         self.update_rotation()
 
     def update_rotation(self):
-        pass
         self.rotation = 180 if self.is_upside_down else 0
-
-    def set_skin(self, skin: Skin):
-        self.skin = skin
-        self.animator.set_sprite_count(self.skin.animation_length)
 
     def move_right(self, delta_time: float):
         self.velocity.x += self.acceleration * delta_time
@@ -115,8 +112,6 @@ class Player(Entity):
         self.prev_position = self.position.copy()
         self.prev_rect = self.hitbox.copy()
 
-        self.animator.update(delta_time)
-
         self.velocity.y += self.gravity * delta_time * self.gravity_dir
         self.position += self.velocity * delta_time
 
@@ -136,6 +131,7 @@ class Player(Entity):
                 self.rotation = self.rotation_target
             else:
                 self.rotation = round(self.rotation / 90) * 90
+
         if abs(self.position.y) >= self.kill_y:
             self.kill()
 
@@ -169,8 +165,8 @@ class Player(Entity):
             self.set_gamemode(self.current_checkpoint.gamemode)
         else:
             self.set_gamemode(GameMode.CUBE)
+
         self.on_ground = False
-        self.animator.reset()
         self.step_timer.reset()
         self.is_moving = False
         self.velocity = Vector2(0, 0)

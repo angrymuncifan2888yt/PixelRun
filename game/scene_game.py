@@ -43,16 +43,18 @@ class SceneGame(Scene):
         self.camera = Camera(pygame.Vector2(0, 0), *const.WINDOW_SIZE)
         self.world = World()
 
-        self.player = Player(self.world, pygame.Vector2(400, 400), PlayerData.SKIN)
+        self.player = Player(
+            self.world,
+            pygame.Vector2(400, 400),
+            PlayerData.CUBE_SKIN,
+            PlayerData.UFO_SKIN
+        )
 
     def on_enter(self):
         pygame.mixer.music.pause()
 
     def on_exit(self):
         pygame.mixer.music.unpause()
-
-    def set_skin(self, skin):
-        self.player.set_skin(skin)
 
     def _on_player_reach_end_door(self, event):
         self.level_ended = True
@@ -91,7 +93,7 @@ class SceneGame(Scene):
         self.background_color = level.background_color
         self.level_ended = False
         self.camera.position = self.player.position.copy()
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
         level.load_to_world(self.world, self.player)
         self.subscribe_world_event()
 
@@ -100,8 +102,7 @@ class SceneGame(Scene):
         self.world = World()
 
         # Пересоздаем игрока
-        self.player = Player(self.world, self.current_level.player_spawn, self.player.skin)
-
+        self.player = Player(self.world, self.current_level.player_spawn, self.player.cube_skin, self.player.ufo_skin)
         # Перезагружаем текущий уровень
         self.load_level(self.current_level)
         self.background_color = self.current_level.background_color
@@ -117,7 +118,8 @@ class SceneGame(Scene):
                 if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
                     self._toogle_pause()
         else:
-            player_click(self.player, event)
+            if not self.dying_animation:
+                player_click(self.player, event)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F3:
                     self.show_hitboxes = not self.show_hitboxes
