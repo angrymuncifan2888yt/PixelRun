@@ -6,6 +6,7 @@ from window import WindowManager, WindowType
 import pygame
 from .settings_window import SettingsWindow
 from .credits_window import CreditsWindow
+from .update_log_window import UpdateLogWindow
 import webbrowser
 
 
@@ -17,8 +18,10 @@ class SceneMainMenu(Scene):
         self.window_manager = WindowManager()
         self.settings_window = SettingsWindow(self.window_manager)
         self.credits_window = CreditsWindow(self.window_manager)
+        self.update_log_window = UpdateLogWindow(self.window_manager)
         self.window_manager.add_window(self.settings_window)
         self.window_manager.add_window(self.credits_window)
+        self.window_manager.add_window(self.update_log_window)
 
         # UI
         self.ui = UiManager()
@@ -90,9 +93,19 @@ class SceneMainMenu(Scene):
         )
         btn_settings.center_by_x(const.WINDOW_SIZE[0])
 
+        # Update Log
+        btn_update_log = NormalButton(
+            position=pygame.Vector2(0, start_y + spacing * 5),
+            size=(button_width, button_height),
+            text="Update Log",
+            font=Fonts.NORMAL_30,
+            callback=lambda: self.window_manager.set_window(WindowType.UPDATE_LOG)
+        )
+        btn_update_log.center_by_x(const.WINDOW_SIZE[0])
+
         # Exit
         btn_exit = NormalButton(
-            position=pygame.Vector2(0, start_y + spacing * 5),
+            position=pygame.Vector2(0, start_y + spacing * 6),
             size=(button_width, button_height),
             text="Exit",
             font=Fonts.NORMAL_30,
@@ -110,6 +123,7 @@ class SceneMainMenu(Scene):
         self.ui.add_ui_object(btn_editor)
         self.ui.add_ui_object(btn_credits)
         self.ui.add_ui_object(btn_settings)
+        self.ui.add_ui_object(btn_update_log)
         self.ui.add_ui_object(btn_exit)
         self.ui.add_ui_object(btn_youtube)
 

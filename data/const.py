@@ -1,5 +1,6 @@
 import os
 
+GAME_VERSION = "1.0"
 SAVE_FILE_FILE_PATH = os.path.join(os.path.expanduser("~"), "pixelrun.json")
 WINDOW_SIZE = (1300, 800)
 WINDOW_CAPTION = "PixelRun"

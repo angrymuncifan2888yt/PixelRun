@@ -1,7 +1,7 @@
 {
     "name": "Easy challenge",
     "player_spawn": [
-        0.0,
+        100.0,
         0.0
     ],
     "background_color": [
@@ -5315,8 +5315,8 @@
         {
             "type": "text",
             "position": [
-                6283.0,
-                -466.0
+                6350.0,
+                -50.0
             ],
             "size": [
                 217,
@@ -5503,19 +5503,17 @@
         {
             "type": "platform",
             "position": [
-                6250.0,
+                6200.0,
                 -100.0
             ],
             "size": [
-                50,
+                100,
                 100
             ],
             "rotation": 0,
-            "opacity": 0,
-            "active": true,
-            "id": [
-                "wall4"
-            ],
+            "opacity": 255,
+            "active": false,
+            "id": [],
             "color": [
                 80,
                 180,
@@ -5533,11 +5531,9 @@
                 100
             ],
             "rotation": 0,
-            "opacity": 0,
+            "opacity": 255,
             "active": true,
-            "id": [
-                "wall5"
-            ],
+            "id": [],
             "color": [
                 80,
                 180,
@@ -5555,11 +5551,9 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 0,
+            "opacity": 255,
             "active": true,
-            "id": [
-                "wall5"
-            ],
+            "id": [],
             "color_fill": [
                 0,
                 0,
@@ -5582,11 +5576,9 @@
                 50
             ],
             "rotation": 180,
-            "opacity": 0,
+            "opacity": 255,
             "active": true,
-            "id": [
-                "wall5"
-            ],
+            "id": [],
             "color_fill": [
                 0,
                 0,
@@ -5601,7 +5593,7 @@
         {
             "type": "spike",
             "position": [
-                6200.0,
+                6150.0,
                 -100.0
             ],
             "size": [
@@ -5609,11 +5601,9 @@
                 50
             ],
             "rotation": 90,
-            "opacity": 0,
-            "active": true,
-            "id": [
-                "wall4"
-            ],
+            "opacity": 255,
+            "active": false,
+            "id": [],
             "color_fill": [
                 0,
                 0,
@@ -5628,7 +5618,7 @@
         {
             "type": "spike",
             "position": [
-                6200.0,
+                6150.0,
                 -50.0
             ],
             "size": [
@@ -5636,11 +5626,9 @@
                 50
             ],
             "rotation": 90,
-            "opacity": 0,
-            "active": true,
-            "id": [
-                "wall4"
-            ],
+            "opacity": 255,
+            "active": false,
+            "id": [],
             "color_fill": [
                 0,
                 0,
@@ -5651,44 +5639,6 @@
                 255,
                 255
             ]
-        },
-        {
-            "type": "opacity_trigger",
-            "position": [
-                6200.0,
-                -100.0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "rotation": 0,
-            "opacity": 0,
-            "active": true,
-            "id": [],
-            "target_id": "wall4",
-            "target_opacity": 100,
-            "transition_time": 0.3,
-            "activation_type": "ONCE_ON_ENTER"
-        },
-        {
-            "type": "opacity_trigger",
-            "position": [
-                6400.0,
-                -350.0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "rotation": 0,
-            "opacity": 0,
-            "active": true,
-            "id": [],
-            "target_id": "wall5",
-            "target_opacity": 100,
-            "transition_time": 0.3,
-            "activation_type": "ONCE_ON_ENTER"
         },
         {
             "type": "platform",
@@ -5773,28 +5723,6 @@
         {
             "type": "platform",
             "position": [
-                6500.0,
-                -500.0
-            ],
-            "size": [
-                100,
-                100
-            ],
-            "rotation": 0,
-            "opacity": 255,
-            "active": true,
-            "id": [
-                "labyrinth"
-            ],
-            "color": [
-                255,
-                255,
-                0
-            ]
-        },
-        {
-            "type": "platform",
-            "position": [
                 6827.0,
                 -276.0
             ],
@@ -5852,7 +5780,7 @@
             "id": [
                 "triggers4"
             ],
-            "target_id": "labyrinth",
+            "target_id": "triggers7",
             "toggle": "OFF",
             "activation_type": "MANUAL"
         },
@@ -6047,6 +5975,549 @@
                 180,
                 255
             ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6600.0,
+                -100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 200,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6650.0,
+                -100.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 200,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                6000.0,
+                -400.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": false,
+            "id": [
+                "wall5",
+                "labyrinth"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6000.0,
+                -300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": false,
+            "id": [
+                "wall5",
+                "labyrinth"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6050.0,
+                -300.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": false,
+            "id": [
+                "wall5",
+                "labyrinth"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                6300.0,
+                100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6300.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6350.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 180,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                6000.0,
+                200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                5950.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                5950.0,
+                250.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                6000.0,
+                0.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                5950.0,
+                0.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                5950.0,
+                50.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                6400.0,
+                -500.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "wall4",
+                "labyrinth"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6350.0,
+                -500.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "wall4",
+                "labyrinth"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                6350.0,
+                -450.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 90,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "wall4",
+                "labyrinth"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                6200.0,
+                -500.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers7"
+            ],
+            "target_id": "triggers5",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                6300.0,
+                -700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers5"
+            ],
+            "target_id": "wall4",
+            "target_opacity": 255,
+            "transition_time": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                6200.0,
+                -700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers5"
+            ],
+            "target_id": "triggers6",
+            "delay": 2.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                6050.0,
+                -700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers6"
+            ],
+            "target_id": "wall4",
+            "target_offset": [
+                -300.0,
+                0.0
+            ],
+            "transition_time": 5.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                6400.0,
+                -700.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers5"
+            ],
+            "target_id": "wall5",
+            "toggle": "ON",
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "toggle_trigger",
+            "position": [
+                7000.0,
+                -100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers4"
+            ],
+            "target_id": "labyrinth",
+            "toggle": "OFF",
+            "activation_type": "MANUAL"
         }
     ]
 }

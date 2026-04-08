@@ -26,7 +26,8 @@ class SceneGame(Scene):
             const.WINDOW_SIZE,
             self._toogle_pause,
             lambda: self.scene_manager.set_scene(SceneType.MAIN_MENU),
-            lambda: self._on_player_death(None)
+            lambda: self._on_player_death(None),
+            self.play_again
         )
         self.level_complete_menu = LevelCompleteMenu(
             pygame.Vector2(0, 0),

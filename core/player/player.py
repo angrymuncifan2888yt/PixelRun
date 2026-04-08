@@ -75,6 +75,8 @@ class Player(Entity):
         self.on_ground = False
 
     def set_gamemode(self, gamemode: GameMode):
+        if self.gamemode == gamemode:
+            return
         self.gamemode = gamemode
         self.rotation = 0
 

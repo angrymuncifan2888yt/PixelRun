@@ -1,0 +1,462 @@
+{
+    "name": "Profile picture",
+    "player_spawn": [
+        200.0,
+        0.0
+    ],
+    "background_color": [
+        0,
+        0,
+        0
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                100.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "cube_portal",
+            "position": [
+                150.0,
+                -200.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ufo_portal",
+            "position": [
+                300.0,
+                -200.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "ball_portal",
+            "position": [
+                450.0,
+                -200.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                -300.0
+            ],
+            "size": [
+                1000,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                -200.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                -100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                0.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1050.0,
+                -200.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1125.0,
+                -200.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1200.0,
+                -200.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1050.0,
+                -50.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                950.0,
+                -50.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1125.0,
+                -50.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1200.0,
+                -50.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1200.0,
+                -125.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "gravity_portal",
+            "position": [
+                700.0,
+                -200.0
+            ],
+            "size": [
+                64,
+                128
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": []
+        },
+        {
+            "type": "platform",
+            "position": [
+                1050.0,
+                -275.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks",
+                "wall"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                1128.0,
+                -124.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "triggers1",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                1050.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers1"
+            ],
+            "target_id": "wall",
+            "target_offset": [
+                0.0,
+                150.0
+            ],
+            "transition_time": 0.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                1150.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers1"
+            ],
+            "target_id": "blocks",
+            "target_opacity": 0,
+            "transition_time": 0.5,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "platform",
+            "position": [
+                950.0,
+                50.0
+            ],
+            "size": [
+                75,
+                75
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "blocks"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        }
+    ]
+}

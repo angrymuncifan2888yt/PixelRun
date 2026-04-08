@@ -1,0 +1,492 @@
+{
+    "name": "Unnamed Level",
+    "player_spawn": [
+        0.0,
+        0.0
+    ],
+    "background_color": [
+        100,
+        100,
+        100
+    ],
+    "objects": [
+        {
+            "type": "platform",
+            "position": [
+                0.0,
+                150.0
+            ],
+            "size": [
+                500,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                350.0,
+                0.0
+            ],
+            "size": [
+                100,
+                150
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color": [
+                75,
+                75,
+                75
+            ]
+        },
+        {
+            "type": "text",
+            "position": [
+                356.0,
+                23.0
+            ],
+            "size": [
+                91,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": false,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "R.I.P",
+            "auto_resize": true
+        },
+        {
+            "type": "platform",
+            "position": [
+                -450.0,
+                150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                -902.0,
+                88.0
+            ],
+            "size": [
+                100,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bazzoka"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                -802.0,
+                88.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bazzoka"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                -450.0,
+                50.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "bazzoka",
+            "target_offset": [
+                400.0,
+                0.0
+            ],
+            "transition_time": 1.5,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "platform",
+            "position": [
+                850.0,
+                250.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                850.0,
+                150.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "triggers1",
+            "delay": 0.0,
+            "activation_type": "ONCE_ON_ENTER"
+        },
+        {
+            "type": "spawn_trigger",
+            "position": [
+                850.0,
+                350.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers1"
+            ],
+            "target_id": "triggers2",
+            "delay": 1.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                750.0,
+                350.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers1"
+            ],
+            "target_id": "bazzoka2",
+            "target_opacity": 255,
+            "transition_time": 0.0,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "platform",
+            "position": [
+                600.0,
+                200.0
+            ],
+            "size": [
+                100,
+                50
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "bazzoka2"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "spike",
+            "position": [
+                700.0,
+                200.0
+            ],
+            "size": [
+                50,
+                50
+            ],
+            "rotation": 270,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "bazzoka2"
+            ],
+            "color_fill": [
+                0,
+                0,
+                0
+            ],
+            "color_border": [
+                255,
+                255,
+                255
+            ]
+        },
+        {
+            "type": "move_trigger",
+            "position": [
+                950.0,
+                350.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [
+                "triggers2"
+            ],
+            "target_id": "bazzoka2",
+            "target_offset": [
+                800.0,
+                0.0
+            ],
+            "transition_time": 2.3,
+            "activation_type": "MANUAL"
+        },
+        {
+            "type": "text",
+            "position": [
+                1550.0,
+                50.0
+            ],
+            "size": [
+                109,
+                36
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [],
+            "color": [
+                255,
+                255,
+                255
+            ],
+            "text": "Hookah",
+            "auto_resize": true
+        },
+        {
+            "type": "platform",
+            "position": [
+                1550.0,
+                100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1577.0,
+                200.0
+            ],
+            "size": [
+                50,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1533.0,
+                293.0
+            ],
+            "size": [
+                50,
+                100
+            ],
+            "rotation": 330,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1624.0,
+                292.0
+            ],
+            "size": [
+                50,
+                100
+            ],
+            "rotation": 30,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1639.0,
+                187.0
+            ],
+            "size": [
+                50,
+                100
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "platform",
+            "position": [
+                1505.0,
+                187.0
+            ],
+            "size": [
+                50,
+                100
+            ],
+            "rotation": 90,
+            "opacity": 255,
+            "active": true,
+            "id": [
+                "bro"
+            ],
+            "color": [
+                80,
+                180,
+                255
+            ]
+        },
+        {
+            "type": "opacity_trigger",
+            "position": [
+                1400.0,
+                100.0
+            ],
+            "size": [
+                100,
+                100
+            ],
+            "rotation": 0,
+            "opacity": 0,
+            "active": true,
+            "id": [],
+            "target_id": "bro",
+            "target_opacity": 0,
+            "transition_time": 0.1,
+            "activation_type": "ONCE_ON_ENTER"
+        }
+    ]
+}

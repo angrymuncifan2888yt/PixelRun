@@ -8,3 +8,4 @@ class WindowType(Enum):
     EDIT_ID_ENTITY = auto()
     SETTINGS = auto()
     CREDITS = auto()
+    UPDATE_LOG = auto()
