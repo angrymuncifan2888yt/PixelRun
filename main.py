@@ -7,6 +7,7 @@ from scene_skins import SceneSkins
 from scene_levels import SceneLevels
 from scene_editor_playtest import SceneEditorPlaytest
 from editor import SceneEditor
+from util import resource_path
 
 
 def init_assets():
@@ -49,8 +50,9 @@ class PixelRun:
         self.scene_manager.add_scene(self.scene_editor_playtest)
         self.scene_manager.set_scene(SceneType.MAIN_MENU)
 
+        pygame.display.set_icon(Sprites.PIXELRUN_ICON)
         # Background music
-        pygame.mixer.music.load("assets/sounds/background.mp3")
+        pygame.mixer.music.load(resource_path("assets/sounds/background.mp3"))
         pygame.mixer.music.set_volume(PlayerData.MUSIC_VOLUME)
 
     def mainloop(self):

@@ -1,11 +1,11 @@
 import pygame
-
+from util import resource_path
 
 class Fonts:
     @classmethod
     def init(cls):
-        LOGO_FONT_PATH = "assets/fonts/logo_font.ttf"
-        NORMAL_FONT_PATH = "assets/fonts/normal_font.ttf"
+        LOGO_FONT_PATH = resource_path("assets/fonts/logo_font.ttf")
+        NORMAL_FONT_PATH = resource_path("assets/fonts/normal_font.ttf")
         cls.LOGO_100 = pygame.font.Font(LOGO_FONT_PATH, 100)
         cls.LOGO_70 = pygame.font.Font(LOGO_FONT_PATH, 70)
         cls.NORMAL_30 = pygame.font.Font(NORMAL_FONT_PATH, 30)
