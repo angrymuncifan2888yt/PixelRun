@@ -253,6 +253,87 @@ class SettingsWindow(Window):
             font=Fonts.NORMAL_30,
             callback=self.increase_player_death_volume
         )
+
+        self.label_button_volume = Text(
+    pygame.Vector2(x, start_y + spacing * 2),
+    Fonts.NORMAL_30,
+    "Button Volume"
+)
+
+        self.button_volume = PlayerData.BUTTON_VOLUME
+
+        # =========================
+        # 🟢 BUTTON VOLUME
+        # =========================
+        self.text_button_volume = Text(
+            pygame.Vector2(x + 85, start_y + spacing * 2 + 35),
+            Fonts.NORMAL_30,
+            f"{self.button_volume:.2f}"
+        )
+
+        self.btn_button_volume_down = NormalButton(
+            pygame.Vector2(x, start_y + spacing * 2 + 35),
+            "<",
+            Fonts.NORMAL_30,
+            size=(40, 40),
+            callback=self.decrease_button_volume
+        )
+
+        self.btn_button_volume_up = NormalButton(
+            pygame.Vector2(x + 200, start_y + spacing * 2 + 35),
+            ">",
+            Fonts.NORMAL_30,            
+            size=(40, 40),
+            callback=self.increase_button_volume
+        )
+
+        # =========================
+        # 🟢 TOGGLE GRID
+        # =========================
+        self.label_grid = Text(
+            pygame.Vector2(x, start_y + spacing * 3),
+            Fonts.NORMAL_30,            
+            (40, 40),
+            self.increase_button_volume
+        )
+
+        # =========================
+        # 🟢 TOGGLE GRID
+        # =========================
+        self.label_grid = Text(
+            pygame.Vector2(x, start_y + spacing * 3),
+            Fonts.NORMAL_30,
+            "Draw World Grid"
+        )
+
+        self.btn_toggle_grid = NormalButton(
+            position=pygame.Vector2(x, start_y + spacing * 3 + 35),
+            text="ON" if PlayerData.DRAW_WORLD_GRID else "OFF",
+            font=Fonts.NORMAL_30,
+            size=(200, 40),
+            callback=self.toggle_grid
+        )
+        self.draw_grid_value = PlayerData.DRAW_WORLD_GRID
+        # =========================
+        # 🟢 GRID COLOR
+        # =========================
+        self.label_grid_color = Text(
+            pygame.Vector2(x, start_y + spacing * 4),
+            Fonts.NORMAL_30,
+            "Grid Color (RGB)"
+        )
+
+        r, g, b = PlayerData.WORLD_GRID_COLOR
+
+        self.input_grid_r = LineEdit((x, start_y + spacing * 4 + 35), (80, 40), Fonts.NORMAL_30)
+        self.input_grid_r.text = str(r)
+
+        self.input_grid_g = LineEdit((x + 100, start_y + spacing * 4 + 35), (80, 40), Fonts.NORMAL_30)
+        self.input_grid_g.text = str(g)
+
+        self.input_grid_b = LineEdit((x + 200, start_y + spacing * 4 + 35), (80, 40), Fonts.NORMAL_30)
+        self.input_grid_b.text = str(b)
+
         # =========================
         # 🟢 КНОПКИ
         # =========================
@@ -297,7 +378,10 @@ class SettingsWindow(Window):
         ]
         second_tab = [
             self.label_player_volume, self.text_player_volume, self.btn_player_volume_down, self.btn_player_volume_up,
-            self.label_player_death_volume, self.text_player_death_volume, self.btn_player_death_volume_down, self.btn_player_death_volume_up
+            self.label_player_death_volume, self.text_player_death_volume, self.btn_player_death_volume_down, self.btn_player_death_volume_up,
+            self.label_button_volume, self.text_button_volume, self.btn_button_volume_down, self.btn_button_volume_up,
+            self.label_grid, self.btn_toggle_grid,
+            self.label_grid_color, self.input_grid_r, self.input_grid_g, self.input_grid_b
         ]
         self.tabs.add_tab(first_tab)
         self.tabs.add_tab(second_tab)
@@ -311,6 +395,18 @@ class SettingsWindow(Window):
             self.btn_apply, self.btn_close
         ]:
             self.ui.add_ui_object(obj)
+
+    def increase_button_volume(self):
+        self.button_volume = min(1.0, self.button_volume + 0.05)
+        self.text_button_volume.text = f"{self.button_volume:.2f}"
+
+    def decrease_button_volume(self):
+        self.button_volume = max(0.0, self.button_volume - 0.05)
+        self.text_button_volume.text = f"{self.button_volume:.2f}"
+
+    def toggle_grid(self):
+        self.draw_grid_value = not self.draw_grid_value
+        self.btn_toggle_grid.set_text("ON" if self.draw_grid_value else "OFF")
 
     def increase_player_death_volume(self):
         self.player_death_value = min(1.0, self.player_death_value + 0.05)
@@ -364,8 +460,20 @@ class SettingsWindow(Window):
         PlayerData.MUSIC_VOLUME = self.volume_value
         PlayerData.PLAYER_VOLUME = self.player_volume
         PlayerData.PLAYER_DEATH_VOLUME = self.player_death_value
-        PlayerData.save()
         pygame.mixer.music.set_volume(PlayerData.MUSIC_VOLUME)
+
+        PlayerData.BUTTON_VOLUME = self.button_volume
+
+        try:
+            r = max(0, min(255, int(self.input_grid_r.text)))
+            g = max(0, min(255, int(self.input_grid_g.text)))
+            b = max(0, min(255, int(self.input_grid_b.text)))
+
+            PlayerData.WORLD_GRID_COLOR = (r, g, b)
+        except:
+            pass
+        PlayerData.DRAW_WORLD_GRID = self.draw_grid_value
+        PlayerData.save()
 
     def handle_pygame_event(self, event):
         self.ui.handle_pygame_event(event)

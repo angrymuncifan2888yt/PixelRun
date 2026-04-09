@@ -2,7 +2,7 @@ import pygame
 from scene import Scene, SceneType
 from core import *
 from core.render import render_entity, render_hitbox
-from util import player_click, player_input, Camera, Timer
+from util import player_click, player_input, Camera, Timer, draw_world_grid
 from level import Level
 from .pause_menu import PauseMenu
 from .level_complete import LevelCompleteMenu
@@ -178,6 +178,7 @@ class SceneGame(Scene):
         self.debug_menu.text_entities_rendered.text = f"Entities rendered: {rendered}"
         
         if self.debug:
+            draw_world_grid(self.world, self.camera, screen)
             self.debug_menu.draw(screen)
 
         if self.pause:

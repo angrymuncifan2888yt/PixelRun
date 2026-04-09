@@ -11,7 +11,18 @@ class World:
         self.entities: List[Entity] = []
         self.event_bus = EventBus()
         self.level_background_color = [0, 0, 0]
-    
+
+        self.cell_size = 200
+        self.grid = {}
+        self.large_entities = []
+
+    def add_entity(self, entity):
+        self.entities.append(entity)
+
+    def remove_entity(self, entity):
+        if entity in self.entities:
+            self.entities.remove(entity)
+
     def get_nearest_checkpoint(self, position: pygame.Vector2) -> Checkpoint | None:
         nearest = None
         min_dist = inf
@@ -26,62 +37,111 @@ class World:
         return nearest
 
     def get_entities_by_id(self, id: str):
-        list_ = []
+        result = []
         for entity in self.entities:
             if id in entity.id:
-                list_.append(entity)
-        return list_
+                result.append(entity)
+        return result
 
-    def add_entity(self, entity):
-        self.entities.append(entity)
-    
-    def remove_entity(self, entity):
-        if entity in self.entities:
-            self.entities.remove(entity)
-            
-    def get_nearest_entities(
-        self,
-        position: pygame.Vector2,
-        radius: float
-    ) -> List[Entity]:
+    def get_nearest_entities(self, position: pygame.Vector2, radius: float) -> List[Entity]:
         result = []
         radius_sq = radius * radius
 
         for entity in self.entities:
-            try:
-                rect = entity.hitbox
+            if not entity.active:
+                continue
 
-                closest_x = max(rect.left, min(position.x, rect.right))
-                closest_y = max(rect.top, min(position.y, rect.bottom))
+            rect = entity.hitbox
 
-                dx = position.x - closest_x
-                dy = position.y - closest_y
+            closest_x = max(rect.left, min(position.x, rect.right))
+            closest_y = max(rect.top, min(position.y, rect.bottom))
 
-                dist_sq = dx * dx + dy * dy
+            dx = position.x - closest_x
+            dy = position.y - closest_y
 
-                if dist_sq <= radius_sq:
-                    result.append(entity)
-
-            except Exception as e:
-                pass
+            if dx * dx + dy * dy <= radius_sq:
+                result.append(entity)
 
         return result
-    
+
+    def _get_cells_for_rect(self, rect: pygame.Rect):
+        min_x = rect.left // self.cell_size
+        max_x = rect.right // self.cell_size
+        min_y = rect.top // self.cell_size
+        max_y = rect.bottom // self.cell_size
+
+        for x in range(min_x, max_x + 1):
+            for y in range(min_y, max_y + 1):
+                yield (x, y)
+
+    def _is_large(self, rect: pygame.Rect):
+        return (
+            rect.width > self.cell_size * 2 or
+            rect.height > self.cell_size * 2
+        )
+
+    def _build_grid(self):
+        self.grid.clear()
+        self.large_entities.clear()
+
+        for entity in self.entities:
+            if not entity.active:
+                continue
+
+            rect = entity.hitbox
+
+            if self._is_large(rect):
+                self.large_entities.append(entity)
+                continue
+
+            for cell in self._get_cells_for_rect(rect):
+                if cell not in self.grid:
+                    self.grid[cell] = []
+
+                self.grid[cell].append(entity)
+
     def update_entities(self, entities: List[Entity], delta_time: float):
-        # Actual update
         updated = 0
-        for i, entity in enumerate(entities):
+
+        self._build_grid()
+
+        entities_copy = entities[:]
+
+        for entity in entities_copy:
             if not entity.active:
                 continue
 
             entity.update(delta_time)
+            updated += 1
 
-            for other in entities[i + 1:]:
-                if not other.active:
+            rect = entity.hitbox
+            checked = set()
+
+            # 🔹 Проверка через grid
+            for cell in self._get_cells_for_rect(rect):
+                for other in self.grid.get(cell, []):
+                    if other is entity or not other.active:
+                        continue
+
+                    if other in checked:
+                        continue
+
+                    checked.add(other)
+
+                    if rect.colliderect(other.hitbox):
+                        entity.on_entity_collision(other)
+                        other.on_entity_collision(entity)
+
+            # 🔸 Проверка с большими объектами
+            for other in self.large_entities:
+                if other is entity or not other.active:
                     continue
 
-                if entity.hitbox.colliderect(other.hitbox):
+                if other in checked:
+                    continue
+
+                if rect.colliderect(other.hitbox):
                     entity.on_entity_collision(other)
                     other.on_entity_collision(entity)
-            updated += 1
+
         return updated

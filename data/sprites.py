@@ -1,6 +1,6 @@
 import pygame
 from .const import *
-from util import resource_path
+from util.resourse_path import resource_path
 
 class Sprites:
     @classmethod

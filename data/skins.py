@@ -1,4 +1,3 @@
-from .sprites import Sprites
 from core import GameMode
 
 
@@ -14,6 +13,7 @@ class Skin:
 class Skins:
     @classmethod
     def init(cls):
+        from .sprites import Sprites
         cls.ALL_SKINS = []
 
         cls.CUBE_SKINS = []

@@ -5,3 +5,4 @@ from .timer import Timer
 from .file_dialog import open_file_dialog, save_file_dialog
 from .player_input import player_input, player_click
 from .resourse_path import resource_path
+from .world_grid_render import draw_world_grid
