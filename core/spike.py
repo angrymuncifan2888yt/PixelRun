@@ -14,19 +14,20 @@ class Spike(Entity):
         self.hitbox.height = int(self.height * 0.6)
         self.color_fill = (0, 0, 0)
         self.color_border = (255, 255, 255)
-
-    def update_hitbox(self):
-        self.hitbox.width = int(self.width * 0.25)
-        self.hitbox.height = int(self.height * 0.6)
-
-        self.hitbox.center = (
-            int(self.position.x + self.width / 2),
-            int(self.position.y + self.height / 2),
+        
+    @property
+    def hitbox(self):
+        return pygame.Rect(
+            self.position.x + self.width * 0.375,
+            self.position.y + self.height * 0.2,
+            self.width * 0.25,
+            self.height * 0.6
         )
 
     def on_entity_collision(self, entity):
         if isinstance(entity, Player):
             entity.kill()
+
     def get_special_fields(self):
         return {
             "fill_r": {"type": "int", "value": self.color_fill[0]},

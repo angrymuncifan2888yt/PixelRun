@@ -66,30 +66,22 @@ class World:
                 pass
 
         return result
-
-    def update_all_hitboxes(self):
-        updated = 0
-        for entity in self.entities:
-            entity.update_hitbox()
-            updated += 1
-        return updated
-
+    
     def update_entities(self, entities: List[Entity], delta_time: float):
         # Actual update
         updated = 0
-        for entity in entities:
-            try:
-                if entity.active:
-                    entity.update(delta_time)
-                    updated += 1
-                    for other in entities:
-                        if other is entity or not other.active:
-                            continue
+        for i, entity in enumerate(entities):
+            if not entity.active:
+                continue
 
-                        if entity.hitbox.colliderect(other.hitbox):
-                            entity.on_entity_collision(other)
+            entity.update(delta_time)
 
-            except Exception as e:
-                pass
-            
+            for other in entities[i + 1:]:
+                if not other.active:
+                    continue
+
+                if entity.hitbox.colliderect(other.hitbox):
+                    entity.on_entity_collision(other)
+                    other.on_entity_collision(entity)
+            updated += 1
         return updated

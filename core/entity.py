@@ -8,12 +8,6 @@ class Entity:
         self.width = width
         self.height = height
         self.rotation = rotation
-
-        self.hitbox = pygame.rect.Rect(
-            (self.position.x, self.position.y),
-            (self.width, self.height)
-        )
-
         self.opacity = 255  # 0..255
         self.active = True
         self.id = []
@@ -30,11 +24,14 @@ class Entity:
     def emit_event(self, event):
         self.world.event_bus.emit(event)
 
-    def update_hitbox(self):
-        self.hitbox.x = int(self.position.x)
-        self.hitbox.y = int(self.position.y)
-        self.hitbox.width = self.width
-        self.hitbox.height = self.height
+    @property
+    def hitbox(self):
+        return pygame.Rect(
+            self.position.x,
+            self.position.y,
+            self.width,
+            self.height
+        )
 
     def on_entity_collision(self, entity):
         pass

@@ -105,7 +105,6 @@ class SceneEditorPlaytest(Scene):
         self.editor_btn.update(delta, shit="school")
         if not self.dying_animation:
             # Upd world
-            hitboxes_updated = self.world.update_all_hitboxes()
             entities_to_upd = self.world.get_nearest_entities(self.player.position, PlayerData.WORLD_LOAD_DISTANCE)
             objects_updated = self.world.update_entities(entities_to_upd, delta)
 
@@ -113,7 +112,7 @@ class SceneEditorPlaytest(Scene):
             self.player.is_clicking = False
 
             player_input(self.player, delta)
-            self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)
+            self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated)
 
         else:
             self.player_dying_timer.update(delta)

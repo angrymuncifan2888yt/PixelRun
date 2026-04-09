@@ -131,13 +131,14 @@ class SceneGame(Scene):
                     self.debug = not self.debug
                 if event.key in (pygame.K_ESCAPE, pygame.K_RETURN):
                     self._toogle_pause()
+                if event.key == pygame.K_r:
+                    self._on_player_death(None)
 
     def update(self, delta, **kwargs):
         if not self.level_ended:
             if not self.pause:
                 if not self.dying_animation:
                     # Upd world
-                    hitboxes_updated = self.world.update_all_hitboxes()
                     entities_to_upd = self.world.get_nearest_entities(self.player.position, PlayerData.WORLD_LOAD_DISTANCE)
                     objects_updated = self.world.update_entities(entities_to_upd, delta)
 
@@ -145,7 +146,7 @@ class SceneGame(Scene):
                     self.camera.update(pygame.Vector2(self.player.hitbox.center), delta)
                     self.player.is_clicking = False
 
-                    self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated, hitboxes_updated)
+                    self.debug_menu.update(delta, kwargs["clock"], self.player, objects_updated)
 
                 else:
                     self.player_dying_timer.update(delta)

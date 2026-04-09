@@ -98,7 +98,6 @@ class MainMenuBackground(UiObject):
         for i, orb in enumerate(self.gravity_orbs):
             orb.position.x += math.cos(self.time * 1.5 + i) * 0.2
 
-        self.world.update_all_hitboxes()
         self.world.update_entities(self.world.entities, delta)
 
         self.player.is_clicking = False

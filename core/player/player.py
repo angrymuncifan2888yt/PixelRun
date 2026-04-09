@@ -4,6 +4,7 @@ from data.const import PLAYER_SIZE
 from util import PlayerDirection, Timer
 from event import Event, EventType
 from .gamemode import GameMode
+import sys
 
 
 class Player(Entity):
@@ -44,6 +45,8 @@ class Player(Entity):
 
         self.step_timer = Timer(0.25)
         self.gamemode = GameMode.CUBE
+        if "fly" in sys.argv:
+            self.set_gamemode(GameMode.UFO)
 
     @property
     def is_upside_down(self):
@@ -75,6 +78,11 @@ class Player(Entity):
         self.on_ground = False
 
     def set_gamemode(self, gamemode: GameMode):
+        if "fly" in sys.argv:
+            self.gamemode = GameMode.UFO
+            self.jump_force = 500
+            self.gravity = 2400
+            return
         if self.gamemode == gamemode:
             return
         self.gamemode = gamemode
@@ -166,6 +174,8 @@ class Player(Entity):
         self.is_clicking = False
 
     def kill(self):
+        if "invincible" in sys.argv:
+            return
         self.world.event_bus.emit(Event(EventType.PLAYER_DEATH, {}))
 
     def respawn(self):
@@ -199,6 +209,8 @@ class Player(Entity):
         self.update_rotation()
 
     def handle_platform_collision(self, platform):
+        if "noclip" in sys.argv:
+            return
         plat_rect = platform.hitbox
         curr_rect = self.hitbox
 

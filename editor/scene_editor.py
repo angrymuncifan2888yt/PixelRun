@@ -243,8 +243,6 @@ class SceneEditor(Scene):
         self.window_manager.handle_pygame_event(event)
 
     def update(self, delta, **kwargs):
-        if not self.window_manager.current_window:
-            self.world.update_all_hitboxes()
         self.ui.update(delta, **kwargs)
         self.window_manager.update_current_window(delta)
 
