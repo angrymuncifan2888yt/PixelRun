@@ -3,6 +3,7 @@ from ui import NormalButton, Text
 from ui.ui_manager import UiManager
 from data import Fonts, const
 from window import Window, WindowType
+from util import resource_path
 
 
 WINDOW_WIDTH = 750
@@ -13,19 +14,8 @@ class UpdateLogWindow(Window):
 
     def __init__(self, manager):
         super().__init__(manager, WindowType.UPDATE_LOG)
-        text = """
-This update adds:
-- 3 gamemodes (cube, UFO, ball)
-- Gravity portals
-- Triggers
-- Blocks, spikes
-- Text
-- Level editor
-- 5 main levels
-- Skins for all gamemodes
-- Settings
-- And more!
-"""
+        with open(resource_path("assets/update_log.txt"), "r", encoding="utf-8") as f:
+            text = f.read()
         self.ui = UiManager()
 
         self.rect = pygame.Rect(

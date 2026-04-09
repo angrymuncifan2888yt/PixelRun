@@ -107,6 +107,8 @@ class World:
 
         entities_copy = entities[:]
 
+        checked_pairs = set()
+
         for entity in entities_copy:
             if not entity.active:
                 continue
@@ -115,7 +117,6 @@ class World:
             updated += 1
 
             rect = entity.hitbox
-            checked = set()
 
             # 🔹 Проверка через grid
             for cell in self._get_cells_for_rect(rect):
@@ -123,25 +124,27 @@ class World:
                     if other is entity or not other.active:
                         continue
 
-                    if other in checked:
+                    pair = (id(entity), id(other))
+                    if pair in checked_pairs:
                         continue
 
-                    checked.add(other)
+                    checked_pairs.add(pair)
 
                     if rect.colliderect(other.hitbox):
                         entity.on_entity_collision(other)
-                        other.on_entity_collision(entity)
 
             # 🔸 Проверка с большими объектами
             for other in self.large_entities:
                 if other is entity or not other.active:
                     continue
 
-                if other in checked:
+                pair = (id(entity), id(other))
+                if pair in checked_pairs:
                     continue
+
+                checked_pairs.add(pair)
 
                 if rect.colliderect(other.hitbox):
                     entity.on_entity_collision(other)
-                    other.on_entity_collision(entity)
 
         return updated

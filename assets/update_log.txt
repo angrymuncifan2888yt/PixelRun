@@ -1,0 +1,11 @@
+This update adds:
+- 3 gamemodes (cube, UFO, ball)
+- Gravity portals
+- Triggers
+- Blocks, spikes
+- Text
+- Level editor
+- 5 main levels
+- Skins for all gamemodes
+- Settings
+- And more!

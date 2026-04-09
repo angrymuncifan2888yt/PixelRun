@@ -8,7 +8,7 @@ import sys
 
 
 class Player(Entity):
-    def __init__(self, world, position: Vector2, cube_skin, ufo_skin, ball_skin,rotation=0):
+    def __init__(self, world, position: Vector2, cube_skin, ufo_skin, ball_skin, rotation=0):
         super().__init__(world, position, *PLAYER_SIZE, rotation)
 
         self.id = ["player"]
@@ -45,6 +45,7 @@ class Player(Entity):
 
         self.step_timer = Timer(0.25)
         self.gamemode = GameMode.CUBE
+
         if "fly" in sys.argv:
             self.set_gamemode(GameMode.UFO)
 
@@ -57,21 +58,23 @@ class Player(Entity):
             if self.on_ground:
                 self.jump()
                 self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+
         elif self.gamemode == GameMode.UFO:
             self.jump()
             self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+
         elif self.gamemode == GameMode.BALL:
             if self.on_ground:
                 self.reverse_gravity()
                 self.on_ground = False
                 self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+
         self.is_clicking = True
 
     def hold(self):
-        if self.gamemode == GameMode.CUBE:
-            if self.on_ground:
-                self.jump()
-                self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
+        if self.gamemode == GameMode.CUBE and self.on_ground:
+            self.jump()
+            self.world.event_bus.emit(Event(EventType.PLAYER_JUMP, {}))
 
     def jump(self):
         self.velocity.y = -self.jump_force * self.gravity_dir
@@ -83,18 +86,19 @@ class Player(Entity):
             self.jump_force = 500
             self.gravity = 2400
             return
+
         if self.gamemode == gamemode:
             return
+
         self.gamemode = gamemode
         self.rotation = 0
 
         if self.gamemode == GameMode.UFO:
             self.jump_force = 500
-            self.gravity = 2400
         elif self.gamemode == GameMode.CUBE:
             self.jump_force = 750
-            self.gravity = 2400
 
+        self.gravity = 2400
         self.update_rotation()
 
     def update_rotation(self):
@@ -161,6 +165,7 @@ class Player(Entity):
                     self.rotation_target += 360
 
                 self.rotation = self.rotation_target
+
         if abs(self.position.y) >= self.kill_y:
             self.kill()
 
@@ -181,25 +186,16 @@ class Player(Entity):
     def respawn(self):
         if self.current_checkpoint:
             self.position = self.current_checkpoint.position.copy()
-        else:
-            self.position = self.base_spawn_position.copy()
-
-        if self.current_checkpoint:
             self.world.level_background_color = self.current_checkpoint.level_background_color
-
-        if self.current_checkpoint:
             self.gravity_dir = self.current_checkpoint.gravity_dir
-        else:
-            self.gravity_dir = 1
-
-        if self.current_checkpoint:
             self.set_gamemode(self.current_checkpoint.gamemode)
         else:
+            self.position = self.base_spawn_position.copy()
+            self.gravity_dir = 1
             self.set_gamemode(GameMode.CUBE)
 
         self.on_ground = False
         self.step_timer.reset()
-        self.is_moving = False
         self.velocity = Vector2(0, 0)
         self.update_rotation()
 
@@ -211,6 +207,7 @@ class Player(Entity):
     def handle_platform_collision(self, platform):
         if "noclip" in sys.argv:
             return
+
         plat_rect = platform.hitbox
         curr_rect = self.hitbox
 

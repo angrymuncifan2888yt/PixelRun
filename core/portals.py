@@ -9,17 +9,24 @@ class Portal(Entity):
         super().__init__(world, position, width, height, rotation)
 
     def on_entity_collision(self, entity):
-        if isinstance(entity, Player):
-            # проверяем вход игрока в портал с помощью prev_rect
-            was_outside = not entity.prev_rect.colliderect(self.hitbox)
-            is_inside = entity.hitbox.colliderect(self.hitbox)
+        if not isinstance(entity, Player):
+            return
 
-            if was_outside and is_inside:
-                self.apply(entity)
+        curr = entity.hitbox
+        prev = entity.prev_rect
+        portal = self.hitbox
+
+        # был снаружи и пересёк портал
+        entered = (
+            not prev.colliderect(portal) and
+            curr.colliderect(portal)
+        )
+
+        if entered:
+            self.apply(entity)
 
     def apply(self, player: Player):
         raise NotImplementedError
-
 
 class GravityPortal(Portal):
     def apply(self, player: Player):
